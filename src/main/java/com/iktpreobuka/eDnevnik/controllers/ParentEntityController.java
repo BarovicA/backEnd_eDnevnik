@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -51,7 +52,7 @@ public class ParentEntityController {
    
     
     // 1. add ParentEntity
-    
+    @Secured("ADMIN")
     @PostMapping("/add")
     public ResponseEntity<?> addParent(@Valid @RequestBody ParentDTO newParent, BindingResult result) {
     	if (result.hasErrors()) {
@@ -67,7 +68,7 @@ public class ParentEntityController {
     
 
     // 2. get all ParentEntity
-    
+    @Secured("ADMIN")
     @GetMapping
     public ResponseEntity<?> getAllParents() {
         return new ResponseEntity<>(parentRepository.findAll(), HttpStatus.OK);
@@ -75,7 +76,7 @@ public class ParentEntityController {
     }
 
     // 3. change ParentEntity
-    
+    @Secured("ADMIN")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateParent(@PathVariable Long id, @Valid @RequestBody ParentDTO dto,
             BindingResult result) {
@@ -95,7 +96,7 @@ public class ParentEntityController {
     }
 //
 //    // 4. find by id
-    
+    @Secured("ADMIN")
     @GetMapping("/find/{id}")
     public ResponseEntity<?> getParentById(@PathVariable Long id) {
 
@@ -106,7 +107,7 @@ public class ParentEntityController {
         return new ResponseEntity<RESTError>(new RESTError(4 , "Parent does not exist!"), HttpStatus.NOT_FOUND);
     }
  // 5. delete ParentEntity (only set ParentEntity.deleted on true)
-    
+    @Secured("ADMIN")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteParent(@PathVariable Long id) {
         
@@ -118,7 +119,7 @@ public class ParentEntityController {
         }
         return new ResponseEntity<RESTError>(new RESTError(4,"Parent does not exist!"), HttpStatus.NOT_FOUND);
     }
-
+    @Secured("ADMIN")
     @GetMapping("/changerole/{id}")
     public ResponseEntity<?> TeacherById(@PathVariable Long id) {
     	ParentEntity teacherEntity = parentRepository.findById(id).orElse(null);

@@ -4,11 +4,16 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +35,8 @@ import com.iktpreobuka.eDnevnik.security.UserPrincipal;
 @RequestMapping("/api/v1/auth")
 public class AuthController {
 
+	
+	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	@Autowired
     AuthenticationManager authenticationManager;
 
@@ -51,21 +58,27 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsername(),
-                        loginRequest.getPassword()
-                )
-        );
+        try {
+			Authentication authentication = authenticationManager.authenticate(
+			        new UsernamePasswordAuthenticationToken(
+			                loginRequest.getUsername(),
+			                loginRequest.getPassword()
+			        )
+			);
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = tokenProvider.generateToken(authentication);
-        
-        UserPrincipal userDetails = (UserPrincipal) authentication.getPrincipal();		
-		List<String> roles = userDetails.getAuthorities().stream()
-				.map(item -> item.getAuthority())
-				.collect(Collectors.toList());
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+			String jwt = tokenProvider.generateToken(authentication);
+			
+			UserPrincipal userDetails = (UserPrincipal) authentication.getPrincipal();		
+			List<String> roles = userDetails.getAuthorities().stream()
+					.map(item -> item.getAuthority())
+					.collect(Collectors.toList());
+			logger.info("User: " + loginRequest.getUsername() + "singed in.");
+			return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+		} catch (BadCredentialsException ex) {
+			logger.error("Wrong credentials during sign in attempt.");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Wrong credentials!");
+		}
     }
 	
 	@PostMapping

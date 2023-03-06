@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -56,7 +57,7 @@ public class GradeEntityController {
 	@Autowired
 	GradeRepository gradeRepository;
 	
-
+	@Secured("ADMIN")
 	@PostMapping("/add")
 	public ResponseEntity<?> addNewGrade(@RequestBody GradeEntity newGrade, BindingResult result) {
 		if(result.hasErrors()) {
@@ -71,7 +72,7 @@ public class GradeEntityController {
 	}
 	
 	
-	
+	@Secured("ADMIN")
 	@PutMapping("/upadte/{id}")
 	public ResponseEntity<?> updateGrade(@PathVariable Long id, @Valid @RequestBody GradeEntity upadetedGrade, BindingResult result) {
 		if(result.hasErrors()) {
@@ -85,12 +86,12 @@ public class GradeEntityController {
         logger.info("Changed grade with id:" + id);
 		return new ResponseEntity<>(gradeRepository.save(existingGrade), HttpStatus.OK);
 	}
-	
+	@Secured("ADMIN")
 	@GetMapping("/all")
 	public ResponseEntity<?> getAll(){
 		return new ResponseEntity<>(gradeRepository.findAll(), HttpStatus.OK);
 	}
-	
+	@Secured("ADMIN")
 	@DeleteMapping(path = "/delete/{Id}")
 	public ResponseEntity<?> deleteGrade(@PathVariable Long Id){
 		if(gradeService.isActive(Id)) {
@@ -105,7 +106,7 @@ public class GradeEntityController {
 	}
 	
 	// add TecherSubjectCombination to Grade
-	
+	@Secured("ADMIN")
 	@PostMapping("/addSubjecttoGrade/{teacherSubjectId}/grade/{gadeId}")
 	public ResponseEntity<?> addSubjecttoGrade(@PathVariable Long teacherSubjectId, @PathVariable Long gadeId){
 		

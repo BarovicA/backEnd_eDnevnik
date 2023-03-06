@@ -1,6 +1,12 @@
 package com.iktpreobuka.eDnevnik.controllers;
 
 
+import java.security.Principal;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 import javax.validation.Valid;
 
 import org.hibernate.annotations.Parent;
@@ -45,6 +51,7 @@ public class StudentEntityController {
 	
 	@Autowired
 	private ParentEntity parentEntity;
+	
 	@Autowired
 	GradeRepository gradeRepository;
 	
@@ -71,7 +78,7 @@ public class StudentEntityController {
 		binder.addValidators(studentCustomValidator);
 	}
 	// 1. add StudentEntity
-
+	@Secured("ADMIN")
 	@PostMapping("/add")
 	public ResponseEntity<?> addStudent(@Valid @RequestBody StudentDto newStudent, BindingResult result) {
 		if (result.hasErrors()) {
@@ -85,23 +92,37 @@ public class StudentEntityController {
 	}
 
 	// 2. get all StudentEntity
-	@Secured("PARENT")
+	@Secured("ADMIN")
 	@GetMapping
 	public ResponseEntity<?> getAllStudents() {
 	    return new ResponseEntity<>(studentRepository.findAll(), HttpStatus.OK);
 	}
+	
+	@Secured("ADMIN")
+	@GetMapping
+	public ResponseEntity<?> getMyStudents() {
+		List<StudentEntity> students = StreamSupport.stream(studentRepository.findAll().spliterator(), false)
+                .filter(student -> !student.getDeleted())
+                .collect(Collectors.toList());
+	    return new ResponseEntity<>(students, HttpStatus.OK);
+	}
+	//all Parents children
+	
+	@Secured("PARENT")
+	@GetMapping("/children")
+	public ResponseEntity<?> getAllStudents(Principal principal) {
+	    ParentEntity parent = parentRepository.findByUsername(principal.getName());
+	    List<StudentEntity> students = parent.getStudent();
+	    return new ResponseEntity<>(students, HttpStatus.OK);
+	}
+	
+	
 
-//	@GetMapping
-//	public ResponseEntity<?> getAllStudents() {
-//	    List<StudentEntity> students = studentRepository.findAll()
-//	            .stream()
-//	            .filter(student -> !student.getDeleted())
-//	            .collect(Collectors.toList());
-//	    return new ResponseEntity<>(students, HttpStatus.OK);
-//	}
+	
+	
 	
 	// 3. change StudentEntity
-
+	@Secured("ADMIN")
 	@PutMapping("/update/{id}")
 	public ResponseEntity<?> updateStudent(@PathVariable Long id, @Valid @RequestBody StudentDto dto,
 	        BindingResult result) {
@@ -120,7 +141,7 @@ public class StudentEntityController {
 	}
 
 	// 4. find by id
-
+	@Secured("ADMIN")
 	@GetMapping("/find/{id}")
 	public ResponseEntity<?> getStudentById(@PathVariable Long id) {
 
@@ -131,7 +152,7 @@ public class StudentEntityController {
 	    return new ResponseEntity<RESTError>(new RESTError(4 , "Student does not exist!"), HttpStatus.NOT_FOUND);
 	}
     // 5. delete StudentEntity (only set StudentEntity.deleted on true)
-    
+	@Secured("ADMIN")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteStudent(@PathVariable Long id) {
         
@@ -145,7 +166,7 @@ public class StudentEntityController {
     }
     
     // 6. add parent to student
-    
+	@Secured("ADMIN")
     @PostMapping("/addParent/{studentId}/parent/{parentId}")
     public ResponseEntity<?> addParentToStudent(@PathVariable Long studentId, @PathVariable Long parentId) {
     	 if (!studentService.isActive(studentId)) {
@@ -162,7 +183,7 @@ public class StudentEntityController {
     }
     
     // 7. add student to grade
-    
+	@Secured("ADMIN")
     @PostMapping("/addGrade/{studentId}/grade/{gradeId}")
     public ResponseEntity<?> addStudentToGrade(@PathVariable Long studentId, @PathVariable Long gradeId){
     	if (!studentService.isActive(studentId)) {

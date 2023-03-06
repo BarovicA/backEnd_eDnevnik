@@ -10,4 +10,6 @@ public interface ParentRepository extends CrudRepository<ParentEntity, Long> {
 
 	boolean existsByEmail(String email);
 
+	ParentEntity findByUsername(String name);
+
 }
