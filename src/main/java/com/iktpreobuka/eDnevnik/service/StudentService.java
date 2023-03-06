@@ -11,4 +11,6 @@ public interface StudentService {
 
 	StudentEntity mappNewStudent(StudentDto dto);
 
+	StudentEntity addStudentToGrade(Long studentId, Long gradeId);
+
 }

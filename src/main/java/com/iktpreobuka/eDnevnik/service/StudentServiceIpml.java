@@ -4,10 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import com.iktpreobuka.eDnevnik.entities.GradeEntity;
 import com.iktpreobuka.eDnevnik.entities.StudentEntity;
+import com.iktpreobuka.eDnevnik.entities.TeacherSubjectGradeEntity;
+import com.iktpreobuka.eDnevnik.entities.TeacherSubjectStudentEntity;
 import com.iktpreobuka.eDnevnik.entities.dto.StudentDto;
+import com.iktpreobuka.eDnevnik.repositories.GradeRepository;
 import com.iktpreobuka.eDnevnik.repositories.RoleRepository;
 import com.iktpreobuka.eDnevnik.repositories.StudentRepository;
+import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectGradeRepository;
+import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectStudentRepository;
 
 @Service
 @Primary
@@ -18,7 +24,13 @@ public class StudentServiceIpml implements StudentService{
 
 	@Autowired
 	private RoleRepository roleRepo;
-
+    @Autowired
+	GradeRepository gradeRepository;
+    
+    @Autowired
+    TeacherSubjectGradeRepository teSuGrRepository;
+    @Autowired
+    TeacherSubjectStudentRepository teacherSubjectStudentRepository;
 
 	@Override
 	public StudentEntity mappNewStudent(StudentDto dto) {
@@ -59,5 +71,22 @@ public class StudentServiceIpml implements StudentService{
 		student.setDeleted(dto.isDeleted());
 
 		return student;
+	}
+	@Override
+	public StudentEntity addStudentToGrade(Long studentId, Long gradeId) {
+		StudentEntity studentEntity = studentRepository.findById(studentId).get();
+		GradeEntity grade = gradeRepository.findById(gradeId).get();
+		studentEntity.setGrade(grade);
+		TeacherSubjectGradeEntity teSuGr = grade.getTeacherSubjectGrade();
+		TeacherSubjectStudentEntity teSuSu = new TeacherSubjectStudentEntity();
+		teSuSu.setTeacherSubject(teSuGr.getTeacherSubject());
+		teSuSu.setStudent(studentEntity);
+		teSuSu.setDeleted(false);
+		gradeRepository.save(grade);
+		teacherSubjectStudentRepository.save(teSuSu);
+		
+		
+		return studentRepository.save(studentEntity);
+		
 	}
 }

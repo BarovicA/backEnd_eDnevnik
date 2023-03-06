@@ -161,7 +161,7 @@ public class StudentEntityController {
     	return new ResponseEntity<StudentEntity>(studentRepository.save(student), HttpStatus.OK);
     }
     
-    // add student to grade
+    // 7. add student to grade
     
     @PostMapping("/addGrade/{studentId}/grade/{gradeId}")
     public ResponseEntity<?> addStudentToGrade(@PathVariable Long studentId, @PathVariable Long gradeId){
@@ -173,20 +173,16 @@ public class StudentEntityController {
 		}
     	StudentEntity student = studentRepository.findById(studentId).get();
     	GradeEntity grade = gradeRepository.findById(gradeId).get();
+    	if (grade.getTeacherSubjectGrade() == null) {
+      		 return new ResponseEntity<RESTError>(new RESTError(4,"Grade does not have assigned Teacher with subject!"), HttpStatus.NOT_FOUND);
+		}
     	if (student.getGrade() == grade) {
     		return new ResponseEntity<RESTError>(new RESTError(4,"Student is already in that grade!"), HttpStatus.NOT_FOUND);
 		}
-    	return null;
+    	logger.info("Student: " + student.getUsername() + " added to grade: " + grade.getId());
+    	return new ResponseEntity<StudentEntity>(studentService.addStudentToGrade(studentId, gradeId), HttpStatus.OK);
     }
-//    @GetMapping("/changerole/{id}")
-//    public ResponseEntity<?> TeacherById(@PathVariable Long id) {
-//    	StudentEntity teacherEntity = studentRepository.findById(id).orElse(null);
-//        if (teacherEntity == null) {
-//            return new ResponseEntity<RESTError>(new RESTError(1 , "Teacher does not exist!"), HttpStatus.NOT_FOUND);
-//        }
-//        teacherEntity.setRole
-//        studentRepository.save(teacherEntity);
-//        return new ResponseEntity<>(teacherEntity, HttpStatus.OK);
-//    }
-//    
+    
+    
+
 }
