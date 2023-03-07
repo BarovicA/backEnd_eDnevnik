@@ -31,7 +31,7 @@ public class RoleEntity {
 	@JsonIgnore
 	private Long id;
 	@Enumerated(EnumType.STRING)
-	@Column(name = "role_name")
+	@Column(name = "name")
 	private RoleENUM name;
 	
 	@OneToMany(mappedBy = "role", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
@@ -45,7 +45,10 @@ public class RoleEntity {
 	public RoleEntity() {
 		super();
 	}
-
+    public RoleEntity(RoleENUM name) {
+        this.name = name;
+    }
+	
 	public Integer getVersion() {
 		return version;
 	}
@@ -62,8 +65,8 @@ public class RoleEntity {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name.toString();
+	public RoleENUM getName() {
+		return name;
 	}
 
 	public void setName(RoleENUM name) {

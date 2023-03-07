@@ -1,5 +1,9 @@
 package com.iktpreobuka.eDnevnik.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -9,6 +13,7 @@ import com.iktpreobuka.eDnevnik.entities.StudentEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherSubjectGradeEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherSubjectStudentEntity;
 import com.iktpreobuka.eDnevnik.entities.dto.StudentDto;
+import com.iktpreobuka.eDnevnik.entities.enums.RoleENUM;
 import com.iktpreobuka.eDnevnik.repositories.GradeRepository;
 import com.iktpreobuka.eDnevnik.repositories.RoleRepository;
 import com.iktpreobuka.eDnevnik.repositories.StudentRepository;
@@ -39,7 +44,7 @@ public class StudentServiceIpml implements StudentService{
 		student.setLastName(dto.getLastName());
 		student.setUsername(dto.getUsername());
 		student.setPassword(dto.getPassword());
-		student.setRole(roleRepo.findByName("STUDENT"));
+		student.setRole(roleRepo.findByName(RoleENUM.STUDENT).get());
 		student.setDeleted(false);
 		return student;
 	}
@@ -77,13 +82,17 @@ public class StudentServiceIpml implements StudentService{
 		StudentEntity studentEntity = studentRepository.findById(studentId).get();
 		GradeEntity grade = gradeRepository.findById(gradeId).get();
 		studentEntity.setGrade(grade);
-		TeacherSubjectGradeEntity teSuGr = grade.getTeacherSubjectGrade();
-		TeacherSubjectStudentEntity teSuSu = new TeacherSubjectStudentEntity();
-		teSuSu.setTeacherSubject(teSuGr.getTeacherSubject());
-		teSuSu.setStudent(studentEntity);
-		teSuSu.setDeleted(false);
+		
+		
+		List <TeacherSubjectGradeEntity> listaTSG = new ArrayList<>();
+		listaTSG = teSuGrRepository.findAllByGrade(grade);
+		for (TeacherSubjectGradeEntity teacherSubjectGradeEntity : listaTSG) {
+			TeacherSubjectStudentEntity tss = new TeacherSubjectStudentEntity();
+			tss.setTeacherSubject(teacherSubjectGradeEntity.getTeacherSubject());
+			tss.setStudent(studentEntity);
+			teacherSubjectStudentRepository.save(tss);
+		}
 		gradeRepository.save(grade);
-		teacherSubjectStudentRepository.save(teSuSu);
 		
 		
 		return studentRepository.save(studentEntity);

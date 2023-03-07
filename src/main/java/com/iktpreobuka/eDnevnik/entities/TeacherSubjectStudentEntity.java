@@ -32,6 +32,7 @@ public class TeacherSubjectStudentEntity {
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(name = "student")
 	private StudentEntity student;
+	
 
 	
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
@@ -53,6 +54,7 @@ public class TeacherSubjectStudentEntity {
 	private Integer version;
 
 	public TeacherSubjectStudentEntity() {
+		this.deleted = false;
 	}
 
 //	public List<FinalMark> getFinalMarks() {

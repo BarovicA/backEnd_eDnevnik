@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,7 +43,7 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	protected void initBinder(final WebDataBinder binder) {
 		binder.addValidators();
 	}
-	
+	@Secured("ADMIN")
 	@PostMapping("/add")
 	public ResponseEntity<?> addNewSubject(@Valid @RequestBody SubjectEntity newSubject, BindingResult result) {
 		if(result.hasErrors()) {
@@ -55,12 +56,12 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	        return new ResponseEntity<>("The subject already exists.", HttpStatus.CONFLICT);
 	    }
 	}
-	
+	@Secured("ADMIN")
 	@GetMapping("/")
 	public Iterable<SubjectEntity> getAllSubjects() {
 		return subjectRepository.findAll();
 	}
-	
+	@Secured("ADMIN")
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getSubjectById(@PathVariable Long id) {
 		if(subjectRepository.existsById(id)) {
@@ -69,7 +70,7 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 			return new ResponseEntity<>("The subject does not exist.", HttpStatus.NOT_FOUND);
 		}
 	}
-	
+	@Secured("ADMIN")
 	@PutMapping("/update/{id}")
 	public ResponseEntity<?> updateSubjectById(@PathVariable Long id, @Valid @RequestBody SubjectEntity updatedSubject, BindingResult result) {
 		if(result.hasErrors()) {
@@ -81,6 +82,7 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 			subject.setWeeklyHours(updatedSubject.getWeeklyHours());
 			subject.setYear(updatedSubject.getYear());
 			subject.setSemester(updatedSubject.getSemester());
+			subject.setName(updatedSubject.getName());
 			subjectRepository.save(subject);
 			logger.info("Updated subject with id: " + id);
 			return new ResponseEntity<>("The subject is updated.", HttpStatus.OK);
@@ -88,7 +90,7 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 			return new ResponseEntity<>("The subject does not exist.", HttpStatus.NOT_FOUND);
 		}
 	}
-	
+	@Secured("ADMIN")
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> deleteSubject(@PathVariable Long id) {
 		if (subjectService.isActive(id)) {

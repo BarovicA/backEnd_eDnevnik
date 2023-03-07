@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.iktpreobuka.eDnevnik.entities.TeacherEntity;
 import com.iktpreobuka.eDnevnik.entities.dto.TeacherEntityDTO;
+import com.iktpreobuka.eDnevnik.entities.enums.RoleENUM;
 import com.iktpreobuka.eDnevnik.repositories.RoleRepository;
 import com.iktpreobuka.eDnevnik.repositories.TeacherRepository;
 @Service
@@ -23,7 +24,7 @@ public class TeacherServiceImpl implements TeacherService{
 		teacher.setLastName(dto.getLastName());
 		teacher.setUsername(dto.getUsername());
 		teacher.setPassword(dto.getPassword());
-		teacher.setRole(roleRepo.findByName("TEACHER"));
+		teacher.setRole(roleRepo.findByName(RoleENUM.TEACHER).get());
 		teacher.setDeleted(false);
 		return teacher;
 	}

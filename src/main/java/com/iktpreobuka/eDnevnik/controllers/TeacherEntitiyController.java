@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
@@ -65,6 +66,7 @@ public class TeacherEntitiyController {
    
     
     // 1. add TeacherEntity
+    @Secured("ADMIN")
     @PostMapping("/add")
     public ResponseEntity<?> addTeacher(@Valid @RequestBody TeacherEntityDTO newTeacher, BindingResult result) {
     	if (result.hasErrors()) {
@@ -78,6 +80,7 @@ public class TeacherEntitiyController {
     }
 
     // 2. get all TeacherEntity
+    @Secured("ADMIN")
     @GetMapping
     public ResponseEntity<?> getAllTeachers() {
         return new ResponseEntity<>(teacherRepository.findAll(), HttpStatus.OK);
@@ -85,7 +88,7 @@ public class TeacherEntitiyController {
     }
 
     // 3. change TeacherEntity
-    
+    @Secured("ADMIN")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateTeacher(@PathVariable Long id,@Valid  @RequestBody TeacherEntityDTO dto,
     		BindingResult result) {
@@ -104,6 +107,7 @@ public class TeacherEntitiyController {
     }
 //
 //    // 4. find by id
+    @Secured("ADMIN")
     @GetMapping("/find/{id}")
     public ResponseEntity<?> getTeacherById(@PathVariable Long id) {
         TeacherEntity teacherEntity = teacherRepository.findById(id).orElse(null);
@@ -114,6 +118,7 @@ public class TeacherEntitiyController {
     }
 
     // 5. delete TeacherEntity (only set TeacherEntity.deleted on true)
+    @Secured("ADMIN")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteTeacher(@PathVariable Long id) {
         TeacherEntity existingTeacher = teacherRepository.findById(id).orElse(null);
@@ -126,7 +131,7 @@ public class TeacherEntitiyController {
     }
     
     // add subject for teacher
-    
+    @Secured("ADMIN")
     @PostMapping("/{teacherId}/subject/{subjectId}")
     public ResponseEntity<?> addSubjectForTeacher(@PathVariable Long teacherId, @PathVariable Long subjectId) {
     	
@@ -152,6 +157,8 @@ public class TeacherEntitiyController {
     	TeacherSubjectEntity tse = new TeacherSubjectEntity();
     	tse.setSubject(subjectRepository.findById(subjectId).get());
     	tse.setTeacher(teacherRepository.findById(teacherId).get());
+    	tse.setYear(subjectRepository.findById(subjectId).get().getYear());
+    	tse.setSemester(subjectRepository.findById(subjectId).get().getSemester());
     	tse.setDeleted(false);
     	teacherSubjectRepository.save(tse);
     	logger.info("Successfully created teacherSubject with id: " + tse.getId());
@@ -159,17 +166,7 @@ public class TeacherEntitiyController {
     }
     
     
-    
-    @GetMapping("/changerole/{id}")
-    public ResponseEntity<?> TeacherById(@PathVariable Long id) {
-        TeacherEntity teacherEntity = teacherRepository.findById(id).orElse(null);
-        if (teacherEntity == null) {
-            return new ResponseEntity<RESTError>(new RESTError(1 , "Teacher does not exist!"), HttpStatus.NOT_FOUND);
-        }
-        teacherEntity.setRole(null);
-        teacherRepository.save(teacherEntity);
-        return new ResponseEntity<>(teacherEntity, HttpStatus.OK);
-    }
+
     
     
     

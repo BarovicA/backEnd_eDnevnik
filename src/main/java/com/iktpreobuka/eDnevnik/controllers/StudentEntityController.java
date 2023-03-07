@@ -16,8 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -33,6 +36,7 @@ import com.iktpreobuka.eDnevnik.entities.ParentEntity;
 import com.iktpreobuka.eDnevnik.entities.StudentEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherEntity;
 import com.iktpreobuka.eDnevnik.entities.dto.StudentDto;
+import com.iktpreobuka.eDnevnik.entities.enums.RoleENUM;
 import com.iktpreobuka.eDnevnik.repositories.GradeRepository;
 import com.iktpreobuka.eDnevnik.repositories.ParentRepository;
 import com.iktpreobuka.eDnevnik.repositories.StudentRepository;
@@ -92,15 +96,15 @@ public class StudentEntityController {
 	}
 
 	// 2. get all StudentEntity
-	@Secured("ADMIN")
-	@GetMapping
-	public ResponseEntity<?> getAllStudents() {
-	    return new ResponseEntity<>(studentRepository.findAll(), HttpStatus.OK);
-	}
+//	@Secured("ADMIN")
+//	@GetMapping
+//	public ResponseEntity<?> getAllStudents() {
+//	    return new ResponseEntity<>(studentRepository.findAll(), HttpStatus.OK);
+//	}
 	
 	@Secured("ADMIN")
 	@GetMapping
-	public ResponseEntity<?> getMyStudents() {
+	public ResponseEntity<?> getAllStudents() {
 		List<StudentEntity> students = StreamSupport.stream(studentRepository.findAll().spliterator(), false)
                 .filter(student -> !student.getDeleted())
                 .collect(Collectors.toList());
@@ -108,11 +112,13 @@ public class StudentEntityController {
 	}
 	//all Parents children
 	
+	@CrossOrigin
 	@Secured("PARENT")
 	@GetMapping("/children")
-	public ResponseEntity<?> getAllStudents(Principal principal) {
+	public ResponseEntity<?> getMyStudents(Principal principal) {
 	    ParentEntity parent = parentRepository.findByUsername(principal.getName());
 	    List<StudentEntity> students = parent.getStudent();
+	    System.out.println("User roles: " + ((AbstractAuthenticationToken) principal).getAuthorities()); // ispisuje role korisnika
 	    return new ResponseEntity<>(students, HttpStatus.OK);
 	}
 	

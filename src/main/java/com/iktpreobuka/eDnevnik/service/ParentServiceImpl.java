@@ -7,6 +7,7 @@ import com.iktpreobuka.eDnevnik.entities.ParentEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherEntity;
 import com.iktpreobuka.eDnevnik.entities.dto.ParentDTO;
 import com.iktpreobuka.eDnevnik.entities.dto.TeacherEntityDTO;
+import com.iktpreobuka.eDnevnik.entities.enums.RoleENUM;
 import com.iktpreobuka.eDnevnik.repositories.ParentRepository;
 import com.iktpreobuka.eDnevnik.repositories.RoleRepository;
 @Service
@@ -29,7 +30,7 @@ public class ParentServiceImpl implements ParentService {
 		
 		parent.setUsername(dto.getUsername());
 		parent.setPassword(dto.getPassword());
-		parent.setRole(roleRepo.findByName("PARENT"));
+		parent.setRole(roleRepo.findByName(RoleENUM.PARENT).get());
 		parent.setDeleted(false);
 		return parent;
 	}

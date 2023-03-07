@@ -20,6 +20,8 @@ public interface TeacherSubjectGradeRepository extends CrudRepository<TeacherSub
 
 	List<TeacherSubjectGradeEntity> findByTeacherSubjectSubject(SubjectEntity subjectEntity);
 
+	List<TeacherSubjectGradeEntity> findAllByGrade(GradeEntity grade);
+
 	
 
 

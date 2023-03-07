@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.iktpreobuka.eDnevnik.entities.GradeEntity;
 import com.iktpreobuka.eDnevnik.entities.ParentEntity;
+import com.iktpreobuka.eDnevnik.entities.TeacherSubjectEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherSubjectGradeEntity;
 import com.iktpreobuka.eDnevnik.entities.dto.StudentDto;
 import com.iktpreobuka.eDnevnik.repositories.GradeRepository;
@@ -129,7 +130,7 @@ public class GradeEntityController {
 				teSuGr.setDeleted(false);
 				teacherSubjectGradeRepository.save(teSuGr);
 				logger.info("Successfully reactivated techerSubject for grade: " + teSuGr.getId().toString());
-				return new ResponseEntity<>("Successfully reactivated TeacherSubject for Grade.", HttpStatus.OK);
+				return new ResponseEntity<>("Successfully reactivated TeacherSubject  for Grade.", HttpStatus.OK);
 			}
 			// if yes message that exist
 			else {	
@@ -138,13 +139,20 @@ public class GradeEntityController {
 			}
 		}
 		//not exist make one
+		GradeEntity grade = gradeRepository.findById(gadeId).get();
+		TeacherSubjectEntity ts = teSuRepository.findById(teacherSubjectId).get();
 		TeacherSubjectGradeEntity teSuGr =  new TeacherSubjectGradeEntity();
+		if (grade.getSchoolYear() != ts.getYear()) {
+			return new ResponseEntity<RESTError>(new RESTError(5, "Grade and Subject are not in same scool year."), HttpStatus.NOT_FOUND);
+		}
+		
 		teSuGr.setTeacherSubject(teSuRepository.findById(teacherSubjectId).get());
 		teSuGr.setDeleted(false);
+		teSuGr.setGrade(grade);
 		teacherSubjectGradeRepository.save(teSuGr);
-		GradeEntity grade = gradeRepository.findById(gadeId).get();
-		grade.setTeacherSubjectGrade(teSuGr);
+
 		gradeRepository.save(grade);
+		
 		logger.info("Successfully added techerSubject: " + teacherSubjectId + " for grade: " + gadeId);
 		return new ResponseEntity<>("Successfully added TeacherSubject for Grade.", HttpStatus.OK);
 	}

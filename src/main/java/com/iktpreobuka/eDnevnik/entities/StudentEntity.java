@@ -8,10 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectGradeRepository;
 import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectStudentRepository;
 
@@ -29,13 +31,46 @@ public class StudentEntity extends UserEntity {
 	@JoinColumn(name = "grade")
 	private GradeEntity grade;
 
+	@OneToMany(mappedBy = "student", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JsonBackReference
+	private List<TeacherSubjectStudentEntity> teacherSubjectStudent;
+	
+	
+	
+	
 //	@OneToMany(mappedBy = "student", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 //	@JsonBackReference
 //	private List<MarkEntity> marks;
 //	
 
+	
+	
 	public StudentEntity() {
 		super();
+	}
+
+	public List<TeacherSubjectStudentEntity> getTeacherSubjectStudent() {
+		return teacherSubjectStudent;
+	}
+
+	public void setTeacherSubjectStudent(List<TeacherSubjectStudentEntity> teacherSubjectStudent) {
+		this.teacherSubjectStudent = teacherSubjectStudent;
+	}
+
+	public TeacherSubjectStudentRepository getTeacherSubjectStudentRepository() {
+		return teacherSubjectStudentRepository;
+	}
+
+	public void setTeacherSubjectStudentRepository(TeacherSubjectStudentRepository teacherSubjectStudentRepository) {
+		this.teacherSubjectStudentRepository = teacherSubjectStudentRepository;
+	}
+
+	public TeacherSubjectGradeRepository getTeacherSubjectGradeRepository() {
+		return teacherSubjectGradeRepository;
+	}
+
+	public void setTeacherSubjectGradeRepository(TeacherSubjectGradeRepository teacherSubjectGradeRepository) {
+		this.teacherSubjectGradeRepository = teacherSubjectGradeRepository;
 	}
 
 	public ParentEntity getParent() {

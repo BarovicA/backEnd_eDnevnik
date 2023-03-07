@@ -52,7 +52,6 @@ public class SubjectEntity {
 	private Integer weeklyHours;
 
 	@Column
-	
 	@Enumerated(EnumType.STRING)
 	@NotNull(message = "Year must not be null.")
 	private SchoolYear year;
@@ -75,6 +74,7 @@ public class SubjectEntity {
 	private Integer version;
 
 	public SubjectEntity() {
+		this.deleted = false;
 	}
 
 	public Long getId() {

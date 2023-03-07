@@ -36,10 +36,11 @@ public class TeacherSubjectGradeEntity {
 	@JoinColumn(name = "teacherSubject")
 	private TeacherSubjectEntity teacherSubject;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "teacherSubjectGrade", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-	private List<GradeEntity> grade = new ArrayList<>();
 
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinColumn(name = "grade")
+	private GradeEntity grade;
+	
 	@Column
 	private Boolean deleted;
 
@@ -47,6 +48,7 @@ public class TeacherSubjectGradeEntity {
 	private Integer version;
 
 	public TeacherSubjectGradeEntity() {
+		this.deleted = false;
 	}
 
 	public Long getId() {
@@ -65,12 +67,15 @@ public class TeacherSubjectGradeEntity {
 		this.teacherSubject = teacherSubject;
 	}
 
-	public List<GradeEntity> getGrades() {
+
+	
+
+	public GradeEntity getGrade() {
 		return grade;
 	}
 
-	public void setGrades(List<GradeEntity> grades) {
-		this.grade = grades;
+	public void setGrade(GradeEntity grade) {
+		this.grade = grade;
 	}
 
 	public Boolean getDeleted() {

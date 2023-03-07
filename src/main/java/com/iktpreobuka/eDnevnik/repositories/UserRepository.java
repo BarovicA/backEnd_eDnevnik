@@ -9,11 +9,12 @@ import com.iktpreobuka.eDnevnik.entities.UserEntity;
 
 public interface UserRepository extends CrudRepository<UserEntity, Long> {
 	
-	public Optional<UserEntity> findByUsername(String username);
+	//public Optional<UserEntity> findByUsername(String username);
 
 	List<UserEntity> findByIdIn(List<Long> userIds);
 
 	Boolean existsByUsername(String username);
-
+	
+	Optional<UserEntity> findByUsername(String username); 
 
 }

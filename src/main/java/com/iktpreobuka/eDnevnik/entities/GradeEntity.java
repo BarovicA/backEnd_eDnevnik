@@ -54,12 +54,10 @@ public class GradeEntity {
 	@Max(value = 4, message = "Class number must me less then 4")
 	private Integer unit;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "grade", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	private List<TeacherSubjectGradeEntity> teacherSubjectGrade = new ArrayList<>();
 	
-	
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-	@JoinColumn(name = "teacherSubjectGrade")
-	private TeacherSubjectGradeEntity teacherSubjectGrade;
-
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "grade", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
@@ -72,6 +70,7 @@ public class GradeEntity {
 	private Integer version;
 
 	public GradeEntity() {
+		this.deleted = false;
 	}
 
 	public Long getId() {
@@ -106,14 +105,15 @@ public class GradeEntity {
 		this.unit = unit;
 	}
 
-	public TeacherSubjectGradeEntity getTeacherSubjectGrade() {
+
+
+	public List<TeacherSubjectGradeEntity> getTeacherSubjectGrade() {
 		return teacherSubjectGrade;
 	}
 
-	public void setTeacherSubjectGrade(TeacherSubjectGradeEntity teacherSubjectGrade) {
+	public void setTeacherSubjectGrade(List<TeacherSubjectGradeEntity> teacherSubjectGrade) {
 		this.teacherSubjectGrade = teacherSubjectGrade;
 	}
-
 
 	public Boolean getDeleted() {
 		return deleted;

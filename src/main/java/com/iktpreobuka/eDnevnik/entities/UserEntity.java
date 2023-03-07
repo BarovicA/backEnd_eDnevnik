@@ -1,5 +1,7 @@
 package com.iktpreobuka.eDnevnik.entities;
 
+
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,6 +20,8 @@ import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,10 +31,12 @@ import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectStudentRepository;
 
 
 
+
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "User_Type")
-public  class UserEntity {
+public abstract class UserEntity {
 
 	
 	@Id
@@ -58,6 +64,10 @@ public  class UserEntity {
 	@JsonIgnore
 	@Version
 	private Integer version;
+	
+	public List<GrantedAuthority> getAuthorities() {
+	    return Collections.singletonList(new SimpleGrantedAuthority(role.getName().toString()));
+	}
 	
 	
 	

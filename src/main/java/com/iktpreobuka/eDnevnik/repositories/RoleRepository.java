@@ -9,7 +9,7 @@ import com.iktpreobuka.eDnevnik.entities.enums.RoleENUM;
 
 public interface RoleRepository extends CrudRepository<RoleEntity, Long> {
 
-	RoleEntity findByName(String name);
+	
 	Optional<RoleEntity> findByName(RoleENUM roleName);
 	
 }

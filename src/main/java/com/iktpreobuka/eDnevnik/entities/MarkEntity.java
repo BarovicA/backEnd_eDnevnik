@@ -55,6 +55,7 @@ public class MarkEntity {
 	private Integer version;
 
 	public MarkEntity() {
+		this.deleted = false;
 	}
 
 	public Long getId() {

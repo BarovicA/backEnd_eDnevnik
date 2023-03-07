@@ -7,6 +7,8 @@ import java.util.Optional;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,11 +18,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.iktpreobuka.eDnevnik.entities.enums.SchoolYear;
+import com.iktpreobuka.eDnevnik.entities.enums.Semester;
 
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
@@ -41,6 +46,16 @@ public class TeacherSubjectEntity {
 	@JoinColumn(name = "subject")
 	private SubjectEntity subject;
 
+	@Column
+	@Enumerated(EnumType.STRING)
+	@NotNull(message = "Year must not be null.")
+	private SchoolYear year;
+
+	@Column
+	@Enumerated(EnumType.STRING)
+	@NotNull(message = "Semester must not be null.")
+	private Semester semester;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "teacherSubject", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private List<TeacherSubjectGradeEntity> teacherSubjectGrade = new ArrayList<>();
@@ -56,6 +71,7 @@ public class TeacherSubjectEntity {
 	private Integer version;
 
 	public TeacherSubjectEntity() {
+		this.deleted = false;
 	}
 
 	public Long getId() {
@@ -84,6 +100,22 @@ public class TeacherSubjectEntity {
 
 	public List<TeacherSubjectGradeEntity> getTeacherSubjectGrade() {
 		return teacherSubjectGrade;
+	}
+
+	public SchoolYear getYear() {
+		return year;
+	}
+
+	public void setYear(SchoolYear year) {
+		this.year = year;
+	}
+
+	public Semester getSemester() {
+		return semester;
+	}
+
+	public void setSemester(Semester semester) {
+		this.semester = semester;
 	}
 
 	public void setTeacherSubjectGrade(List<TeacherSubjectGradeEntity> teacherSubjectGrade) {
