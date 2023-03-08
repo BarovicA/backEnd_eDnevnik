@@ -27,7 +27,6 @@ public class SubjectServiceImpl implements SubjectService {
 		subject.setYear(newSubject.getYear());
 		subject.setSemester(newSubject.getSemester());
 		subject.setWeeklyHours(newSubject.getWeeklyHours());
-		subject.setDeleted(false);
 		return suRepository.save(subject);
 	}
 

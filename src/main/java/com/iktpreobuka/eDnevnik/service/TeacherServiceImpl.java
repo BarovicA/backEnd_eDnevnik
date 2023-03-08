@@ -25,7 +25,6 @@ public class TeacherServiceImpl implements TeacherService{
 		teacher.setUsername(dto.getUsername());
 		teacher.setPassword(dto.getPassword());
 		teacher.setRole(roleRepo.findByName(RoleENUM.TEACHER).get());
-		teacher.setDeleted(false);
 		return teacher;
 	}
 	

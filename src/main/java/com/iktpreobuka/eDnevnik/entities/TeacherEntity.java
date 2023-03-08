@@ -31,6 +31,7 @@ public class TeacherEntity extends UserEntity {
 
 	public TeacherEntity() {
 		super();
+		this.deleted = false;
 	}
 
 	
@@ -58,7 +59,7 @@ public class TeacherEntity extends UserEntity {
 	public void setDeleted(Boolean deleted) {
 	    this.deleted = deleted;
 	    
-	    if (deleted = true) {
+	    if (deleted) {
 	        List<TeacherSubjectEntity> teacherSubjects = teacherSubjectRepository.findByTeacher(this);
 	        teacherSubjects.forEach(ts -> ts.setDeleted(true));
 	        teacherSubjectRepository.saveAll(teacherSubjects);

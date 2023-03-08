@@ -1,10 +1,14 @@
 package com.iktpreobuka.eDnevnik.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.iktpreobuka.eDnevnik.entities.GradeEntity;
+import com.iktpreobuka.eDnevnik.entities.StudentEntity;
 import com.iktpreobuka.eDnevnik.entities.enums.SchoolYear;
 import com.iktpreobuka.eDnevnik.repositories.GradeRepository;
+import com.iktpreobuka.eDnevnik.repositories.StudentRepository;
 
 @Service
 public class GradeServiceImpl implements GradeService {
@@ -12,12 +16,15 @@ public class GradeServiceImpl implements GradeService {
 	@Autowired
 	GradeRepository gradeRepository;
 	
+	@Autowired
+	StudentRepository studentRepository;
+	
 	@Override
 	public GradeEntity create(GradeEntity newGrade) {
 		GradeEntity grade = new GradeEntity();
 		grade.setSchoolYear(newGrade.getSchoolYear());
 		grade.setUnit(newGrade.getUnit());
-		grade.setDeleted(false);
+		
 		return gradeRepository.save(grade);
 	}
 	@Override
@@ -46,4 +53,16 @@ public class GradeServiceImpl implements GradeService {
 	public boolean isGradeUnique(SchoolYear schoolYear, Integer unit) {
 	    return gradeRepository.findBySchoolYearAndUnit(schoolYear, unit) == null;
 	}
+	@Override
+	public List<StudentEntity> listAllStudentsInGrade(Long gradeId){
+		GradeEntity grade = gradeRepository.findById(gradeId).get();
+		List<StudentEntity> students = studentRepository.findAllByGrade(grade);
+		
+		return students;
+	}
+	
+	
+	
+	
+	
 }

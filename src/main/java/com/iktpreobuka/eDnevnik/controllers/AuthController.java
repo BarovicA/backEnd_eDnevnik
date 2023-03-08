@@ -36,8 +36,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iktpreobuka.eDnevnik.config.JwtTokenProvider;
-
-
+import com.iktpreobuka.eDnevnik.entities.UserEntity;
+import com.iktpreobuka.eDnevnik.payload.ApiResponse;
 import com.iktpreobuka.eDnevnik.repositories.AdminRepository;
 import com.iktpreobuka.eDnevnik.repositories.ParentRepository;
 import com.iktpreobuka.eDnevnik.repositories.RoleRepository;
@@ -78,29 +78,76 @@ public class AuthController {
     @Autowired
     private ResourceLoader resourceLoader;
 	
+//    @PostMapping("/login")
+//    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+//
+//        // Provjera vjerodajnica korisnika
+//        Authentication authentication = authenticationManager.authenticate(
+//                new UsernamePasswordAuthenticationToken(
+//                        loginRequest.getUsername(),
+//                        loginRequest.getPassword()
+//                )
+//        );
+//
+//        // Postavljanje autentifikacije u SecurityContext
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//
+//        // Generiranje JWT tokena
+//        String jwt = tokenProvider.generateToken(authentication);
+//
+//        // Dohvat informacija o prijavljenom korisniku
+//        UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
+//        logger.info("Ulogovan korisnik: " + loginRequest.getUsername());
+//        // Vraćanje odgovora s generiranim tokenom i informacijama o korisniku
+//        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+//    }
+    
+    
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-        // Provjera vjerodajnica korisnika
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsername(),
-                        loginRequest.getPassword()
-                )
-        );
+//        // Provera da li postoji korisnik sa zadatim username-om
+//        if (userRepository.existsByUsername(loginRequest.getUsername())) {
+        	// Dohvatanje korisnika po username-u
+        	Optional<UserEntity> userOptional = userRepository.findByUsername(loginRequest.getUsername());
 
-        // Postavljanje autentifikacije u SecurityContext
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        	if (userOptional.isPresent()) {
+        	    UserEntity user = userOptional.get();
+        	    
+        	    // Provera da li je korisnik označen kao obrisan
+        	    if (user.getDeleted()) {
+        	        return ResponseEntity
+        	                .badRequest()
+        	                .body(new ApiResponse(false, "Pristup odbijen. Vaš nalog je obrisan."));
+        	    }
+            // Provjera vjerodajnica korisnika
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginRequest.getUsername(),
+                            loginRequest.getPassword()
+                    )
+            );
 
-        // Generiranje JWT tokena
-        String jwt = tokenProvider.generateToken(authentication);
+            // Postavljanje autentifikacije u SecurityContext
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // Dohvat informacija o prijavljenom korisniku
-        UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
-        logger.info("Ulogovan korisnik: " + loginRequest.getUsername());
-        // Vraćanje odgovora s generiranim tokenom i informacijama o korisniku
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+            // Generiranje JWT tokena
+            String jwt = tokenProvider.generateToken(authentication);
+
+            // Dohvat informacija o prijavljenom korisniku
+            UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
+            logger.info("Ulogovan korisnik: " + loginRequest.getUsername());
+            // Vraćanje odgovora s generiranim tokenom i informacijama o korisniku
+            return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+        } else {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new ApiResponse(false, "Pogrešni kredencijali. Molimo pokušajte ponovo."));
+        }
     }
+    
+    
+    
 	//proba bez download
     @GetMapping("/logs")
     public ResponseEntity<String> getLogs() throws IOException {

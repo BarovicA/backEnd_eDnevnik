@@ -1,12 +1,19 @@
 package com.iktpreobuka.eDnevnik.controllers;
 
+import com.iktpreobuka.eDnevnik.entities.GradeEntity;
+import com.iktpreobuka.eDnevnik.entities.ParentEntity;
+import com.iktpreobuka.eDnevnik.entities.StudentEntity;
 import com.iktpreobuka.eDnevnik.entities.SubjectEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherSubjectEntity;
+import com.iktpreobuka.eDnevnik.entities.TeacherSubjectGradeEntity;
 import com.iktpreobuka.eDnevnik.entities.dto.TeacherEntityDTO;
+import com.iktpreobuka.eDnevnik.repositories.GradeRepository;
 import com.iktpreobuka.eDnevnik.repositories.SubjectRepository;
 import com.iktpreobuka.eDnevnik.repositories.TeacherRepository;
+import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectGradeRepository;
 import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectRepository;
+import com.iktpreobuka.eDnevnik.service.GradeService;
 import com.iktpreobuka.eDnevnik.service.SubjectService;
 import com.iktpreobuka.eDnevnik.service.TeacherService;
 import com.iktpreobuka.eDnevnik.service.TeacherSubjectGradeService;
@@ -26,6 +33,8 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,6 +66,13 @@ public class TeacherEntitiyController {
 	
 	@Autowired
 	TeacherSubjectGradeService teacherSubjectGradeService;
+	@Autowired
+	TeacherSubjectGradeRepository teacherSubjectGradeRepository;
+	
+	@Autowired
+	GradeRepository gradeRepository;
+	@Autowired
+	GradeService gradeService;
     
     @InitBinder
 	protected void initBinder(final WebDataBinder binder) {
@@ -167,10 +183,79 @@ public class TeacherEntitiyController {
     
     
 
+    //prikazi sve predmete koje Naastavnik koji je ulogovan predaje.
+    @Secured("TEACHER")
+    @GetMapping("/mySubjects")
+    public ResponseEntity<?> getMySubjects(Principal principal){
+    	TeacherEntity teacher = teacherRepository.findByUsername(principal.getName());
+    	List<SubjectEntity> subjects = new ArrayList<>();
+    	subjects = ((List<TeacherSubjectEntity>) teacherSubjectRepository.findByTeacher(teacher))
+    			.stream()
+				.filter(teacherSubject -> !teacherSubject.getDeleted().equals(true))
+				.map(subject -> subject.getSubject())
+				.filter(subject -> !subject.getDeleted().equals(true))
+				.collect(Collectors.toList());
+    	logger.info("This are all subjects for teacher: " + teacher.getUsername() );
+    	return new ResponseEntity<List<SubjectEntity>>(subjects, HttpStatus.OK);
+  
+    }
+    
+  //prikazi sve Razrede gde Naastavnik koji je ulogovan predaje
+	@Secured("TEACHER")
+	@GetMapping("/myGrades")
+	public ResponseEntity<?> getMyGrades(Principal principal) {
+		TeacherEntity teacher = teacherRepository.findByUsername(principal.getName());
+		List<GradeEntity> grades = new ArrayList<>();
+		List<TeacherSubjectEntity> teacherSubjects = teacherSubjectRepository.findByTeacher(teacher);
+		for (TeacherSubjectEntity teacherSubject : teacherSubjects) {
+			if (!teacherSubject.getDeleted()) {
+				List<TeacherSubjectGradeEntity> teacherSubjectGrades = teacherSubjectGradeRepository
+						.findByTeacherSubject(teacherSubject);
+				for (TeacherSubjectGradeEntity teacherSubjectGrade : teacherSubjectGrades) {
+					if (!teacherSubjectGrade.getDeleted()) {
+						grades.add(teacherSubjectGrade.getGrade());
+					}
+				}
+			}
+		}
+		logger.info("Returned all grades where " + teacher.getUsername()+ " teaches." );
+		return new ResponseEntity<List<GradeEntity>>(grades, HttpStatus.OK);
+	}
+    
+    //prikazi sve ucenike u razredu 
+	@Secured("TEACHER")
+	@GetMapping("/studentsInMyGrade/{gradeid}")
+	public ResponseEntity<?> getStudentsInGrade(@PathVariable Long gradeid,Principal principal){
+		if (gradeService.isActive(gradeid)) {
+		GradeEntity grade = gradeRepository.findById(gradeid).get();
+		TeacherEntity teacher = teacherRepository.findByUsername(principal.getName());
+		if (teacherSubjectGradeService.isTeacherLinkedWithGrade(teacher, grade)) {
+			List<StudentEntity> students = gradeService.listAllStudentsInGrade(gradeid);
+			logger.info("Returned all students in grade where " + teacher.getUsername()+ " teaches." );
+			return new ResponseEntity<List<StudentEntity>>(students, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<RESTError>(new RESTError(2, "You are not teaching in this grade."), HttpStatus.NOT_FOUND);
+		}
+		}
+		
+	return new ResponseEntity<RESTError>(new RESTError(2, "Grade is not active."), HttpStatus.NOT_FOUND);
+	}
     
     
     
     
+    
+    
+    
+    
+    
+    //"Subjects where you teach:"
+    
+//    Map<String, Object> response = new HashMap<>();
+//    response.put("message", "Subjects where you teach:");
+//    response.put("subjects", subjects);
+//
+//    return ResponseEntity.ok(response);
     
     
     

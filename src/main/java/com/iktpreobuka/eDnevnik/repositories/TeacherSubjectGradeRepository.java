@@ -1,6 +1,7 @@
 package com.iktpreobuka.eDnevnik.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -21,6 +22,10 @@ public interface TeacherSubjectGradeRepository extends CrudRepository<TeacherSub
 	List<TeacherSubjectGradeEntity> findByTeacherSubjectSubject(SubjectEntity subjectEntity);
 
 	List<TeacherSubjectGradeEntity> findAllByGrade(GradeEntity grade);
+
+	List<TeacherSubjectGradeEntity> findByTeacherSubject(TeacherSubjectEntity teacherSubject);
+
+	
 
 	
 

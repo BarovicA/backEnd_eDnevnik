@@ -153,7 +153,7 @@ public class SubjectEntity {
 	public void setDeleted(Boolean deleted) {
 	    this.deleted = deleted;
 
-	    if (deleted = true) {
+	    if (deleted) {
 	        List<TeacherSubjectEntity> teacherSubjects = teacherSubjectRepository.findBySubject(this);
 	        teacherSubjects.forEach(ts -> ts.setDeleted(true));
 	        teacherSubjectRepository.saveAll(teacherSubjects);

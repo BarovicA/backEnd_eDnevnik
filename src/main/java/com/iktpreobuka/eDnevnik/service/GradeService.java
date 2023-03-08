@@ -1,7 +1,10 @@
 package com.iktpreobuka.eDnevnik.service;
 
+import java.util.List;
+
 import com.iktpreobuka.eDnevnik.entities.GradeEntity;
 import com.iktpreobuka.eDnevnik.entities.ParentEntity;
+import com.iktpreobuka.eDnevnik.entities.StudentEntity;
 import com.iktpreobuka.eDnevnik.entities.enums.SchoolYear;
 
 public interface GradeService {
@@ -13,5 +16,7 @@ public interface GradeService {
 	Boolean isActive(Long id);
 
 	boolean isGradeUnique(SchoolYear schoolYear, Integer unit);
+
+	List<StudentEntity> listAllStudentsInGrade(Long gradeId);
 
 }

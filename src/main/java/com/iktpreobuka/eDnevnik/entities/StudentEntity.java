@@ -48,6 +48,8 @@ public class StudentEntity extends UserEntity {
 	
 	public StudentEntity() {
 		super();
+		this.deleted = false;
+		
 	}
 
 	public List<TeacherSubjectStudentEntity> getTeacherSubjectStudent() {
@@ -98,6 +100,7 @@ public class StudentEntity extends UserEntity {
 //		this.marks = marks;
 //	}
 //	
+	
 	@JsonIgnore
 	@Transient
 	@Autowired
@@ -110,7 +113,7 @@ public class StudentEntity extends UserEntity {
 	
 	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
-		if (deleted = true) {
+		if (deleted) {
 		    List<TeacherSubjectStudentEntity> teacherSubjectStudents = teacherSubjectStudentRepository.findByStudent(this);
 		    teacherSubjectStudents.forEach(tss -> tss.setDeleted(true));
 		    teacherSubjectStudentRepository.saveAll(teacherSubjectStudents);

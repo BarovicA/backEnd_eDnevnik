@@ -10,6 +10,8 @@ public interface TeacherRepository extends JpaRepository<TeacherEntity, Long> {
 
 	boolean existsByUsername(String username);
 
+	TeacherEntity findByUsername(String name);
+
 	
 
 }
