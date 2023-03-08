@@ -1,13 +1,26 @@
 package com.iktpreobuka.eDnevnik.controllers;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,19 +28,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iktpreobuka.eDnevnik.config.JwtTokenProvider;
-import com.iktpreobuka.eDnevnik.config.UserPrincipal;
-import com.iktpreobuka.eDnevnik.entities.AdminEntity;
-import com.iktpreobuka.eDnevnik.entities.ParentEntity;
-import com.iktpreobuka.eDnevnik.entities.UserEntity;
-import com.iktpreobuka.eDnevnik.entities.enums.RoleENUM;
-import com.iktpreobuka.eDnevnik.payload.JwtAuthenticationResponse;
+
+
 import com.iktpreobuka.eDnevnik.repositories.AdminRepository;
 import com.iktpreobuka.eDnevnik.repositories.ParentRepository;
 import com.iktpreobuka.eDnevnik.repositories.RoleRepository;
@@ -64,6 +74,9 @@ public class AuthController {
 
     @Autowired
     AdminRepository adminepository;
+    
+    @Autowired
+    private ResourceLoader resourceLoader;
 	
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -88,7 +101,92 @@ public class AuthController {
         // Vraćanje odgovora s generiranim tokenom i informacijama o korisniku
         return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
     }
-	
+	//proba bez download
+    @GetMapping("/logs")
+    public ResponseEntity<String> getLogs() throws IOException {
+        Resource resource = resourceLoader.getResource("file:D:/Program Files/StsWorkspaceNew/eDnevnik/logs/spring-boot-logging.log");
+        String content = new String(Files.readAllBytes(resource.getFile().toPath()));
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_PLAIN);
+        logger.info("Success loading logger.");
+        return new ResponseEntity<String>(content, headers, HttpStatus.OK);
+    }
+    
+    
+    //sredjen download sa try-with-resources blokom
+    
+    @Secured("ADMIN")
+    @GetMapping("/logs/download")
+    public void downloadLogs(HttpServletResponse response) {
+        try (InputStream inputStream = new FileInputStream("logs/spring-boot-logging.log")) {
+            response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+            response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"spring-boot-logging.log\"");
+            IOUtils.copy(inputStream, response.getOutputStream());
+            response.flushBuffer();
+            logger.info("Successfully downloaded log file.");
+        } catch (FileNotFoundException e) {
+            logger.error("Log file not found!");
+            e.printStackTrace();
+            response.setStatus(HttpStatus.NOT_FOUND.value());
+        } catch (IOException e) {
+            logger.error("INTERNAL_SERVER_ERROR");
+            e.printStackTrace();
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+//    @Secured("ADMIN")
+//    @GetMapping("/logs/download")
+//    public void downloadLogs(HttpServletResponse response) throws IOException {
+//        try {
+//			Resource resource = resourceLoader.getResource("file:D:/Program Files/StsWorkspaceNew/eDnevnik/logs/spring-boot-logging.log");
+//			File file = resource.getFile();
+//
+//			InputStream inputStream = new FileInputStream(file);
+//
+//			response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+//			response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"");
+//			IOUtils.copy(inputStream, response.getOutputStream());
+//			response.flushBuffer();
+//			inputStream.close();
+//			logger.info("Successfully downloaded log file.");
+//		} catch (FileNotFoundException e) {
+//			logger.error("Log file not found!");
+//			e.printStackTrace();
+//			response.setStatus(HttpStatus.NOT_FOUND.value());
+//		} catch (IOException e) {
+//			logger.error("INTERNAL_SERVER_ERROR");
+//			e.printStackTrace();
+//		    response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+//		}
+//    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 //	@PostMapping
 //	public AdminEntity addAdmin() {
 //		AdminEntity admin = new AdminEntity();

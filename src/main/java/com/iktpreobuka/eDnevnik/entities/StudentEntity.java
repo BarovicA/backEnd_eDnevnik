@@ -14,6 +14,7 @@ import javax.persistence.Transient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectGradeRepository;
 import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectStudentRepository;
 
@@ -97,17 +98,19 @@ public class StudentEntity extends UserEntity {
 //		this.marks = marks;
 //	}
 //	
+	@JsonIgnore
 	@Transient
 	@Autowired
 	private TeacherSubjectStudentRepository teacherSubjectStudentRepository;
-
+	@JsonIgnore
 	@Transient
 	@Autowired
 	private TeacherSubjectGradeRepository teacherSubjectGradeRepository;
 	
+	
 	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
-		if (deleted) {
+		if (deleted = true) {
 		    List<TeacherSubjectStudentEntity> teacherSubjectStudents = teacherSubjectStudentRepository.findByStudent(this);
 		    teacherSubjectStudents.forEach(tss -> tss.setDeleted(true));
 		    teacherSubjectStudentRepository.saveAll(teacherSubjectStudents);

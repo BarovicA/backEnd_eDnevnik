@@ -136,15 +136,15 @@ public class SubjectEntity {
 	public Boolean getDeleted() {
 		return deleted;
 	}
-
+	@JsonIgnore
 	@Transient
 	@Autowired
 	private TeacherSubjectRepository teacherSubjectRepository;
-
+	@JsonIgnore
 	@Transient
 	@Autowired
 	private TeacherSubjectGradeRepository teacherSubjectGradeRepository;
-
+	@JsonIgnore
 	@Transient
 	@Autowired
 	private TeacherSubjectStudentRepository teacherSubjectStudentRepository;
@@ -153,7 +153,7 @@ public class SubjectEntity {
 	public void setDeleted(Boolean deleted) {
 	    this.deleted = deleted;
 
-	    if (deleted) {
+	    if (deleted = true) {
 	        List<TeacherSubjectEntity> teacherSubjects = teacherSubjectRepository.findBySubject(this);
 	        teacherSubjects.forEach(ts -> ts.setDeleted(true));
 	        teacherSubjectRepository.saveAll(teacherSubjects);

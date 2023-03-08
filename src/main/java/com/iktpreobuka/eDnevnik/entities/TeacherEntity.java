@@ -41,15 +41,15 @@ public class TeacherEntity extends UserEntity {
 	public void setTecherSubject(List<TeacherSubjectEntity> techerSubject) {
 		this.techerSubject = techerSubject;
 	}
-
+	@JsonIgnore
 	@Transient
 	@Autowired
 	private TeacherSubjectRepository teacherSubjectRepository;
-	
+	@JsonIgnore
 	@Transient
 	@Autowired
 	private TeacherSubjectGradeRepository teacherSubjectGradeRepository;
-
+	@JsonIgnore
 	@Transient
 	@Autowired
 	private TeacherSubjectStudentRepository teacherSubjectStudentRepository;
@@ -58,7 +58,7 @@ public class TeacherEntity extends UserEntity {
 	public void setDeleted(Boolean deleted) {
 	    this.deleted = deleted;
 	    
-	    if (deleted) {
+	    if (deleted = true) {
 	        List<TeacherSubjectEntity> teacherSubjects = teacherSubjectRepository.findByTeacher(this);
 	        teacherSubjects.forEach(ts -> ts.setDeleted(true));
 	        teacherSubjectRepository.saveAll(teacherSubjects);

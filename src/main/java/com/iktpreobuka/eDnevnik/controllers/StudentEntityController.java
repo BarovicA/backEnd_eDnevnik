@@ -207,7 +207,9 @@ public class StudentEntityController {
     		return new ResponseEntity<RESTError>(new RESTError(4,"Student is already in that grade!"), HttpStatus.NOT_FOUND);
 		}
     	logger.info("Student: " + student.getUsername() + " added to grade: " + grade.getId());
-    	return new ResponseEntity<StudentEntity>(studentService.addStudentToGrade(studentId, gradeId), HttpStatus.OK);
+    	//add student to grade and make teacherSubjectStudents entiities with this studdent and teacerSubject
+    	// that is connected to him trough grade :)
+    	return new ResponseEntity<>(studentService.addStudentToGrade(studentId, gradeId), HttpStatus.OK);
     }
     
     
