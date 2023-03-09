@@ -158,6 +158,16 @@ public class GradeEntityController {
 	}
 	
 	
+	// svi ucenici u razredu
+	@Secured("ADMIN")
+	@GetMapping("/studentsInGrade/{gadeId}")
+	public ResponseEntity<?> allStudentsInGrade(@PathVariable Long gadeId){
+		if (!gradeService.isActive(gadeId)) {
+			return new ResponseEntity<RESTError>(new RESTError(5, "Grade not found."), HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<>(gradeService.listAllStudentsInGrade(gadeId), HttpStatus.OK);
+	}
 	
 	
 	

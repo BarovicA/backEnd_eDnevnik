@@ -1,5 +1,8 @@
 package com.iktpreobuka.eDnevnik.entities.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import net.bytebuddy.asm.Advice.Return;
 
 
@@ -15,16 +18,18 @@ import net.bytebuddy.asm.Advice.Return;
 		public int getValue() {
 			return value;
 		}
-
-		public void setValue(int value) {
-			this.value = value;
-		}
-
-	 public int getValue(int value) {
-	        return value;
+		
+	    @JsonValue
+	    public String toString() {
+	        return name() + "(" + value + ")";
 	    }
-	
-	
 
-	
+//		public static MarkEnum fromInt(int i) {
+//	        for (MarkEnum mark : MarkEnum.values()) {
+//	            if (mark.value == i) {
+//	                return mark;
+//	            }
+//	        }
+//	        throw new IllegalArgumentException("Invalid mark value: " + i);
+//		}
 }

@@ -155,7 +155,7 @@ public class TeacherEntitiyController {
     		return new ResponseEntity<RESTError>(new RESTError(6, "Teacher not found."), HttpStatus.NOT_FOUND);
 		}
     	if (!subjectService.isActive(subjectId)) {
-    		return new ResponseEntity<RESTError>(new RESTError(2, "Course not found."), HttpStatus.NOT_FOUND);
+    		return new ResponseEntity<RESTError>(new RESTError(2, "Subject not found."), HttpStatus.NOT_FOUND);
 		}
     	if ((teacherSubjectRepository.findBySubjectAndTeacher(subjectRepository.findById(subjectId).get(), teacherRepository.findById(teacherId).get()) != null)) {
     		TeacherSubjectEntity tse = (TeacherSubjectEntity) teacherSubjectRepository.findBySubjectAndTeacher(subjectRepository.findById(subjectId).get(), teacherRepository.findById(teacherId).get());

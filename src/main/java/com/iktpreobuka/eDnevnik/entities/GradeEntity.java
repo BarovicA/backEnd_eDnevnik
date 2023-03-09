@@ -66,6 +66,7 @@ public class GradeEntity {
 	@JsonIgnore
 	private Boolean deleted = Boolean.FALSE;
 	
+	@JsonIgnore
 	@Version
 	private Integer version;
 

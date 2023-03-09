@@ -48,9 +48,13 @@ public class TeacherSubjectStudentEntity {
 //	private List<FinalMark> finalMarks = new ArrayList<>();
 
 	@Column
+	@JsonIgnore
+
 	private Boolean deleted;
 
 	@Version
+	@JsonIgnore
+
 	private Integer version;
 
 	public TeacherSubjectStudentEntity() {

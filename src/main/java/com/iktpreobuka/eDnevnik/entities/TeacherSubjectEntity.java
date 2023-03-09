@@ -65,9 +65,12 @@ public class TeacherSubjectEntity {
 	private List<TeacherSubjectStudentEntity> teacherSubjectStudent = new ArrayList<>();
 
 	@Column
+	@JsonIgnore
 	private Boolean deleted;
 
 	@Version
+	@JsonIgnore
+
 	private Integer version;
 
 	public TeacherSubjectEntity() {

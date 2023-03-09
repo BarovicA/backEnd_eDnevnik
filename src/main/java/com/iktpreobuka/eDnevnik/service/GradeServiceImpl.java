@@ -1,6 +1,8 @@
 package com.iktpreobuka.eDnevnik.service;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,7 +58,10 @@ public class GradeServiceImpl implements GradeService {
 	@Override
 	public List<StudentEntity> listAllStudentsInGrade(Long gradeId){
 		GradeEntity grade = gradeRepository.findById(gradeId).get();
-		List<StudentEntity> students = studentRepository.findAllByGrade(grade);
+		List<StudentEntity> students = (studentRepository.findAllByGrade(grade))
+										.stream()
+										.filter(student -> !student.getDeleted().equals(true))
+										.collect(Collectors.toList());
 		
 		return students;
 	}

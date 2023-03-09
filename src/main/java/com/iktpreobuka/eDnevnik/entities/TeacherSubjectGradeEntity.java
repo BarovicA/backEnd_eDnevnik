@@ -42,9 +42,13 @@ public class TeacherSubjectGradeEntity {
 	private GradeEntity grade;
 	
 	@Column
+	@JsonIgnore
+
 	private Boolean deleted;
 
 	@Version
+	@JsonIgnore
+
 	private Integer version;
 
 	public TeacherSubjectGradeEntity() {

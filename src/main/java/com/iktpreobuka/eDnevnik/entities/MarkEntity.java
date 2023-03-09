@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,8 +14,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.iktpreobuka.eDnevnik.entities.enums.MarkEnum;
+import com.iktpreobuka.eDnevnik.entities.enums.MarkEnumDeserializer;
 
 @Entity
 public class MarkEntity {
@@ -24,11 +25,14 @@ public class MarkEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	
 	@Column
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate date;
 
-	@Enumerated
+	
+	@JsonDeserialize(using = MarkEnumDeserializer.class)
 	@Column
 	private MarkEnum markValue;
 
@@ -49,9 +53,13 @@ public class MarkEntity {
 	private TeacherSubjectStudentEntity teacherSubjectStudent;
 
 	@Column
+	@JsonIgnore
+
 	private Boolean deleted;
 
 	@Version
+	@JsonIgnore
+
 	private Integer version;
 
 	public MarkEntity() {
@@ -73,6 +81,8 @@ public class MarkEntity {
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
+
+	
 
 	public MarkEnum getMarkValue() {
 		return markValue;
