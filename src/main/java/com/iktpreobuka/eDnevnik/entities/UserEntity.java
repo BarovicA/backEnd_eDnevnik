@@ -64,7 +64,7 @@ public abstract class UserEntity {
 	@JsonIgnore
 	@Version
 	private Integer version;
-	
+	@JsonIgnore
 	public List<GrantedAuthority> getAuthorities() {
 	    return Collections.singletonList(new SimpleGrantedAuthority(role.getName().toString()));
 	}

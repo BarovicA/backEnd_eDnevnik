@@ -65,7 +65,7 @@ public class SubjectEntity {
 
 	@JsonIgnore
 	private List<TeacherSubjectEntity> teacherSubject = new ArrayList<>();
-
+	@JsonIgnore
 	@Column
 	private Boolean deleted;
 	

@@ -32,6 +32,7 @@ import com.iktpreobuka.eDnevnik.repositories.SubjectRepository;
 import com.iktpreobuka.eDnevnik.repositories.TeacherRepository;
 import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectRepository;
 import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectStudentRepository;
+import com.iktpreobuka.eDnevnik.service.EmailService;
 import com.iktpreobuka.eDnevnik.service.MarkService;
 import com.iktpreobuka.eDnevnik.service.StudentService;
 import com.iktpreobuka.eDnevnik.service.SubjectService;
@@ -45,6 +46,8 @@ public class MarkController {
 
 	@Autowired
 	MarkService markservice;
+	@Autowired
+	EmailService emailservice;
 	@Autowired
 	MarkRepository markRepository;
 	@Autowired
@@ -94,7 +97,7 @@ public class MarkController {
 		markRepository.save(mark);
 		logger.info("Teacher: " + teacher.getUsername()+ "added mark: " + newMark.getValue() 
 					+ "to student: " + student.getUsername() + "in subject: " + subject.getName());
-		
+		emailservice.sendMarkEmail(mark);
 		return new ResponseEntity(mark, HttpStatus.OK);
 	}
 	
