@@ -13185,3 +13185,9 @@ com.fasterxml.jackson.databind.exc.InvalidDefinitionException: No serializer fou
 2023-03-10 14:51:04.058  WARN 10552 --- [http-nio-8080-exec-1] o.a.c.u.SessionIdGeneratorBase           : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [128] milliseconds.
 2023-03-10 14:52:13.481  INFO 10552 --- [http-nio-8080-exec-5] c.i.e.c.AuthController                   : Ulogovan korisnik: admin
 2023-03-10 14:52:30.742  INFO 10552 --- [http-nio-8080-exec-6] c.i.e.c.GradeEntityController            : Created grade:VI3
+2023-03-10 14:54:07.527  INFO 10552 --- [RMI TCP Connection(7)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-03-10 14:54:07.555  INFO 10552 --- [RMI TCP Connection(7)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-03-10 14:54:07.557  INFO 10552 --- [RMI TCP Connection(7)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-03-10 14:54:07.574  INFO 10552 --- [RMI TCP Connection(7)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-10 14:54:07.576  INFO 10552 --- [RMI TCP Connection(7)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-03-10 14:54:07.591  INFO 10552 --- [RMI TCP Connection(7)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
