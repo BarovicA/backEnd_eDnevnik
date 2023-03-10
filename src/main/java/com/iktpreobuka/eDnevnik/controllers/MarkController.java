@@ -118,7 +118,7 @@ public class MarkController {
 	public ResponseEntity<?> getAllMyMarksByTeacher(Principal principal){
 	TeacherEntity teacher = teacherRepository.findByUsername(principal.getName());
 	
-		List<MarkEntity>  all = markRepository.findBySetDeletedFalse()
+		List<MarkEntity>  all = markRepository.findByDeletedFalse()
 				.stream().
 				filter(mark -> mark.getTeacherSubjectStudent().getTeacherSubject().getTeacher().equals(teacher))
 				.collect(Collectors.toList());
@@ -230,7 +230,7 @@ public class MarkController {
 	@Secured("ADMIN")
 	@GetMapping("/getAllMarksByAdmin")
 	public ResponseEntity<?> getAllMarksByAdmin() {
-		List<MarkEntity>  all = markRepository.findBySetDeletedFalse();
+		List<MarkEntity>  all = markRepository.findByDeletedFalse();
 		logger.info("Admin got all marks");
 		return new ResponseEntity<>(all, HttpStatus.OK);
 		

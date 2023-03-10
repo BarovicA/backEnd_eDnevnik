@@ -1,5 +1,6 @@
 package com.iktpreobuka.eDnevnik.service;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -8,18 +9,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.iktpreobuka.eDnevnik.entities.GradeEntity;
 import com.iktpreobuka.eDnevnik.entities.StudentEntity;
+import com.iktpreobuka.eDnevnik.entities.TeacherSubjectEntity;
+import com.iktpreobuka.eDnevnik.entities.TeacherSubjectGradeEntity;
+import com.iktpreobuka.eDnevnik.entities.TeacherSubjectStudentEntity;
 import com.iktpreobuka.eDnevnik.entities.enums.SchoolYear;
 import com.iktpreobuka.eDnevnik.repositories.GradeRepository;
 import com.iktpreobuka.eDnevnik.repositories.StudentRepository;
+import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectGradeRepository;
+import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectStudentRepository;
 
 @Service
 public class GradeServiceImpl implements GradeService {
 
 	@Autowired
 	GradeRepository gradeRepository;
+	@Autowired
+	TeacherSubjectGradeRepository techerSubjectGradeRepository;
 	
 	@Autowired
 	StudentRepository studentRepository;
+	
+	@Autowired
+	TeacherSubjectStudentRepository teacherSubjectStudentRepository;
 	
 	@Override
 	public GradeEntity create(GradeEntity newGrade) {
@@ -66,7 +77,33 @@ public class GradeServiceImpl implements GradeService {
 		return students;
 	}
 	
+	// prolazak kroz sve studente u razredu i dodavanje njih u TeacherSubjectStudent ako vec nisu
+	// jer Za svaki TeacherSubjectGrade mora da postoji,
+	// onoliko TeacherSubjectStudent koliko ima studenta u tom razredu
 	
+	@Override
+	public void addTeacherSubjectForAllStudentsInGrade(Long gradeId) {
+		List<StudentEntity> students = listAllStudentsInGrade(gradeId);
+		GradeEntity grade = gradeRepository.findById(gradeId).get();
+		
+		List<TeacherSubjectGradeEntity> listTSG = techerSubjectGradeRepository.findAllByGrade(grade);
+		List<TeacherSubjectEntity> listTS = listTSG.stream()
+				                                    .map(tsg -> tsg.getTeacherSubject())
+		                                            .collect(Collectors.toList());  										
+		
+		TeacherSubjectStudentEntity TSS = new TeacherSubjectStudentEntity();
+		for (TeacherSubjectEntity teacherSubjectEntity : listTS) {
+			         for (StudentEntity studentEntity : students) {
+						if (teacherSubjectStudentRepository.findByTeacherSubjectAndStudent(teacherSubjectEntity, studentEntity) == null) {
+							TSS.setTeacherSubject(teacherSubjectEntity);
+							TSS.setStudent(studentEntity);
+							teacherSubjectStudentRepository.save(TSS);
+						}
+					}
+		}
+		
+	}
+
 	
 	
 	

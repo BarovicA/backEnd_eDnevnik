@@ -15,7 +15,7 @@ public interface MarkRepository extends CrudRepository<MarkEntity, Long>{
 
 	List<MarkEntity> findByTeacherSubjectStudent(TeacherSubjectStudentEntity teacherSubjectStudentEntity);
 
-	List<MarkEntity> findBySetDeletedFalse();
+	List<MarkEntity> findByDeletedFalse();
 
 	
 	

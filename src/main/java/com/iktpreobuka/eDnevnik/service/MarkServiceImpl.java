@@ -65,7 +65,7 @@ public class MarkServiceImpl implements MarkService {
 	public Boolean isActive(Long id) {
 		if(markRepository.existsById(id)) {
 			MarkEntity mark = markRepository.findById(id).get();
-			if(mark.getDeleted().equals(true)) {
+			if(mark.getDeleted()) {
 				return false;
 			}else {
 				return true;

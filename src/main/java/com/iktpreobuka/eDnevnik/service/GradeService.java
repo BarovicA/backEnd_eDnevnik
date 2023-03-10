@@ -19,4 +19,8 @@ public interface GradeService {
 
 	List<StudentEntity> listAllStudentsInGrade(Long gradeId);
 
+	
+
+	void addTeacherSubjectForAllStudentsInGrade(Long gradeId);
+
 }

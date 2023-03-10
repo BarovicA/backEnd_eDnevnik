@@ -13,6 +13,7 @@ import com.iktpreobuka.eDnevnik.entities.GradeEntity;
 import com.iktpreobuka.eDnevnik.entities.StudentEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherSubjectGradeEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherSubjectStudentEntity;
+import com.iktpreobuka.eDnevnik.entities.dto.ReportStudentDto;
 import com.iktpreobuka.eDnevnik.entities.dto.StudentDto;
 import com.iktpreobuka.eDnevnik.entities.dto.SubjectMarksDto;
 import com.iktpreobuka.eDnevnik.entities.enums.RoleENUM;
@@ -98,7 +99,7 @@ public class StudentServiceIpml implements StudentService {
 		}
 		gradeRepository.save(grade);
 
-		return studentRepository.save(studentEntity);
+		return studentRepository.save(studentEntity);                                    
 
 	}
 
@@ -116,7 +117,15 @@ public class StudentServiceIpml implements StudentService {
 
 	}
 	
-	
+	@Override
+	public ReportStudentDto makeReportDto(StudentEntity student) {
+		ReportStudentDto dto = new ReportStudentDto();
+		List<SubjectMarksDto> list = makeSubjectMarksDto(student);
+		dto.setFirstName(student.getFirstName());
+		dto.setLastName(student.getLastName());
+		dto.setSubjectMarkDto(list);
+		return dto;
+	}
 	
 	
 	

@@ -1,5 +1,9 @@
 package com.iktpreobuka.eDnevnik.controllers;
 
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -23,8 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.iktpreobuka.eDnevnik.entities.ParentEntity;
 import com.iktpreobuka.eDnevnik.entities.StudentEntity;
 import com.iktpreobuka.eDnevnik.entities.dto.ParentDTO;
+import com.iktpreobuka.eDnevnik.entities.dto.ReportStudentDto;
 import com.iktpreobuka.eDnevnik.repositories.ParentRepository;
+import com.iktpreobuka.eDnevnik.repositories.StudentRepository;
 import com.iktpreobuka.eDnevnik.service.ParentService;
+import com.iktpreobuka.eDnevnik.service.StudentService;
 import com.iktpreobuka.eDnevnik.util.ParentCustomValidator;
 import com.iktpreobuka.eDnevnik.util.RESTError;
 import com.iktpreobuka.eDnevnik.validation.Validation;
@@ -37,6 +44,10 @@ public class ParentEntityController {
 
 	@Autowired
     private ParentRepository parentRepository;
+	@Autowired
+	private StudentRepository studentRepository;
+	@Autowired
+	private StudentService studentService;
 
     @Autowired
     private ParentService parentService;
@@ -71,7 +82,7 @@ public class ParentEntityController {
     @Secured("ADMIN")
     @GetMapping
     public ResponseEntity<?> getAllParents() {
-        return new ResponseEntity<>(parentRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(parentRepository.findByDeletedFalse(), HttpStatus.OK);
         
     }
 
@@ -115,6 +126,7 @@ public class ParentEntityController {
         	ParentEntity existingParent = parentRepository.findById(id).get();
         	existingParent.setDeleted(true);
         	parentRepository.save(existingParent);
+        	logger.info("Parent: " + existingParent.getUsername() + " deleted!");
             return new ResponseEntity<>("Parent deleted successfully", HttpStatus.OK);
         }
         return new ResponseEntity<RESTError>(new RESTError(4,"Parent does not exist!"), HttpStatus.NOT_FOUND);
@@ -130,4 +142,27 @@ public class ParentEntityController {
         parentRepository.save(teacherEntity);
         return new ResponseEntity<>(teacherEntity, HttpStatus.OK);
     }
+    @Secured("PARENT")
+    @GetMapping("/getAllMyChildren")
+    public ResponseEntity<?> getAllMyChildren(Principal principal) {
+    	ParentEntity parent = parentRepository.findByUsername(principal.getName());
+    	List<StudentEntity> children = studentRepository.findByParent(parent);
+    	List<ReportStudentDto> report = new ArrayList<>();
+    	for (StudentEntity student : children) {
+			report.add(studentService.makeReportDto(student));
+		}
+    	
+    	return new ResponseEntity<>(report, HttpStatus.OK);
+    }
+    
+    
+    
+    
 }
+
+
+
+
+
+
+

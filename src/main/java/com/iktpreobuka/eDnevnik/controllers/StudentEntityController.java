@@ -229,8 +229,8 @@ public class StudentEntityController {
 	// 8. get all students marks
 	
 	@Secured("STUDENT")
-	@GetMapping("/marks")
-	public ResponseEntity<?> getStudentMarks(Principal principal) {
+	@GetMapping("/mySubjectsWithMarks")
+	public ResponseEntity<?> mySubjectsWithMarks(Principal principal) {
 	    // pronalazenje studenta koji ima pristup 
 	    StudentEntity student = studentRepository.findByUsername(principal.getName());
 
@@ -257,8 +257,8 @@ public class StudentEntityController {
 	}
 	
 	@Secured("ADMIN")
-	@GetMapping("/allmarks")
-	public ResponseEntity<?> getStudentMarks(@RequestParam Long studentId) {
+	@GetMapping("/allmMarksForStudentByAdmin")
+	public ResponseEntity<?> allmMarksForStudentByAdmin(@RequestParam Long studentId) {
 	    // pronalazenje studenta da li aktivan
 	    if (!studentService.isActive(studentId)) {
 	    	return new ResponseEntity<RESTError>(new RESTError(4,"Student does not exist!"), HttpStatus.NOT_FOUND);

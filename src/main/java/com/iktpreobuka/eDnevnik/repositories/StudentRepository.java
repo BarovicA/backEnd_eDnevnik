@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 
 import com.iktpreobuka.eDnevnik.entities.GradeEntity;
+import com.iktpreobuka.eDnevnik.entities.ParentEntity;
 import com.iktpreobuka.eDnevnik.entities.StudentEntity;
 
 public interface StudentRepository extends CrudRepository<StudentEntity, Long> {
@@ -15,6 +16,8 @@ public interface StudentRepository extends CrudRepository<StudentEntity, Long> {
 	List<StudentEntity> findAllByGrade(GradeEntity grade);
 
 	StudentEntity findByUsername(String name);
+
+	List<StudentEntity> findByParent(ParentEntity parent);
 
 	
 

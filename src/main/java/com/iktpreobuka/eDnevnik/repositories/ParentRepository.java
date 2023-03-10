@@ -12,4 +12,6 @@ public interface ParentRepository extends CrudRepository<ParentEntity, Long> {
 
 	ParentEntity findByUsername(String name);
 
+	Object findByDeletedFalse();
+
 }

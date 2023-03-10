@@ -3,6 +3,7 @@ package com.iktpreobuka.eDnevnik.service;
 import java.util.List;
 
 import com.iktpreobuka.eDnevnik.entities.StudentEntity;
+import com.iktpreobuka.eDnevnik.entities.dto.ReportStudentDto;
 import com.iktpreobuka.eDnevnik.entities.dto.StudentDto;
 import com.iktpreobuka.eDnevnik.entities.dto.SubjectMarksDto;
 
@@ -17,5 +18,7 @@ public interface StudentService {
 	StudentEntity addStudentToGrade(Long studentId, Long gradeId);
 
 	List<SubjectMarksDto> makeSubjectMarksDto(StudentEntity student);
+
+	ReportStudentDto makeReportDto(StudentEntity student);
 
 }

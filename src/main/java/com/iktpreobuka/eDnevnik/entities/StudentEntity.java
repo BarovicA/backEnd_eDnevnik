@@ -15,11 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectGradeRepository;
 import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectStudentRepository;
 
 @Entity(name = "Student")
 @DiscriminatorValue("Student")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class StudentEntity extends UserEntity {
 
 	
@@ -33,7 +35,7 @@ public class StudentEntity extends UserEntity {
 	private GradeEntity grade;
 
 	@OneToMany(mappedBy = "student", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-	@JsonBackReference
+	@JsonIgnore
 	private List<TeacherSubjectStudentEntity> teacherSubjectStudent;
 	
 	

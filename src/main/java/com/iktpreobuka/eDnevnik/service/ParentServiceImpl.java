@@ -1,18 +1,24 @@
 package com.iktpreobuka.eDnevnik.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.iktpreobuka.eDnevnik.entities.ParentEntity;
+import com.iktpreobuka.eDnevnik.entities.StudentEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherEntity;
 import com.iktpreobuka.eDnevnik.entities.dto.ParentDTO;
 import com.iktpreobuka.eDnevnik.entities.dto.TeacherEntityDTO;
 import com.iktpreobuka.eDnevnik.entities.enums.RoleENUM;
 import com.iktpreobuka.eDnevnik.repositories.ParentRepository;
 import com.iktpreobuka.eDnevnik.repositories.RoleRepository;
+import com.iktpreobuka.eDnevnik.repositories.StudentRepository;
 @Service
 public class ParentServiceImpl implements ParentService {
-
+	@Autowired
+	StudentRepository studentRepository;
 	
 	@Autowired
 	private ParentRepository parentRepository;
@@ -62,8 +68,11 @@ public class ParentServiceImpl implements ParentService {
 
 		return parent;
 	}
-	
-	
+	@Override
+	public List<StudentEntity> getMyStudents(ParentEntity parent){
+		List<StudentEntity> students = studentRepository.findByParent(parent);
+		return students;
+	}
 	
 	
 	
