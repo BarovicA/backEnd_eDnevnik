@@ -3,6 +3,7 @@ package com.iktpreobuka.eDnevnik.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -13,8 +14,10 @@ import com.iktpreobuka.eDnevnik.entities.StudentEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherSubjectGradeEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherSubjectStudentEntity;
 import com.iktpreobuka.eDnevnik.entities.dto.StudentDto;
+import com.iktpreobuka.eDnevnik.entities.dto.SubjectMarksDto;
 import com.iktpreobuka.eDnevnik.entities.enums.RoleENUM;
 import com.iktpreobuka.eDnevnik.repositories.GradeRepository;
+import com.iktpreobuka.eDnevnik.repositories.MarkRepository;
 import com.iktpreobuka.eDnevnik.repositories.RoleRepository;
 import com.iktpreobuka.eDnevnik.repositories.StudentRepository;
 import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectGradeRepository;
@@ -22,20 +25,22 @@ import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectStudentRepository;
 
 @Service
 @Primary
-public class StudentServiceIpml implements StudentService{
-	
+public class StudentServiceIpml implements StudentService {
+
 	@Autowired
 	private StudentRepository studentRepository;
 
 	@Autowired
 	private RoleRepository roleRepo;
-    @Autowired
+	@Autowired
+	private MarkRepository markRepository;
+	@Autowired
 	GradeRepository gradeRepository;
-    
-    @Autowired
-    TeacherSubjectGradeRepository teSuGrRepository;
-    @Autowired
-    TeacherSubjectStudentRepository teacherSubjectStudentRepository;
+
+	@Autowired
+	TeacherSubjectGradeRepository teSuGrRepository;
+	@Autowired
+	TeacherSubjectStudentRepository teacherSubjectStudentRepository;
 
 	@Override
 	public StudentEntity mappNewStudent(StudentDto dto) {
@@ -49,14 +54,13 @@ public class StudentServiceIpml implements StudentService{
 		return student;
 	}
 
-
 	@Override
 	public Boolean isActive(Long id) {
-		if(studentRepository.existsById(id)) {
+		if (studentRepository.existsById(id)) {
 			StudentEntity student = studentRepository.findById(id).get();
-			if(student.getDeleted().equals(true)) {
+			if (student.getDeleted().equals(true)) {
 				return false;
-			}else {
+			} else {
 				return true;
 			}
 		}
@@ -65,7 +69,7 @@ public class StudentServiceIpml implements StudentService{
 
 	@Override
 	public StudentEntity changeStudentEntity(StudentEntity student, StudentDto dto) {
-		if (!(dto.getfirstName() == null)) 
+		if (!(dto.getfirstName() == null))
 			student.setFirstName(dto.getfirstName());
 		if (!(dto.getLastName() == null))
 			student.setLastName(dto.getLastName());
@@ -77,14 +81,14 @@ public class StudentServiceIpml implements StudentService{
 
 		return student;
 	}
+
 	@Override
 	public StudentEntity addStudentToGrade(Long studentId, Long gradeId) {
 		StudentEntity studentEntity = studentRepository.findById(studentId).get();
 		GradeEntity grade = gradeRepository.findById(gradeId).get();
 		studentEntity.setGrade(grade);
-		
-		
-		List <TeacherSubjectGradeEntity> listaTSG = new ArrayList<>();
+
+		List<TeacherSubjectGradeEntity> listaTSG = new ArrayList<>();
 		listaTSG = teSuGrRepository.findAllByGrade(grade);
 		for (TeacherSubjectGradeEntity teacherSubjectGradeEntity : listaTSG) {
 			TeacherSubjectStudentEntity tss = new TeacherSubjectStudentEntity();
@@ -93,9 +97,28 @@ public class StudentServiceIpml implements StudentService{
 			teacherSubjectStudentRepository.save(tss);
 		}
 		gradeRepository.save(grade);
-		
-		
+
 		return studentRepository.save(studentEntity);
-		
+
 	}
+
+	@Override
+	public List<SubjectMarksDto> makeSubjectMarksDto(StudentEntity student) {
+
+		List<TeacherSubjectStudentEntity> tssList = teacherSubjectStudentRepository.findByStudent(student);
+		List<SubjectMarksDto> subjectsWithMarkslist = tssList.stream().map(tss -> {
+			SubjectMarksDto dto = new SubjectMarksDto();
+			dto.setName(tss.getTeacherSubject().getSubject().getName());
+			dto.setMarks(markRepository.findByTeacherSubjectStudent(tss));
+			return dto;
+		}).collect(Collectors.toList());
+		return subjectsWithMarkslist;
+
+	}
+	
+	
+	
+	
+	
+	
 }

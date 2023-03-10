@@ -21,4 +21,6 @@ public interface MarkService {
 
 	Boolean isActive(Long id);
 
+	boolean isItTeachersMark(Long teacherId, Long markId);
+
 }

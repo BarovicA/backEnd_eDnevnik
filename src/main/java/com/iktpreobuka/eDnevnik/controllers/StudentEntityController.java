@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iktpreobuka.eDnevnik.entities.GradeEntity;
@@ -230,42 +231,50 @@ public class StudentEntityController {
 	@Secured("STUDENT")
 	@GetMapping("/marks")
 	public ResponseEntity<?> getStudentMarks(Principal principal) {
-	    // Pronalaženje studenta koji ima pristup 
+	    // pronalazenje studenta koji ima pristup 
 	    StudentEntity student = studentRepository.findByUsername(principal.getName());
 
-	    // Pronalaženje svih predmeta koje taj student sluša
-	    List<TeacherSubjectStudentEntity> tsS = teacherSubjectStudentRepository.findByStudent(student);
-	    if (tsS.isEmpty()) {
+	     //pronalazenje svih predmeta koje taj student slusa
+	    List<TeacherSubjectStudentEntity> allTSSforStudent = teacherSubjectStudentRepository.findByStudent(student);
+	    if (allTSSforStudent.isEmpty()) {
 	    	return new ResponseEntity<RESTError>(new RESTError(4,"Student don't listen any classes!"), HttpStatus.NOT_FOUND);
 		}
-	    List<TeacherSubjectEntity> ts = new ArrayList<>();
-	    List<SubjectEntity> subjects = new ArrayList<>();
-	    
-	    for (TeacherSubjectStudentEntity teacherSubjectStudentEntity : tsS) {
-			ts.add(teacherSubjectStudentEntity.getTeacherSubject());
-			
-			 for (TeacherSubjectEntity teacherSubjectEntity : ts) {
-				 subjects.add(teacherSubjectEntity.getSubject());
-			}
-	
-		}
-	 // Kreiranje liste predmeta sa ocenama
+	    //  prolazak kroz sve predmete sto slusa i za svaki pravljenje dto i za svaki nalazenje ocena i stavljanje u dto
+	    // napravicu ovu logiku u servis klasi da ga koristim za roditelja i admina samo sa .stream() i .map()
+	    allTSSforStudent = teacherSubjectStudentRepository.findByStudent(student);
 	    List<SubjectMarksDto> subjectsWithMarkslist = new ArrayList<>();
-
-	    // Iteriranje kroz sve predmete koje student sluša i pravljenje liste ocena za svaki predmet
-	    for (SubjectEntity subject : subjects) {
-	        // Pronalaženje svih ocena koje student ima na tom predmetu
-	        List<MarkEntity> marks = markRepository.findByTeacherSubjectStudent_StudentAndTeacherSubjectStudent_TeacherSubject_Subject(student, subject);
-
-	        // Pravljenje DTO objekta za predmet sa ocenama
-	        SubjectMarksDto subjectWithMarks1 = new SubjectMarksDto();
-	        subjectWithMarks1.setName(subject.toString());
-	        // Dodavanje predmeta sa ocenama u listu
-	        subjectWithMarks1.setMarks(marks);
-	        subjectsWithMarkslist.add(subjectWithMarks1);
+	    for (TeacherSubjectStudentEntity teacherSubjectStudentEntity : allTSSforStudent) {
+	    	
+	    	SubjectMarksDto dto = new SubjectMarksDto();
+	    	dto.setName(teacherSubjectStudentEntity.getTeacherSubject().getSubject().getName());
+	    	List <MarkEntity> marks = markRepository.findByTeacherSubjectStudent(teacherSubjectStudentEntity);
+	    	dto.setMarks(marks);
+	    	subjectsWithMarkslist.add(dto);
+	    	
+		}
 	        
-	    }
 	    return new ResponseEntity<>(subjectsWithMarkslist, HttpStatus.OK);
 	}
+	
+	@Secured("ADMIN")
+	@GetMapping("/allmarks")
+	public ResponseEntity<?> getStudentMarks(@RequestParam Long studentId) {
+	    // pronalazenje studenta da li aktivan
+	    if (!studentService.isActive(studentId)) {
+	    	return new ResponseEntity<RESTError>(new RESTError(4,"Student does not exist!"), HttpStatus.NOT_FOUND);
+		}
+	     //pronalazenje svih predmeta koje taj student slusa
+	    StudentEntity student = studentRepository.findById(studentId).get();
+	    List<TeacherSubjectStudentEntity> allTSSforStudent = teacherSubjectStudentRepository.findByStudent(student);
+	    if (allTSSforStudent.isEmpty()) {
+	    	return new ResponseEntity<RESTError>(new RESTError(4,"Student don't listen any classes!"), HttpStatus.NOT_FOUND);
+		}
+	    List<SubjectMarksDto> subjectsWithMarkslist = studentService.makeSubjectMarksDto(student);
+	 
+	        logger.info("Admin got all marks for student: "+ studentRepository.findById(studentId).get().getUsername());
+	    return new ResponseEntity<>(subjectsWithMarkslist, HttpStatus.OK);
+	}
+	
+	
 
 }

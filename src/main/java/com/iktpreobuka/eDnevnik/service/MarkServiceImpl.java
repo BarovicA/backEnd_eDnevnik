@@ -10,13 +10,15 @@ import com.iktpreobuka.eDnevnik.entities.SubjectEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherEntity;
 import com.iktpreobuka.eDnevnik.entities.enums.MarkEnum;
 import com.iktpreobuka.eDnevnik.repositories.MarkRepository;
+import com.iktpreobuka.eDnevnik.repositories.TeacherRepository;
 
 @Service
 public class MarkServiceImpl implements MarkService {
 
 	@Autowired
 	MarkRepository markRepository;
-	
+	@Autowired
+	TeacherRepository teacherRepository;
 	
 	@Override
 	public MarkEnum enumByNo(int i) {
@@ -68,6 +70,14 @@ public class MarkServiceImpl implements MarkService {
 			}else {
 				return true;
 			}
+		}
+		return false;
+	}
+	@Override
+	public boolean isItTeachersMark(Long teacherId, Long markId) {
+		MarkEntity mark = markRepository.findById(markId).get();
+		if (mark.getTeacherSubjectStudent().getTeacherSubject().getTeacher().getId() == teacherId) {
+			return true;
 		}
 		return false;
 	}

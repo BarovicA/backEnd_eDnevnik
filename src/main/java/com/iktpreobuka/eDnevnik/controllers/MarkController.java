@@ -2,6 +2,9 @@ package com.iktpreobuka.eDnevnik.controllers;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -13,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -109,6 +113,49 @@ public class MarkController {
 		return new ResponseEntity<>(mark, HttpStatus.OK);
 	}
 
+	@Secured("TEACHER")
+	@GetMapping("/getAllMyMarksByTeacher")
+	public ResponseEntity<?> getAllMyMarksByTeacher(Principal principal){
+	TeacherEntity teacher = teacherRepository.findByUsername(principal.getName());
+	
+		List<MarkEntity>  all = markRepository.findBySetDeletedFalse()
+				.stream().
+				filter(mark -> mark.getTeacherSubjectStudent().getTeacherSubject().getTeacher().equals(teacher))
+				.collect(Collectors.toList());
+		logger.info("Admin got all marks");
+		return new ResponseEntity<>(all, HttpStatus.OK);
+	}
+	
+	@Secured("TEACHER")
+	@PutMapping("/updateMarkByTeacher")
+	public ResponseEntity<?> updateGradeByTeacher(@RequestParam Long markId,
+	        @Valid @RequestBody MarkDto updatedMark, BindingResult result, Principal principal) {
+
+	    if (result.hasErrors()) {
+	        return new ResponseEntity<>(Validation.createErrorMessage(result), HttpStatus.BAD_REQUEST);
+	    }
+
+	    if (!markservice.isActive(markId)) {
+	        return new ResponseEntity<RESTError>(new RESTError(6, "Mark not found."), HttpStatus.NOT_FOUND);
+	    }
+	    if (!markservice.isItTeachersMark(teacherRepository.findByUsername(principal.getName()).getId(), markId)) {
+	    	return new ResponseEntity<RESTError>(new RESTError(6, "Mark is  not yours."), HttpStatus.FORBIDDEN);
+	    	
+	    }	
+	    MarkEntity mark = markRepository.findById(markId).get();
+	    mark.setMarkValue(markservice.enumByNo(updatedMark.getValue()));
+	    markRepository.save(mark);
+
+	    logger.info("Teacher: " + SecurityContextHolder.getContext().getAuthentication().getName()
+	            + " updated mark with id: " + mark.getId() + " to value: " + updatedMark.getValue());
+
+	    //emailservice.sendMarkEmail(mark);
+
+	    return new ResponseEntity<>(mark, HttpStatus.OK);
+	}
+	
+	
+	
 	@Secured("ADMIN")
 	@PostMapping("/createMarkByAdmin")
 	public ResponseEntity<?> createGradeByAdmin(@RequestParam Long studentId, @RequestParam Long subjectId,
@@ -151,7 +198,7 @@ public class MarkController {
 
 		//emailservice.sendMarkEmail(mark);
 
-		return new ResponseEntity(mark, HttpStatus.OK);
+		return new ResponseEntity<>(mark, HttpStatus.OK);
 	}
 	
 	@Secured("ADMIN")
@@ -180,6 +227,14 @@ public class MarkController {
 	}
 	
 	
+	@Secured("ADMIN")
+	@GetMapping("/getAllMarksByAdmin")
+	public ResponseEntity<?> getAllMarksByAdmin() {
+		List<MarkEntity>  all = markRepository.findBySetDeletedFalse();
+		logger.info("Admin got all marks");
+		return new ResponseEntity<>(all, HttpStatus.OK);
+		
+	}
 	
 	
 	
