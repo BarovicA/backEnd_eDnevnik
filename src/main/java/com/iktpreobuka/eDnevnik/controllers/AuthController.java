@@ -89,29 +89,7 @@ public class AuthController {
     @Autowired
     private ResourceLoader resourceLoader;
 	
-//    @PostMapping("/login")
-//    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-//
-//        // Provjera vjerodajnica korisnika
-//        Authentication authentication = authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(
-//                        loginRequest.getUsername(),
-//                        loginRequest.getPassword()
-//                )
-//        );
-//
-//        // Postavljanje autentifikacije u SecurityContext
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//
-//        // Generiranje JWT tokena
-//        String jwt = tokenProvider.generateToken(authentication);
-//
-//        // Dohvat informacija o prijavljenom korisniku
-//        UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
-//        logger.info("Ulogovan korisnik: " + loginRequest.getUsername());
-//        // Vraćanje odgovora s generiranim tokenom i informacijama o korisniku
-//        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
-//    }
+
     
     
     @PostMapping("/login")

@@ -9,9 +9,9 @@ public class Validation {
 
 	
 	
-	public static <T> T setIfNotNull(T oldProperty, T newProperty) {
-		return newProperty == null ? oldProperty : newProperty;
-	}
+//	public static <T> T setIfNotNull(T oldProperty, T newProperty) {
+//		return newProperty == null ? oldProperty : newProperty;
+//	}
 	
     public static String createErrorMessage(BindingResult result) {
 		return result.getAllErrors().stream().map(ObjectError::getDefaultMessage)

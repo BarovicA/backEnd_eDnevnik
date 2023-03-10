@@ -95,13 +95,18 @@ public class MarkController {
 		StudentEntity student = studentRepository.findById(studentId).get();
 		SubjectEntity subject = subjectRepository.findById(subjectId).get();
 		TeacherEntity teacher = teacherRepository.findByUsername(principal.getName());
-
+		
+		
 		if (!teacherSubjectService.isActive(teacher, subject)) {
 			return new ResponseEntity<RESTError>(new RESTError(5, "Subject with Teacher not found."),
 					HttpStatus.NOT_FOUND);
 		}
 		TeacherSubjectEntity teSu = (TeacherSubjectEntity) teacherSubjectRepository.findBySubjectAndTeacher(subject,
 				teacher);
+        if (tssRepository.findByTeacherSubjectAndStudent(teSu, student) == null) {
+        	return new ResponseEntity<RESTError>(new RESTError(4, "Student does not listen your class!"), HttpStatus.BAD_REQUEST);
+		}
+		
 		MarkEntity mark = new MarkEntity();
 		mark.setMarkValue(markservice.enumByNo(newMark.getValue()));
 		mark.setDate(LocalDate.now());
@@ -149,7 +154,7 @@ public class MarkController {
 	    logger.info("Teacher: " + SecurityContextHolder.getContext().getAuthentication().getName()
 	            + " updated mark with id: " + mark.getId() + " to value: " + updatedMark.getValue());
 
-	    //emailservice.sendMarkEmail(mark);
+	    emailservice.sendMarkEmail(mark);
 
 	    return new ResponseEntity<>(mark, HttpStatus.OK);
 	}
