@@ -3,6 +3,7 @@ package com.iktpreobuka.eDnevnik.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.iktpreobuka.eDnevnik.entities.SubjectEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherSubjectEntity;
 import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectRepository;
@@ -17,8 +18,8 @@ public class TeacherSubjectServiceImpl implements TeacherSubjectService{
 	@Override
 	public Boolean isActive(Long id) {
 		if(teacherSubjectRepository.existsById(id)) {
-			TeacherSubjectEntity teacher = teacherSubjectRepository.findById(id).orElse(null);
-			if(teacher.getDeleted().equals(true) || teacher == null) {
+			TeacherSubjectEntity teacherSubject = teacherSubjectRepository.findById(id).orElse(null);
+			if(teacherSubject.getDeleted().equals(true) || teacherSubject == null) {
 				return false;
 			}else {
 				return true;
@@ -26,4 +27,22 @@ public class TeacherSubjectServiceImpl implements TeacherSubjectService{
 		}
 		return false;
 	}
+	@Override
+	public Boolean isActive(TeacherEntity teacher, SubjectEntity subject) {
+		if (teacherSubjectRepository.findBySubjectAndTeacher(subject, teacher) == null) {
+			return false;
+		}
+		TeacherSubjectEntity teacherSubject = (TeacherSubjectEntity) teacherSubjectRepository.findBySubjectAndTeacher(subject, teacher);
+		if (!teacherSubject.getDeleted()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	
+	
+	
+	
 }

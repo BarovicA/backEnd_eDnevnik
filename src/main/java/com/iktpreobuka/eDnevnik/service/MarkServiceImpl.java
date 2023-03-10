@@ -59,7 +59,18 @@ public class MarkServiceImpl implements MarkService {
 		return parent;
 	}
 	
-	
+	@Override
+	public Boolean isActive(Long id) {
+		if(markRepository.existsById(id)) {
+			MarkEntity mark = markRepository.findById(id).get();
+			if(mark.getDeleted().equals(true)) {
+				return false;
+			}else {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	
 }

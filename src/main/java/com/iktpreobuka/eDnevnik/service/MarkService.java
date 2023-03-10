@@ -19,4 +19,6 @@ public interface MarkService {
 
 	ParentEntity getStudentsParent(MarkEntity mark);
 
+	Boolean isActive(Long id);
+
 }

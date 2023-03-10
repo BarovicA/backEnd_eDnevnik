@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +38,7 @@ import com.iktpreobuka.eDnevnik.service.EmailService;
 import com.iktpreobuka.eDnevnik.service.MarkService;
 import com.iktpreobuka.eDnevnik.service.StudentService;
 import com.iktpreobuka.eDnevnik.service.SubjectService;
+import com.iktpreobuka.eDnevnik.service.TeacherService;
 import com.iktpreobuka.eDnevnik.service.TeacherSubjectService;
 import com.iktpreobuka.eDnevnik.util.RESTError;
 import com.iktpreobuka.eDnevnik.validation.Validation;
@@ -46,6 +49,8 @@ public class MarkController {
 
 	@Autowired
 	MarkService markservice;
+	@Autowired
+	TeacherService teacherService;
 	@Autowired
 	EmailService emailservice;
 	@Autowired
@@ -66,47 +71,113 @@ public class MarkController {
 	TeacherSubjectRepository teacherSubjectRepository;
 	@Autowired
 	TeacherSubjectService teacherSubjectService;
-	
+
 	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
-	
+
 	// nastavnik dodaje ocenu
 	@Secured("TEACHER")
 	@PostMapping("/createMarkByTeacher")
-	public ResponseEntity<?> createGradeByTeacher(@RequestParam Long studentId, @RequestParam Long subjectId ,
-			@Valid @RequestBody MarkDto newMark, BindingResult result, Principal principal ){
-		if(result.hasErrors()) {
+	public ResponseEntity<?> createGradeByTeacher(@RequestParam Long studentId, @RequestParam Long subjectId,
+			@Valid @RequestBody MarkDto newMark, BindingResult result, Principal principal) {
+		if (result.hasErrors()) {
 			return new ResponseEntity<>(Validation.createErrorMessage(result), HttpStatus.BAD_REQUEST);
 		}
 		if (!subjectService.isActive(subjectId)) {
-    		return new ResponseEntity<RESTError>(new RESTError(2, "Subject not found."), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<RESTError>(new RESTError(2, "Subject not found."), HttpStatus.NOT_FOUND);
 		}
 		if (!studentService.isActive(studentId)) {
-   		 return new ResponseEntity<RESTError>(new RESTError(4,"Student does not exist!"), HttpStatus.NOT_FOUND);
-   	    }
+			return new ResponseEntity<RESTError>(new RESTError(4, "Student does not exist!"), HttpStatus.NOT_FOUND);
+		}
 		StudentEntity student = studentRepository.findById(studentId).get();
 		SubjectEntity subject = subjectRepository.findById(subjectId).get();
 		TeacherEntity teacher = teacherRepository.findByUsername(principal.getName());
-		TeacherSubjectEntity teSu = (TeacherSubjectEntity) teacherSubjectRepository.findBySubjectAndTeacher(subject, teacher);
-		if (!teacherSubjectService.isActive(teSu.getId())) {
-			return new ResponseEntity<RESTError>(new RESTError(5, "Subject with Teacher not found."), HttpStatus.NOT_FOUND);
+
+		if (!teacherSubjectService.isActive(teacher, subject)) {
+			return new ResponseEntity<RESTError>(new RESTError(5, "Subject with Teacher not found."),
+					HttpStatus.NOT_FOUND);
 		}
+		TeacherSubjectEntity teSu = (TeacherSubjectEntity) teacherSubjectRepository.findBySubjectAndTeacher(subject,
+				teacher);
 		MarkEntity mark = new MarkEntity();
 		mark.setMarkValue(markservice.enumByNo(newMark.getValue()));
 		mark.setDate(LocalDate.now());
 		mark.setTeacherSubjectStudent(tssRepository.findByTeacherSubjectAndStudent(teSu, student));
 		markRepository.save(mark);
-		logger.info("Teacher: " + teacher.getUsername()+ "added mark: " + newMark.getValue() 
-					+ "to student: " + student.getUsername() + "in subject: " + subject.getName());
+		logger.info("Teacher: " + teacher.getUsername() + "added mark: " + newMark.getValue() + "to student: "
+				+ student.getUsername() + "in subject: " + subject.getName());
 		emailservice.sendMarkEmail(mark);
+		return new ResponseEntity<>(mark, HttpStatus.OK);
+	}
+
+	@Secured("ADMIN")
+	@PostMapping("/createMarkByAdmin")
+	public ResponseEntity<?> createGradeByAdmin(@RequestParam Long studentId, @RequestParam Long subjectId,
+			@RequestParam Long teacherId, @Valid @RequestBody MarkDto newMark, BindingResult result) {
+
+		if (result.hasErrors()) {
+			return new ResponseEntity<>(Validation.createErrorMessage(result), HttpStatus.BAD_REQUEST);
+		}
+
+		if (!subjectService.isActive(subjectId)) {
+			return new ResponseEntity<RESTError>(new RESTError(2, "Subject not found."), HttpStatus.NOT_FOUND);
+		}
+
+		if (!studentService.isActive(studentId)) {
+			return new ResponseEntity<RESTError>(new RESTError(4, "Student does not exist!"), HttpStatus.NOT_FOUND);
+		}
+		if (!teacherService.isActive(teacherId)) {
+			return new ResponseEntity<RESTError>(new RESTError(4, "Teacher does not exist!"), HttpStatus.NOT_FOUND);
+		}
+
+		StudentEntity student = studentRepository.findById(studentId).get();
+		SubjectEntity subject = subjectRepository.findById(subjectId).get();
+		TeacherEntity teacher = teacherRepository.findById(teacherId).get();
+
+		if (!teacherSubjectService.isActive(teacher, subject)) {
+			return new ResponseEntity<RESTError>(new RESTError(5, "Subject with Teacher not found."),
+					HttpStatus.NOT_FOUND);
+		}
+		TeacherSubjectEntity teSu = (TeacherSubjectEntity) teacherSubjectRepository.findBySubjectAndTeacher(subject,
+				teacher);
+
+		MarkEntity mark = new MarkEntity();
+		mark.setMarkValue(markservice.enumByNo(newMark.getValue()));
+		mark.setDate(LocalDate.now());
+		mark.setTeacherSubjectStudent(tssRepository.findByTeacherSubjectAndStudent(teSu, student));
+		markRepository.save(mark);
+
+		logger.info("Admin: " + SecurityContextHolder.getContext().getAuthentication().getName() + " added mark: "
+				+ newMark.getValue() + " to student: " + student.getUsername() + " in subject: " + subject.getName());
+
+		//emailservice.sendMarkEmail(mark);
+
 		return new ResponseEntity(mark, HttpStatus.OK);
 	}
 	
-	
-	
-	
-	
-	
-	
+	@Secured("ADMIN")
+	@PutMapping("/updateMarkByAdmin")
+	public ResponseEntity<?> updateGradeByAdmin(@RequestParam Long markId,
+	        @Valid @RequestBody MarkDto updatedMark, BindingResult result) {
+
+	    if (result.hasErrors()) {
+	        return new ResponseEntity<>(Validation.createErrorMessage(result), HttpStatus.BAD_REQUEST);
+	    }
+
+	    if (!markservice.isActive(markId)) {
+	        return new ResponseEntity<RESTError>(new RESTError(6, "Mark not found."), HttpStatus.NOT_FOUND);
+	    }
+	    MarkEntity mark = markRepository.findById(markId).get();
+
+	    mark.setMarkValue(markservice.enumByNo(updatedMark.getValue()));
+	    markRepository.save(mark);
+
+	    logger.info("Admin: " + SecurityContextHolder.getContext().getAuthentication().getName()
+	            + " updated mark with id: " + mark.getId() + " to value: " + updatedMark.getValue());
+
+	    //emailservice.sendMarkEmail(mark);
+
+	    return new ResponseEntity<>(mark, HttpStatus.OK);
+	}
 	
 	
 	

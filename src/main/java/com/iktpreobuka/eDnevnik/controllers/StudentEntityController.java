@@ -2,6 +2,7 @@ package com.iktpreobuka.eDnevnik.controllers;
 
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,14 +33,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iktpreobuka.eDnevnik.entities.GradeEntity;
+import com.iktpreobuka.eDnevnik.entities.MarkEntity;
 import com.iktpreobuka.eDnevnik.entities.ParentEntity;
 import com.iktpreobuka.eDnevnik.entities.StudentEntity;
+import com.iktpreobuka.eDnevnik.entities.SubjectEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherEntity;
+import com.iktpreobuka.eDnevnik.entities.TeacherSubjectEntity;
+import com.iktpreobuka.eDnevnik.entities.TeacherSubjectStudentEntity;
 import com.iktpreobuka.eDnevnik.entities.dto.StudentDto;
+import com.iktpreobuka.eDnevnik.entities.dto.SubjectMarksDto;
 import com.iktpreobuka.eDnevnik.entities.enums.RoleENUM;
 import com.iktpreobuka.eDnevnik.repositories.GradeRepository;
+import com.iktpreobuka.eDnevnik.repositories.MarkRepository;
 import com.iktpreobuka.eDnevnik.repositories.ParentRepository;
 import com.iktpreobuka.eDnevnik.repositories.StudentRepository;
+import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectStudentRepository;
 import com.iktpreobuka.eDnevnik.service.GradeService;
 import com.iktpreobuka.eDnevnik.service.ParentService;
 import com.iktpreobuka.eDnevnik.service.StudentService;
@@ -64,6 +72,8 @@ public class StudentEntityController {
 	
 	@Autowired
 	private ParentRepository parentRepository;
+	@Autowired
+	private MarkRepository markRepository;
 
 	@Autowired
 	private ParentService parentService;
@@ -76,6 +86,8 @@ public class StudentEntityController {
 
 	@Autowired
 	private StudentCustomValidator studentCustomValidator;
+	@Autowired
+	TeacherSubjectStudentRepository teacherSubjectStudentRepository;
 
 	@InitBinder
 	protected void initBinder(final WebDataBinder binder) {
@@ -212,6 +224,48 @@ public class StudentEntityController {
     	return new ResponseEntity<>(studentService.addStudentToGrade(studentId, gradeId), HttpStatus.OK);
     }
     
-    
+	
+	// 8. get all students marks
+	
+	@Secured("STUDENT")
+	@GetMapping("/marks")
+	public ResponseEntity<?> getStudentMarks(Principal principal) {
+	    // Pronalaženje studenta koji ima pristup 
+	    StudentEntity student = studentRepository.findByUsername(principal.getName());
+
+	    // Pronalaženje svih predmeta koje taj student sluša
+	    List<TeacherSubjectStudentEntity> tsS = teacherSubjectStudentRepository.findByStudent(student);
+	    if (tsS.isEmpty()) {
+	    	return new ResponseEntity<RESTError>(new RESTError(4,"Student don't listen any classes!"), HttpStatus.NOT_FOUND);
+		}
+	    List<TeacherSubjectEntity> ts = new ArrayList<>();
+	    List<SubjectEntity> subjects = new ArrayList<>();
+	    
+	    for (TeacherSubjectStudentEntity teacherSubjectStudentEntity : tsS) {
+			ts.add(teacherSubjectStudentEntity.getTeacherSubject());
+			
+			 for (TeacherSubjectEntity teacherSubjectEntity : ts) {
+				 subjects.add(teacherSubjectEntity.getSubject());
+			}
+	
+		}
+	 // Kreiranje liste predmeta sa ocenama
+	    List<SubjectMarksDto> subjectsWithMarkslist = new ArrayList<>();
+
+	    // Iteriranje kroz sve predmete koje student sluša i pravljenje liste ocena za svaki predmet
+	    for (SubjectEntity subject : subjects) {
+	        // Pronalaženje svih ocena koje student ima na tom predmetu
+	        List<MarkEntity> marks = markRepository.findByTeacherSubjectStudent_StudentAndTeacherSubjectStudent_TeacherSubject_Subject(student, subject);
+
+	        // Pravljenje DTO objekta za predmet sa ocenama
+	        SubjectMarksDto subjectWithMarks1 = new SubjectMarksDto();
+	        subjectWithMarks1.setName(subject.toString());
+	        // Dodavanje predmeta sa ocenama u listu
+	        subjectWithMarks1.setMarks(marks);
+	        subjectsWithMarkslist.add(subjectWithMarks1);
+	        
+	    }
+	    return new ResponseEntity<>(subjectsWithMarkslist, HttpStatus.OK);
+	}
 
 }

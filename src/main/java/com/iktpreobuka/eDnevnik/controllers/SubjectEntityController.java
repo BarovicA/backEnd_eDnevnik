@@ -1,5 +1,7 @@
 package com.iktpreobuka.eDnevnik.controllers;
 
+import java.security.Principal;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -21,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iktpreobuka.eDnevnik.entities.GradeEntity;
+import com.iktpreobuka.eDnevnik.entities.StudentEntity;
 import com.iktpreobuka.eDnevnik.entities.SubjectEntity;
+import com.iktpreobuka.eDnevnik.repositories.StudentRepository;
 import com.iktpreobuka.eDnevnik.repositories.SubjectRepository;
 import com.iktpreobuka.eDnevnik.service.SubjectService;
 import com.iktpreobuka.eDnevnik.util.RESTError;
@@ -38,6 +42,8 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private SubjectRepository subjectRepository;
+	
+	@Autowired StudentRepository studentRepository;
 	
 	@InitBinder
 	protected void initBinder(final WebDataBinder binder) {
@@ -103,7 +109,7 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 				HttpStatus.NOT_FOUND);
 
 	}
-	
+
 	
 	
 	

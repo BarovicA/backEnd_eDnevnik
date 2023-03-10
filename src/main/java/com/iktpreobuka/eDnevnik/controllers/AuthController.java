@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.security.Principal;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -28,15 +30,22 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iktpreobuka.eDnevnik.config.JwtTokenProvider;
+import com.iktpreobuka.eDnevnik.entities.MarkEntity;
+import com.iktpreobuka.eDnevnik.entities.StudentEntity;
+import com.iktpreobuka.eDnevnik.entities.SubjectEntity;
+import com.iktpreobuka.eDnevnik.entities.TeacherSubjectEntity;
 import com.iktpreobuka.eDnevnik.entities.UserEntity;
+import com.iktpreobuka.eDnevnik.entities.dto.MarkDto;
 import com.iktpreobuka.eDnevnik.payload.ApiResponse;
 import com.iktpreobuka.eDnevnik.repositories.AdminRepository;
 import com.iktpreobuka.eDnevnik.repositories.ParentRepository;
@@ -44,6 +53,8 @@ import com.iktpreobuka.eDnevnik.repositories.RoleRepository;
 import com.iktpreobuka.eDnevnik.repositories.UserRepository;
 import com.iktpreobuka.eDnevnik.security.dto.JwtResponse;
 import com.iktpreobuka.eDnevnik.security.dto.LoginRequest;
+import com.iktpreobuka.eDnevnik.util.RESTError;
+import com.iktpreobuka.eDnevnik.validation.Validation;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -214,26 +225,7 @@ public class AuthController {
 //		}
 //    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 //	@PostMapping
 //	public AdminEntity addAdmin() {
 //		AdminEntity admin = new AdminEntity();
@@ -258,4 +250,17 @@ public class AuthController {
 //	}
 	
 
+	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

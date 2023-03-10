@@ -37,6 +37,8 @@ public class TeacherSubjectGradeServiceImpl implements  TeacherSubjectGradeServi
 	}
 	
 
+	
+	
 	@Override
 	public boolean isTeacherLinkedWithGrade(TeacherEntity teacher, GradeEntity grade) {
 	    List<TeacherSubjectEntity> teacherSubjects = teacherSubjectRepository.findByTeacher(teacher);
