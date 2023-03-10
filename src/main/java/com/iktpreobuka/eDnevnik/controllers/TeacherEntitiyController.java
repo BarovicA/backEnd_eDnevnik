@@ -143,6 +143,7 @@ public class TeacherEntitiyController {
         }
         existingTeacher.setDeleted(true);
         teacherRepository.save(existingTeacher);
+        logger.info("Deleted teacher: " + id);
         return new ResponseEntity<>("Teacher deleted successfully", HttpStatus.OK);
     }
     
@@ -180,6 +181,24 @@ public class TeacherEntitiyController {
     	logger.info("Successfully created teacherSubject with id: " + tse.getId());
     	return new ResponseEntity<>("Successfully added subject for teacher.", HttpStatus.OK);
     }
+    
+    //delete subject for teacher
+    @Secured("ADMIN")
+    @DeleteMapping("/delete/teacherSubject{id}")
+    public ResponseEntity<?> deleteSubjectTeacher(@PathVariable Long id) {
+    	TeacherSubjectEntity ts = teacherSubjectRepository.findById(id).orElse(null);
+        if (ts == null || ts.getDeleted() == true) {
+        	return new ResponseEntity<RESTError>(new RESTError(1,"Teacher does not exist!") , HttpStatus.NOT_FOUND);
+        }
+    	ts.setDeleted(true);
+    	teacherSubjectRepository.save(ts);
+        logger.info("Deleted teacherSubject: " + id);
+        return new ResponseEntity<>("TeacherSubject deleted successfully", HttpStatus.OK);
+    }
+    
+    
+    
+    
     
     
 

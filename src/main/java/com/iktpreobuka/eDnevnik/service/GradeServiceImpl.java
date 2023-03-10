@@ -99,6 +99,9 @@ public class GradeServiceImpl implements GradeService {
 							TSS.setStudent(studentEntity);
 							teacherSubjectStudentRepository.save(TSS);
 						}
+						if (teacherSubjectStudentRepository.findByTeacherSubjectAndStudent(teacherSubjectEntity, studentEntity).getDeleted()) {
+							teacherSubjectStudentRepository.findByTeacherSubjectAndStudent(teacherSubjectEntity, studentEntity).setDeleted(false);
+						}
 					}
 		}
 		

@@ -16,11 +16,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -29,6 +32,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.iktpreobuka.eDnevnik.entities.enums.SchoolYear;
+import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectGradeRepository;
+import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectStudentRepository;
 
 
 //Klasa Odeljenje u skoli, moze biti vise odeljenja jedne skolske godine(razreda).
@@ -120,9 +125,9 @@ public class GradeEntity {
 		return deleted;
 	}
 
-	public void setDeleted(Boolean deleted) {
-		this.deleted = deleted;
-	}
+//	public void setDeleted(Boolean deleted) {
+//		this.deleted = deleted;
+//	}
 
 	public Integer getVersion() {
 		return version;
@@ -131,6 +136,25 @@ public class GradeEntity {
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
+	@JsonIgnore
+	@Transient
+	@Autowired
+	private TeacherSubjectGradeRepository teacherSubjectGradeRepository;
 
+	
+	
+	public void setDeleted(Boolean deleted) {
+	    this.deleted = deleted;
+	    
+	    if (deleted) {
+	       
+	    
+	        List<TeacherSubjectGradeEntity> teacherSubjectGrades = teacherSubjectGradeRepository.findByGrade(this);
+	        teacherSubjectGrades.forEach(tss -> tss.setDeleted(true));
+	        teacherSubjectGradeRepository.saveAll(teacherSubjectGrades);
+	        
+	        
+	    }
+	}
 
 }
