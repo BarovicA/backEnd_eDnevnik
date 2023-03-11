@@ -1,7 +1,7 @@
 package com.iktpreobuka.eDnevnik.service;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -45,8 +45,10 @@ public class EmailServiceImpl implements EmailService {
     	@Override
         public String createMarkTableHtml(MarkEntity mark) {
     		
-    		SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
-    	    String formattedDate = dateFormat.format(LocalDate.now());
+    		LocalDate date = LocalDate.now();
+    		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
+    		String formattedDate = date.format(formatter);
+    		
 
             StringBuilder sb = new StringBuilder();
             sb.append("<!DOCTYPE html>");

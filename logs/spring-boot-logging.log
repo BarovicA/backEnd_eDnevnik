@@ -13913,3 +13913,191 @@ java.lang.NullPointerException: Cannot invoke "com.iktpreobuka.eDnevnik.entities
 2023-03-10 18:04:46.610  INFO 15076 --- [RMI TCP Connection(7)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-03-10 18:04:46.613  INFO 15076 --- [RMI TCP Connection(7)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
 2023-03-10 18:04:46.633  INFO 15076 --- [RMI TCP Connection(7)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-03-11 13:11:43.555  INFO 4660 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 4660 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-03-11 13:11:43.581  INFO 4660 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-03-11 13:11:46.128  INFO 4660 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-11 13:11:46.331  INFO 4660 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 167 ms. Found 12 JPA repository interfaces.
+2023-03-11 13:11:47.346  INFO 4660 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-03-11 13:11:47.384  INFO 4660 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-03-11 13:11:47.385  INFO 4660 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-03-11 13:11:47.672  INFO 4660 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-03-11 13:11:47.672  INFO 4660 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3881 ms
+2023-03-11 13:11:48.733  INFO 4660 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-03-11 13:11:49.278  INFO 4660 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-03-11 13:11:51.204  INFO 4660 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-11 13:11:51.319  WARN 4660 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-11 13:11:52.605  INFO 4660 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7a79a5d6, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4a5eb613, org.springframework.security.web.context.SecurityContextPersistenceFilter@24caa80, org.springframework.security.web.header.HeaderWriterFilter@7bb4f09d, org.springframework.security.web.authentication.logout.LogoutFilter@76929266, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@44d36b56, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@25502b1c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1eaf4e77, org.springframework.security.web.session.SessionManagementFilter@578ac0be, org.springframework.security.web.access.ExceptionTranslationFilter@31887330, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5a106b26]
+2023-03-11 13:11:53.141  WARN 4660 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-03-11 13:11:53.368  INFO 4660 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-11 13:11:53.390  INFO 4660 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 10.607 seconds (JVM running for 12.48)
+2023-03-11 13:12:32.031  INFO 4660 --- [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-11 13:12:32.032  INFO 4660 --- [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-03-11 13:12:32.035  INFO 4660 --- [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet                : Completed initialization in 3 ms
+2023-03-11 13:12:32.803  INFO 4660 --- [http-nio-8080-exec-2] c.i.e.c.AuthController                   : Ulogovan korisnik: admin
+2023-03-11 13:12:32.984  WARN 4660 --- [http-nio-8080-exec-2] o.a.c.u.SessionIdGeneratorBase           : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [134] milliseconds.
+2023-03-11 13:18:44.434  INFO 4660 --- [http-nio-8080-exec-1] c.i.e.c.ParentEntityController           : Parentnebojsa123updated successfully!
+2023-03-11 13:22:24.761  INFO 4660 --- [RMI TCP Connection(14)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-03-11 13:22:24.806  INFO 4660 --- [RMI TCP Connection(14)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-03-11 13:22:24.810  INFO 4660 --- [RMI TCP Connection(14)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-03-11 13:22:24.895  INFO 4660 --- [RMI TCP Connection(14)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-11 13:22:24.901  INFO 4660 --- [RMI TCP Connection(14)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-03-11 13:22:24.967  INFO 4660 --- [RMI TCP Connection(14)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-03-11 13:22:29.692  INFO 10364 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 10364 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-03-11 13:22:29.708  INFO 10364 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-03-11 13:22:31.046  INFO 10364 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-11 13:22:31.235  INFO 10364 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 166 ms. Found 12 JPA repository interfaces.
+2023-03-11 13:22:32.163  INFO 10364 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-03-11 13:22:32.200  INFO 10364 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-03-11 13:22:32.201  INFO 10364 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-03-11 13:22:32.453  INFO 10364 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-03-11 13:22:32.454  INFO 10364 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2631 ms
+2023-03-11 13:22:33.299  INFO 10364 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-03-11 13:22:33.818  INFO 10364 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-03-11 13:22:35.681  INFO 10364 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-11 13:22:35.778  WARN 10364 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-11 13:22:37.076  INFO 10364 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1315d910, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7a79a5d6, org.springframework.security.web.context.SecurityContextPersistenceFilter@7b5e5fa, org.springframework.security.web.header.HeaderWriterFilter@65528bcf, org.springframework.security.web.authentication.logout.LogoutFilter@4778c085, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3420547, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4733662d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4a5eb613, org.springframework.security.web.session.SessionManagementFilter@b21cbbf, org.springframework.security.web.access.ExceptionTranslationFilter@698394bf, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@14927cd4]
+2023-03-11 13:22:37.617  WARN 10364 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-03-11 13:22:37.838  INFO 10364 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-11 13:22:37.862  INFO 10364 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 8.936 seconds (JVM running for 10.662)
+2023-03-11 13:22:50.767  INFO 10364 --- [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-11 13:22:50.767  INFO 10364 --- [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-03-11 13:22:50.769  INFO 10364 --- [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet                : Completed initialization in 2 ms
+2023-03-11 13:22:51.751  INFO 10364 --- [http-nio-8080-exec-2] c.i.e.c.AuthController                   : Ulogovan korisnik: admin
+2023-03-11 13:22:51.952  WARN 10364 --- [http-nio-8080-exec-2] o.a.c.u.SessionIdGeneratorBase           : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [147] milliseconds.
+2023-03-11 13:23:33.391  INFO 10364 --- [http-nio-8080-exec-5] c.i.e.c.ParentEntityController           : Parentnebo1234updated successfully!
+2023-03-11 13:26:44.492  INFO 10364 --- [http-nio-8080-exec-8] c.i.e.c.ParentEntityController           : Parentnebo123updated successfully!
+2023-03-11 13:28:43.058  INFO 10364 --- [http-nio-8080-exec-2] c.i.e.c.AuthController                   : Ulogovan korisnik: milica123
+2023-03-11 13:29:04.999  INFO 10364 --- [http-nio-8080-exec-6] c.i.e.c.AuthController                   : Ulogovan korisnik: milica123
+2023-03-11 13:30:16.812  INFO 10364 --- [http-nio-8080-exec-8] c.i.e.c.MarkController                   : Teacher: milica123added mark: 3to student: milunka123in subject: Srpski Jezik2
+2023-03-11 13:30:16.895 ERROR 10364 --- [http-nio-8080-exec-8] o.a.c.c.C.[.[.[.[dispatcherServlet]      : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalArgumentException: Cannot format given Object as a Date] with root cause
+
+java.lang.IllegalArgumentException: Cannot format given Object as a Date
+	at java.text.DateFormat.format(DateFormat.java:342) ~[?:?]
+	at java.text.Format.format(Format.java:159) ~[?:?]
+	at com.iktpreobuka.eDnevnik.service.EmailServiceImpl.createMarkTableHtml(EmailServiceImpl.java:49) ~[classes/:?]
+	at com.iktpreobuka.eDnevnik.service.EmailServiceImpl.sendMarkEmail(EmailServiceImpl.java:37) ~[classes/:?]
+	at com.iktpreobuka.eDnevnik.controllers.MarkController.createGradeByTeacher(MarkController.java:117) ~[classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1071) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:964) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:696) ~[tomcat-embed-core-9.0.71.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:779) ~[tomcat-embed-core-9.0.71.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:337) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.25.jar:5.3.25]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:177) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:891) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1784) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.71.jar:9.0.71]
+	at java.lang.Thread.run(Thread.java:833) ~[?:?]
+
+2023-03-11 13:40:16.793  INFO 10364 --- [RMI TCP Connection(21)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-03-11 13:40:16.846  INFO 10364 --- [RMI TCP Connection(21)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-03-11 13:40:16.850  INFO 10364 --- [RMI TCP Connection(21)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-03-11 13:40:16.885  INFO 10364 --- [RMI TCP Connection(21)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-11 13:40:16.888  INFO 10364 --- [RMI TCP Connection(21)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-03-11 13:40:16.909  INFO 10364 --- [RMI TCP Connection(21)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-03-11 13:40:22.187  INFO 3428 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 3428 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-03-11 13:40:22.204  INFO 3428 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-03-11 13:40:23.456  INFO 3428 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-11 13:40:23.638  INFO 3428 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 155 ms. Found 12 JPA repository interfaces.
+2023-03-11 13:40:24.664  INFO 3428 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-03-11 13:40:24.776  INFO 3428 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-03-11 13:40:24.777  INFO 3428 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-03-11 13:40:25.135  INFO 3428 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-03-11 13:40:25.136  INFO 3428 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2834 ms
+2023-03-11 13:40:25.970  INFO 3428 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-03-11 13:40:26.549  INFO 3428 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-03-11 13:40:28.454  INFO 3428 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-11 13:40:28.541  WARN 3428 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-11 13:40:29.772  INFO 3428 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@a3f1f32, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@67fda9fb, org.springframework.security.web.context.SecurityContextPersistenceFilter@ee7a538, org.springframework.security.web.header.HeaderWriterFilter@6c2d124e, org.springframework.security.web.authentication.logout.LogoutFilter@22decfa2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@d79a69b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@19bad88, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@580a5b6e, org.springframework.security.web.session.SessionManagementFilter@31887330, org.springframework.security.web.access.ExceptionTranslationFilter@5edce7da, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4f5d7091]
+2023-03-11 13:40:30.308  WARN 3428 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-03-11 13:40:30.525  INFO 3428 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-11 13:40:30.544  INFO 3428 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 9.243 seconds (JVM running for 11.22)
+2023-03-11 13:41:24.422  INFO 3428 --- [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-11 13:41:24.422  INFO 3428 --- [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-03-11 13:41:24.425  INFO 3428 --- [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet                : Completed initialization in 2 ms
+2023-03-11 13:41:25.812  INFO 3428 --- [http-nio-8080-exec-2] c.i.e.c.AuthController                   : Ulogovan korisnik: milica123
+2023-03-11 13:41:26.008  WARN 3428 --- [http-nio-8080-exec-2] o.a.c.u.SessionIdGeneratorBase           : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [143] milliseconds.
+2023-03-11 13:41:58.298  INFO 3428 --- [http-nio-8080-exec-3] c.i.e.c.MarkController                   : Teacher: milica123added mark: 3to student: milunka123in subject: Srpski Jezik2
+2023-03-11 13:50:35.363  INFO 3428 --- [RMI TCP Connection(12)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-03-11 13:50:35.463  INFO 3428 --- [RMI TCP Connection(12)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-03-11 13:50:35.472  INFO 3428 --- [RMI TCP Connection(12)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-03-11 13:50:35.546  INFO 3428 --- [RMI TCP Connection(12)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-11 13:50:35.550  INFO 3428 --- [RMI TCP Connection(12)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-03-11 13:50:35.611  INFO 3428 --- [RMI TCP Connection(12)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.

@@ -64,6 +64,8 @@ public class ParentServiceImpl implements ParentService {
 			parent.setUsername(dto.getUsername());
 		if (!(dto.getPassword() == null))
 			parent.setPassword(dto.getPassword());
+		if (!(dto.getPassword() == null))
+			parent.setEmail(dto.getEmail());
 		parent.setDeleted(dto.isDeleted());
 
 		return parent;
