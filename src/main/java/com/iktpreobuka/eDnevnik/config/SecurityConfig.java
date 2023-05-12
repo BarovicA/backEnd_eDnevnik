@@ -41,11 +41,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        http
 	            .authorizeRequests()
 	                .antMatchers("/api/v1/auth/login").permitAll()
+	                .antMatchers("/api/v1/subjects").permitAll()
+	                .antMatchers("/api/v1/subjects/search").permitAll()
+	                .antMatchers("/api/v1/subjects/search/**").permitAll()
 	                .anyRequest().authenticated()
 	                .and()
+	            .cors() // Dodajte ovu liniju da omogućite CORS za sve endpointove
+	            .and()
 	            .csrf().disable();
 	    }
-
+	    
 	    @Override
 	    @Bean
 	    public AuthenticationManager authenticationManagerBean() throws Exception {

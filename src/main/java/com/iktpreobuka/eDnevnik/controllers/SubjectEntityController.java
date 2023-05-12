@@ -1,6 +1,7 @@
 package com.iktpreobuka.eDnevnik.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
 
 import javax.validation.Valid;
 
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -20,7 +22,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import com.iktpreobuka.eDnevnik.entities.GradeEntity;
 import com.iktpreobuka.eDnevnik.entities.StudentEntity;
@@ -33,6 +38,7 @@ import com.iktpreobuka.eDnevnik.validation.Validation;
 
 @RestController
 @RequestMapping("/api/v1/subjects")
+@CrossOrigin(origins = "*") 
 public class SubjectEntityController {
 
 private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
@@ -62,8 +68,8 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	        return new ResponseEntity<>("The subject already exists.", HttpStatus.CONFLICT);
 	    }
 	}
-	@Secured("ADMIN")
-	@GetMapping("/")
+	//@Secured("ADMIN")
+	@GetMapping
 	public Iterable<SubjectEntity> getAllSubjects() {
 		return subjectRepository.findAll();
 	}
@@ -110,13 +116,25 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@GetMapping("/search")
+	@CrossOrigin(origins = "*") 
+	public Iterable<SubjectEntity> searchSubjectByName(@RequestParam String name) {
+		
+		return subjectRepository.findByNameContainingIgnoreCase(name);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
