@@ -111,7 +111,7 @@ public class AuthController {
         	                .badRequest()
         	                .body(new ApiResponse(false, "Pristup odbijen. Vaš nalog je obrisan."));
         	    }
-            // Provjera vjerodajnica korisnika
+            // Provera vjerodajnica korisnika
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             loginRequest.getUsername(),
@@ -128,7 +128,7 @@ public class AuthController {
             // Dohvat informacija o prijavljenom korisniku
             UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
             logger.info("Ulogovan korisnik: " + loginRequest.getUsername());
-            // Vraćanje odgovora s generiranim tokenom i informacijama o korisniku
+            // Vraćanje odgovora s generisanim tokenom i informacijama o korisniku
             return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
         } else {
             return ResponseEntity
