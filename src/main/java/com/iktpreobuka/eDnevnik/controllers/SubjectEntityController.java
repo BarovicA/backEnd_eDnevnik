@@ -55,7 +55,7 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	protected void initBinder(final WebDataBinder binder) {
 		binder.addValidators();
 	}
-	@Secured("ADMIN")
+	//@Secured("ADMIN")
 	@PostMapping("/add")
 	public ResponseEntity<?> addNewSubject(@Valid @RequestBody SubjectEntity newSubject, BindingResult result) {
 		if(result.hasErrors()) {
@@ -68,11 +68,13 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	        return new ResponseEntity<>("The subject already exists.", HttpStatus.CONFLICT);
 	    }
 	}
+	
 	//@Secured("ADMIN")
 	@GetMapping
 	public Iterable<SubjectEntity> getAllSubjects() {
 		return subjectRepository.findAll();
 	}
+	
 	@Secured("ADMIN")
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getSubjectById(@PathVariable Long id) {
