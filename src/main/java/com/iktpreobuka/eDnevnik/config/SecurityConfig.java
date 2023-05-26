@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
@@ -41,9 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        http
 	            .authorizeRequests()
 	                .antMatchers("/api/v1/auth/login").permitAll()
-	                .antMatchers("/api/v1/subjects").permitAll()
-	                .antMatchers("/api/v1/subjects/**").permitAll()
-	                .antMatchers("/api/v1/subjects/search").permitAll()
+	                .antMatchers("/api/v1/subjects/**").permitAll()	                
 	                .antMatchers("/api/v1/subjects/search/**").permitAll()
 	                .anyRequest().authenticated()
 	                .and()
@@ -59,7 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    }
 
 	}
-
 
 
 

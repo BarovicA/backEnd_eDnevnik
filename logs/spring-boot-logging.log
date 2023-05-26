@@ -14899,3 +14899,449 @@ java.lang.IllegalArgumentException: Invalid character found in the request targe
 2023-05-12 14:20:05.697  INFO 11284 --- [RMI TCP Connection(208)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-05-12 14:20:05.793  INFO 11284 --- [RMI TCP Connection(208)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
 2023-05-12 14:20:05.939  INFO 11284 --- [RMI TCP Connection(208)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-05-13 13:06:07.211  INFO 8680 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 8680 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-05-13 13:06:07.229  INFO 8680 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-05-13 13:06:08.603  INFO 8680 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-13 13:06:08.796  INFO 8680 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 172 ms. Found 12 JPA repository interfaces.
+2023-05-13 13:06:10.374  INFO 8680 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-05-13 13:06:10.413  INFO 8680 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-05-13 13:06:10.413  INFO 8680 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-13 13:06:10.632  INFO 8680 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-05-13 13:06:10.633  INFO 8680 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3320 ms
+2023-05-13 13:06:11.433  INFO 8680 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-05-13 13:06:11.940  INFO 8680 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-05-13 13:06:13.863  INFO 8680 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-13 13:06:13.927  WARN 8680 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-13 13:06:15.613  INFO 8680 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@fdeec12, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1cecd0a9, org.springframework.security.web.context.SecurityContextPersistenceFilter@19bad88, org.springframework.security.web.header.HeaderWriterFilter@54a7d1b9, org.springframework.web.filter.CorsFilter@4822d7a1, org.springframework.security.web.authentication.logout.LogoutFilter@3100b5cf, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1488d1c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@24caa80, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6fa5fc67, org.springframework.security.web.session.SessionManagementFilter@62682ece, org.springframework.security.web.access.ExceptionTranslationFilter@e14559e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@66450129]
+2023-05-13 13:06:15.978  WARN 8680 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-05-13 13:06:16.328  INFO 8680 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-13 13:06:16.356  INFO 8680 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 9.846 seconds (JVM running for 11.62)
+2023-05-13 13:24:37.317  INFO 8680 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-13 13:24:37.318  INFO 8680 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-05-13 13:24:37.320  INFO 8680 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 2 ms
+2023-05-13 14:59:19.213  INFO 8680 --- [RMI TCP Connection(116)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-13 14:59:19.283  INFO 8680 --- [RMI TCP Connection(116)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-05-13 14:59:19.289  INFO 8680 --- [RMI TCP Connection(116)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-05-13 14:59:19.342  INFO 8680 --- [RMI TCP Connection(116)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-13 14:59:19.361  INFO 8680 --- [RMI TCP Connection(116)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-05-13 14:59:19.377  INFO 8680 --- [RMI TCP Connection(116)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-05-13 16:02:30.459  INFO 28968 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 28968 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-05-13 16:02:30.484  INFO 28968 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-05-13 16:02:33.405  INFO 28968 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-13 16:02:33.680  INFO 28968 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 238 ms. Found 12 JPA repository interfaces.
+2023-05-13 16:02:35.518  INFO 28968 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-05-13 16:02:35.573  INFO 28968 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-05-13 16:02:35.574  INFO 28968 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-13 16:02:35.897  INFO 28968 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-05-13 16:02:35.898  INFO 28968 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5208 ms
+2023-05-13 16:02:37.129  INFO 28968 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-05-13 16:02:37.922  INFO 28968 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-05-13 16:02:41.519  INFO 28968 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-13 16:02:41.689  WARN 28968 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-13 16:02:44.588  INFO 28968 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6df0d030, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@33319df0, org.springframework.security.web.context.SecurityContextPersistenceFilter@19bad88, org.springframework.security.web.header.HeaderWriterFilter@54a7d1b9, org.springframework.web.filter.CorsFilter@73b71935, org.springframework.security.web.authentication.logout.LogoutFilter@3100b5cf, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1488d1c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@24caa80, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7d453075, org.springframework.security.web.session.SessionManagementFilter@62682ece, org.springframework.security.web.access.ExceptionTranslationFilter@e14559e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@66450129]
+2023-05-13 16:02:44.980  WARN 28968 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-05-13 16:02:45.337  INFO 28968 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-13 16:02:45.370  INFO 28968 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 16.289 seconds (JVM running for 19.136)
+2023-05-13 16:03:07.502  INFO 28968 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-13 16:03:07.505  INFO 28968 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-05-13 16:03:07.508  INFO 28968 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 2 ms
+2023-05-13 18:20:44.399  WARN 28968 --- [http-nio-8080-exec-7] o.a.c.u.SessionIdGeneratorBase           : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [378] milliseconds.
+2023-05-13 18:22:14.692  INFO 28968 --- [RMI TCP Connection(143)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-13 18:22:14.790  INFO 28968 --- [RMI TCP Connection(143)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-05-13 18:22:14.801  INFO 28968 --- [RMI TCP Connection(143)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-05-13 18:22:14.913  INFO 28968 --- [RMI TCP Connection(143)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-13 18:22:14.964  INFO 28968 --- [RMI TCP Connection(143)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-05-13 18:22:15.004  INFO 28968 --- [RMI TCP Connection(143)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-05-13 18:22:22.303  INFO 45356 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 45356 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-05-13 18:22:22.329  INFO 45356 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-05-13 18:22:24.333  INFO 45356 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-13 18:22:24.564  INFO 45356 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 206 ms. Found 12 JPA repository interfaces.
+2023-05-13 18:22:25.980  INFO 45356 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-05-13 18:22:26.029  INFO 45356 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-05-13 18:22:26.031  INFO 45356 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-13 18:22:26.450  INFO 45356 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-05-13 18:22:26.451  INFO 45356 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3975 ms
+2023-05-13 18:22:27.646  INFO 45356 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-05-13 18:22:28.424  INFO 45356 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-05-13 18:22:31.143  INFO 45356 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-13 18:22:31.313  WARN 45356 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-13 18:22:33.561  INFO 45356 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@29becf8b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@628b1538, org.springframework.security.web.context.SecurityContextPersistenceFilter@2086f336, org.springframework.security.web.header.HeaderWriterFilter@186537ac, org.springframework.web.filter.CorsFilter@36995784, org.springframework.security.web.authentication.logout.LogoutFilter@757ad227, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4d50f682, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5ad13be4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@58dd1d0c, org.springframework.security.web.session.SessionManagementFilter@58ec3e8b, org.springframework.security.web.access.ExceptionTranslationFilter@6ce1cc03, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7053a864]
+2023-05-13 18:22:33.929  WARN 45356 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-05-13 18:22:34.270  INFO 45356 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-13 18:22:34.293  INFO 45356 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 13.238 seconds (JVM running for 15.914)
+2023-05-13 18:22:54.369  INFO 45356 --- [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-13 18:22:54.370  INFO 45356 --- [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-05-13 18:22:54.371  INFO 45356 --- [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet                : Completed initialization in 1 ms
+2023-05-13 18:22:54.718  WARN 45356 --- [http-nio-8080-exec-2] o.a.c.u.SessionIdGeneratorBase           : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [224] milliseconds.
+2023-05-13 18:30:00.481  INFO 45356 --- [RMI TCP Connection(11)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-13 18:30:00.585  INFO 45356 --- [RMI TCP Connection(11)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-05-13 18:30:00.638  INFO 45356 --- [RMI TCP Connection(11)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-05-13 18:30:00.690  INFO 45356 --- [RMI TCP Connection(11)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-13 18:30:00.708  INFO 45356 --- [RMI TCP Connection(11)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-05-13 18:30:00.743  INFO 45356 --- [RMI TCP Connection(11)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-05-13 18:30:07.744  INFO 32296 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 32296 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-05-13 18:30:07.776  INFO 32296 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-05-13 18:30:09.629  INFO 32296 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-13 18:30:09.871  INFO 32296 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 210 ms. Found 12 JPA repository interfaces.
+2023-05-13 18:30:11.255  INFO 32296 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-05-13 18:30:11.298  INFO 32296 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-05-13 18:30:11.299  INFO 32296 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-13 18:30:11.661  INFO 32296 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-05-13 18:30:11.661  INFO 32296 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3741 ms
+2023-05-13 18:30:12.861  INFO 32296 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-05-13 18:30:13.597  INFO 32296 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-05-13 18:30:16.557  INFO 32296 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-13 18:30:16.747  WARN 32296 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-13 18:30:19.081  INFO 32296 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7104b117, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@74597c37, org.springframework.security.web.context.SecurityContextPersistenceFilter@3c83e9ca, org.springframework.security.web.header.HeaderWriterFilter@e14559e, org.springframework.web.filter.CorsFilter@cd9ce76, org.springframework.security.web.authentication.logout.LogoutFilter@20331c8e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6ce1cc03, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5dabe7c8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@421c057a, org.springframework.security.web.session.SessionManagementFilter@d79a69b, org.springframework.security.web.access.ExceptionTranslationFilter@19c6e821, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@60c68c7b]
+2023-05-13 18:30:19.466  WARN 32296 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-05-13 18:30:19.814  INFO 32296 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-13 18:30:19.845  INFO 32296 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 13.164 seconds (JVM running for 15.659)
+2023-05-13 18:30:51.979  INFO 32296 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-13 18:30:51.980  INFO 32296 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-05-13 18:30:51.983  INFO 32296 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 3 ms
+2023-05-13 18:30:53.283  INFO 32296 --- [http-nio-8080-exec-1] c.i.e.c.SubjectEntityController          : Created subject: Geografija 8
+2023-05-13 18:43:16.312  INFO 32296 --- [http-nio-8080-exec-6] c.i.e.c.SubjectEntityController          : Created subject: Istorija 8
+2023-05-13 18:44:58.160  INFO 32296 --- [RMI TCP Connection(18)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-13 18:44:58.187  INFO 32296 --- [RMI TCP Connection(18)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-05-13 18:44:58.190  INFO 32296 --- [RMI TCP Connection(18)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-05-13 18:44:58.209  INFO 32296 --- [RMI TCP Connection(18)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-13 18:44:58.211  INFO 32296 --- [RMI TCP Connection(18)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-05-13 18:44:58.227  INFO 32296 --- [RMI TCP Connection(18)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-05-13 18:45:04.410  INFO 43072 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 43072 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-05-13 18:45:04.426  INFO 43072 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-05-13 18:45:05.568  INFO 43072 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-13 18:45:05.730  INFO 43072 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 138 ms. Found 12 JPA repository interfaces.
+2023-05-13 18:45:06.616  INFO 43072 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-05-13 18:45:06.647  INFO 43072 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-05-13 18:45:06.648  INFO 43072 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-13 18:45:06.864  INFO 43072 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-05-13 18:45:06.864  INFO 43072 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2351 ms
+2023-05-13 18:45:07.660  INFO 43072 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-05-13 18:45:08.139  INFO 43072 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-05-13 18:45:09.840  INFO 43072 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-13 18:45:09.908  WARN 43072 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-13 18:45:11.275  INFO 43072 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@12115c28, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@cc3fc5c, org.springframework.security.web.context.SecurityContextPersistenceFilter@7b5e5fa, org.springframework.security.web.header.HeaderWriterFilter@65528bcf, org.springframework.web.filter.CorsFilter@2aac60b, org.springframework.security.web.authentication.logout.LogoutFilter@4778c085, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3420547, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4733662d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@173602c0, org.springframework.security.web.session.SessionManagementFilter@b21cbbf, org.springframework.security.web.access.ExceptionTranslationFilter@698394bf, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@119f035f]
+2023-05-13 18:45:11.517  WARN 43072 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-05-13 18:45:11.744  INFO 43072 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-13 18:45:11.760  INFO 43072 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 8.032 seconds (JVM running for 10.029)
+2023-05-13 18:48:43.085  INFO 43072 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-13 18:48:43.085  INFO 43072 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-05-13 18:48:43.089  INFO 43072 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 4 ms
+2023-05-13 19:07:13.536  INFO 43072 --- [RMI TCP Connection(24)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-13 19:07:13.576  INFO 43072 --- [RMI TCP Connection(24)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-05-13 19:07:13.579  INFO 43072 --- [RMI TCP Connection(24)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-05-13 19:07:13.602  INFO 43072 --- [RMI TCP Connection(24)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-13 19:07:13.605  INFO 43072 --- [RMI TCP Connection(24)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-05-13 19:07:13.628  INFO 43072 --- [RMI TCP Connection(24)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-05-13 19:07:21.821  INFO 46116 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 46116 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-05-13 19:07:21.843  INFO 46116 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-05-13 19:07:23.176  INFO 46116 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-13 19:07:23.337  INFO 46116 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 145 ms. Found 12 JPA repository interfaces.
+2023-05-13 19:07:24.887  INFO 46116 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-05-13 19:07:24.921  INFO 46116 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-05-13 19:07:24.922  INFO 46116 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-13 19:07:25.153  INFO 46116 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-05-13 19:07:25.154  INFO 46116 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3188 ms
+2023-05-13 19:07:25.978  INFO 46116 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-05-13 19:07:26.478  INFO 46116 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-05-13 19:07:28.219  INFO 46116 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-13 19:07:28.410  WARN 46116 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-13 19:07:29.861  INFO 46116 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@309b6768, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@333e01c6, org.springframework.security.web.context.SecurityContextPersistenceFilter@4545cfc0, org.springframework.security.web.header.HeaderWriterFilter@1f138b74, org.springframework.web.filter.CorsFilter@4f70b659, org.springframework.security.web.authentication.logout.LogoutFilter@19bad88, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@58ca1cad, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@589a82af, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@18f1a81a, org.springframework.security.web.session.SessionManagementFilter@2f16c21f, org.springframework.security.web.access.ExceptionTranslationFilter@5352bc0e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5fdcc63f]
+2023-05-13 19:07:30.137  WARN 46116 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-05-13 19:07:30.379  INFO 46116 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-13 19:07:30.400  INFO 46116 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 9.372 seconds (JVM running for 11.607)
+2023-05-13 19:41:39.037  INFO 46116 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-13 19:41:39.040  INFO 46116 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-05-13 19:41:39.046  INFO 46116 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 6 ms
+2023-05-13 22:59:49.432  INFO 46116 --- [RMI TCP Connection(237)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-13 22:59:49.473  INFO 46116 --- [RMI TCP Connection(237)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-05-13 22:59:49.477  INFO 46116 --- [RMI TCP Connection(237)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-05-13 22:59:49.523  INFO 46116 --- [RMI TCP Connection(237)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-13 22:59:49.539  INFO 46116 --- [RMI TCP Connection(237)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-05-13 22:59:49.554  INFO 46116 --- [RMI TCP Connection(237)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-05-15 18:01:46.853  INFO 15944 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 15944 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-05-15 18:01:46.871  INFO 15944 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-05-15 18:01:48.461  INFO 15944 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-15 18:01:48.680  INFO 15944 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 185 ms. Found 12 JPA repository interfaces.
+2023-05-15 18:01:49.989  INFO 15944 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-05-15 18:01:50.038  INFO 15944 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-05-15 18:01:50.040  INFO 15944 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-15 18:01:50.372  INFO 15944 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-05-15 18:01:50.373  INFO 15944 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3388 ms
+2023-05-15 18:01:51.328  INFO 15944 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-05-15 18:01:51.939  INFO 15944 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-05-15 18:01:54.295  INFO 15944 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-15 18:01:54.389  WARN 15944 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-15 18:01:56.072  INFO 15944 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4822d7a1, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6fa5fc67, org.springframework.security.web.context.SecurityContextPersistenceFilter@186537ac, org.springframework.security.web.header.HeaderWriterFilter@62682ece, org.springframework.web.filter.CorsFilter@17e323fd, org.springframework.security.web.authentication.logout.LogoutFilter@41623694, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@25502b1c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@16a78700, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6df0d030, org.springframework.security.web.session.SessionManagementFilter@44d36b56, org.springframework.security.web.access.ExceptionTranslationFilter@d79a69b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1eaf4e77]
+2023-05-15 18:01:56.356  WARN 15944 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-05-15 18:01:56.630  INFO 15944 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-15 18:01:56.651  INFO 15944 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 10.807 seconds (JVM running for 13.262)
+2023-05-15 18:03:20.643  INFO 15944 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-15 18:03:20.643  INFO 15944 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-05-15 18:03:20.645  INFO 15944 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 1 ms
+2023-05-15 19:14:01.991  INFO 15944 --- [RMI TCP Connection(76)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-15 19:14:02.021  INFO 15944 --- [RMI TCP Connection(76)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-05-15 19:14:02.024  INFO 15944 --- [RMI TCP Connection(76)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-05-15 19:14:02.044  INFO 15944 --- [RMI TCP Connection(76)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-15 19:14:02.046  INFO 15944 --- [RMI TCP Connection(76)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-05-15 19:14:02.058  INFO 15944 --- [RMI TCP Connection(76)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-05-18 14:27:55.736  INFO 1472 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 1472 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-05-18 14:27:55.757  INFO 1472 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-05-18 14:27:57.986  INFO 1472 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-18 14:27:58.254  INFO 1472 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 231 ms. Found 12 JPA repository interfaces.
+2023-05-18 14:28:00.185  INFO 1472 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-05-18 14:28:00.239  INFO 1472 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-05-18 14:28:00.240  INFO 1472 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-18 14:28:00.707  INFO 1472 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-05-18 14:28:00.708  INFO 1472 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4817 ms
+2023-05-18 14:28:02.101  INFO 1472 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-05-18 14:28:03.011  INFO 1472 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-05-18 14:28:05.109  INFO 1472 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-18 14:28:05.213  WARN 1472 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-18 14:28:06.711  INFO 1472 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4a9d6eb9, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@157a2c86, org.springframework.security.web.context.SecurityContextPersistenceFilter@51158fb1, org.springframework.security.web.header.HeaderWriterFilter@19c6e821, org.springframework.web.filter.CorsFilter@5b9c74a, org.springframework.security.web.authentication.logout.LogoutFilter@19a799cb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3c83e9ca, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@b21cbbf, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5b395ee, org.springframework.security.web.session.SessionManagementFilter@ee7a538, org.springframework.security.web.access.ExceptionTranslationFilter@602e7a9e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@a3f1f32]
+2023-05-18 14:28:06.967  WARN 1472 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-05-18 14:28:07.189  INFO 1472 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-18 14:28:07.205  INFO 1472 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 13.598 seconds (JVM running for 16.726)
+2023-05-18 14:28:13.900  INFO 1472 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-18 14:28:13.900  INFO 1472 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-05-18 14:28:13.903  INFO 1472 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 3 ms
+2023-05-18 14:28:14.654  INFO 1472 --- [http-nio-8080-exec-1] c.i.e.c.AuthController                   : Ulogovan korisnik: admin
+2023-05-18 14:28:14.871  WARN 1472 --- [http-nio-8080-exec-1] o.a.c.u.SessionIdGeneratorBase           : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [166] milliseconds.
+2023-05-18 15:39:00.199  INFO 1472 --- [http-nio-8080-exec-8] c.i.e.c.AuthController                   : Ulogovan korisnik: admin
+2023-05-18 21:59:31.864  INFO 1472 --- [RMI TCP Connection(455)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-18 21:59:32.097  INFO 1472 --- [RMI TCP Connection(455)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-05-18 21:59:32.128  INFO 1472 --- [RMI TCP Connection(455)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-05-18 21:59:32.244  INFO 1472 --- [RMI TCP Connection(455)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-18 21:59:32.298  INFO 1472 --- [RMI TCP Connection(455)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-05-18 21:59:32.333  INFO 1472 --- [RMI TCP Connection(455)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-05-23 19:43:21.444  INFO 12172 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 12172 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-05-23 19:43:21.466  INFO 12172 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-05-23 19:43:23.529  INFO 12172 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-23 19:43:23.749  INFO 12172 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 200 ms. Found 12 JPA repository interfaces.
+2023-05-23 19:43:25.180  INFO 12172 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-05-23 19:43:25.228  INFO 12172 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-05-23 19:43:25.230  INFO 12172 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-23 19:43:25.565  INFO 12172 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-05-23 19:43:25.566  INFO 12172 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3910 ms
+2023-05-23 19:43:26.888  INFO 12172 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-05-23 19:43:28.671  INFO 12172 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-05-23 19:43:31.947  INFO 12172 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-23 19:43:32.111  WARN 12172 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-23 19:43:34.503  INFO 12172 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@740530b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3dd8b40e, org.springframework.security.web.context.SecurityContextPersistenceFilter@1737834, org.springframework.security.web.header.HeaderWriterFilter@3420547, org.springframework.web.filter.CorsFilter@4101e146, org.springframework.security.web.authentication.logout.LogoutFilter@d91e8c7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@22decfa2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3445341, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7104b117, org.springframework.security.web.session.SessionManagementFilter@69860811, org.springframework.security.web.access.ExceptionTranslationFilter@7b5e5fa, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@f4aec23]
+2023-05-23 19:43:34.998  WARN 12172 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-05-23 19:43:35.362  INFO 12172 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-23 19:43:35.395  INFO 12172 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 14.947 seconds (JVM running for 17.778)
+2023-05-23 19:45:31.213  INFO 12172 --- [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-23 19:45:31.214  INFO 12172 --- [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-05-23 19:45:31.217  INFO 12172 --- [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet                : Completed initialization in 3 ms
+2023-05-23 20:05:19.305  INFO 12172 --- [http-nio-8080-exec-3] c.i.e.c.AuthController                   : Ulogovan korisnik: admin
+2023-05-23 20:05:19.559  WARN 12172 --- [http-nio-8080-exec-3] o.a.c.u.SessionIdGeneratorBase           : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [214] milliseconds.
+2023-05-23 20:44:06.722  INFO 12172 --- [http-nio-8080-exec-1] c.i.e.c.AuthController                   : Ulogovan korisnik: admin
+2023-05-23 20:49:41.477  INFO 12172 --- [http-nio-8080-exec-3] c.i.e.c.AuthController                   : Ulogovan korisnik: admin
+2023-05-23 20:50:28.434  INFO 12172 --- [RMI TCP Connection(69)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-23 20:50:28.460  INFO 12172 --- [RMI TCP Connection(69)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-05-23 20:50:28.464  INFO 12172 --- [RMI TCP Connection(69)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-05-23 20:50:28.481  INFO 12172 --- [RMI TCP Connection(69)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-23 20:50:28.484  INFO 12172 --- [RMI TCP Connection(69)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-05-23 20:50:28.496  INFO 12172 --- [RMI TCP Connection(69)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-05-23 20:50:33.136  INFO 7492 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 7492 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-05-23 20:50:33.150  INFO 7492 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-05-23 20:50:34.361  INFO 7492 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-23 20:50:34.521  INFO 7492 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 142 ms. Found 12 JPA repository interfaces.
+2023-05-23 20:50:35.720  INFO 7492 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-05-23 20:50:35.753  INFO 7492 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-05-23 20:50:35.754  INFO 7492 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-23 20:50:36.005  INFO 7492 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-05-23 20:50:36.006  INFO 7492 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2758 ms
+2023-05-23 20:50:36.833  INFO 7492 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-05-23 20:50:37.311  INFO 7492 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-05-23 20:50:40.090  INFO 7492 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-23 20:50:40.187  WARN 7492 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-23 20:50:41.656  INFO 7492 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@fdeec12, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1cecd0a9, org.springframework.security.web.context.SecurityContextPersistenceFilter@578ac0be, org.springframework.security.web.header.HeaderWriterFilter@698394bf, org.springframework.web.filter.CorsFilter@4822d7a1, org.springframework.security.web.authentication.logout.LogoutFilter@1a899fcd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7b5e5fa, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@b1e63b5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6fa5fc67, org.springframework.security.web.session.SessionManagementFilter@2226fd2b, org.springframework.security.web.access.ExceptionTranslationFilter@c0b10ae, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@445d878c]
+2023-05-23 20:50:41.891  WARN 7492 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-05-23 20:50:42.098  INFO 7492 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-23 20:50:42.117  INFO 7492 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 9.664 seconds (JVM running for 11.338)
+2023-05-23 20:50:47.808  INFO 7492 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-23 20:50:47.809  INFO 7492 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-05-23 20:50:47.811  INFO 7492 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 2 ms
+2023-05-23 20:50:49.168  WARN 7492 --- [http-nio-8080-exec-1] o.a.c.u.SessionIdGeneratorBase           : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [157] milliseconds.
+2023-05-23 20:55:33.129  INFO 7492 --- [http-nio-8080-exec-9] c.i.e.c.AuthController                   : Ulogovan korisnik: admin
+2023-05-23 20:56:58.806  INFO 7492 --- [RMI TCP Connection(11)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-23 20:56:58.832  INFO 7492 --- [RMI TCP Connection(11)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-05-23 20:56:58.834  INFO 7492 --- [RMI TCP Connection(11)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-05-23 20:56:58.851  INFO 7492 --- [RMI TCP Connection(11)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-23 20:56:58.854  INFO 7492 --- [RMI TCP Connection(11)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-05-23 20:56:58.869  INFO 7492 --- [RMI TCP Connection(11)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-05-23 21:07:55.284  INFO 15476 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 15476 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-05-23 21:07:55.300  INFO 15476 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-05-23 21:07:56.646  INFO 15476 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-23 21:07:56.794  INFO 15476 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 136 ms. Found 12 JPA repository interfaces.
+2023-05-23 21:07:57.693  INFO 15476 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-05-23 21:07:57.733  INFO 15476 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-05-23 21:07:57.734  INFO 15476 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-23 21:07:57.931  INFO 15476 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-05-23 21:07:57.932  INFO 15476 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2541 ms
+2023-05-23 21:07:58.644  INFO 15476 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-05-23 21:07:59.145  INFO 15476 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-05-23 21:08:00.846  INFO 15476 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-23 21:08:00.928  WARN 15476 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-23 21:08:02.392  INFO 15476 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@fdeec12, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1cecd0a9, org.springframework.security.web.context.SecurityContextPersistenceFilter@578ac0be, org.springframework.security.web.header.HeaderWriterFilter@698394bf, org.springframework.web.filter.CorsFilter@4822d7a1, org.springframework.security.web.authentication.logout.LogoutFilter@1a899fcd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7b5e5fa, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@b1e63b5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6fa5fc67, org.springframework.security.web.session.SessionManagementFilter@2226fd2b, org.springframework.security.web.access.ExceptionTranslationFilter@c0b10ae, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@445d878c]
+2023-05-23 21:08:02.635  WARN 15476 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-05-23 21:08:02.849  INFO 15476 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-23 21:08:02.867  INFO 15476 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 8.226 seconds (JVM running for 9.934)
+2023-05-23 21:08:07.249  INFO 15476 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-23 21:08:07.250  INFO 15476 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-05-23 21:08:07.252  INFO 15476 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 2 ms
+2023-05-23 21:08:08.427  INFO 15476 --- [http-nio-8080-exec-1] c.i.e.c.AuthController                   : Ulogovan korisnik: milica123
+2023-05-23 21:08:08.602  WARN 15476 --- [http-nio-8080-exec-1] o.a.c.u.SessionIdGeneratorBase           : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [128] milliseconds.
+2023-05-23 21:17:37.023  WARN 15476 --- [HikariPool-1 housekeeper] c.z.h.p.HikariPool                       : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m37s581ms340µs).
+2023-05-23 21:24:08.951  INFO 15476 --- [RMI TCP Connection(17)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-23 21:24:09.036  INFO 15476 --- [RMI TCP Connection(17)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-05-23 21:24:09.041  INFO 15476 --- [RMI TCP Connection(17)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-05-23 21:24:09.070  INFO 15476 --- [RMI TCP Connection(17)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-23 21:24:09.074  INFO 15476 --- [RMI TCP Connection(17)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-05-23 21:24:09.110  INFO 15476 --- [RMI TCP Connection(17)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-05-23 21:24:13.728  INFO 27024 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 27024 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-05-23 21:24:13.741  INFO 27024 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-05-23 21:24:14.886  INFO 27024 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-23 21:24:15.048  INFO 27024 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 139 ms. Found 12 JPA repository interfaces.
+2023-05-23 21:24:15.954  INFO 27024 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-05-23 21:24:15.985  INFO 27024 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-05-23 21:24:15.986  INFO 27024 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-23 21:24:16.201  INFO 27024 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-05-23 21:24:16.202  INFO 27024 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2372 ms
+2023-05-23 21:24:17.034  INFO 27024 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-05-23 21:24:17.515  INFO 27024 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-05-23 21:24:19.262  INFO 27024 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-23 21:24:19.340  WARN 27024 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-23 21:24:20.743  INFO 27024 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2b27d5d3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@12115c28, org.springframework.security.web.context.SecurityContextPersistenceFilter@7c045627, org.springframework.security.web.header.HeaderWriterFilter@602e7a9e, org.springframework.web.filter.CorsFilter@cc3fc5c, org.springframework.security.web.authentication.logout.LogoutFilter@3aae9e8f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@51158fb1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2226fd2b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2aac60b, org.springframework.security.web.session.SessionManagementFilter@65528bcf, org.springframework.security.web.access.ExceptionTranslationFilter@f69e35a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4dfe56dc]
+2023-05-23 21:24:21.012  WARN 27024 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-05-23 21:24:21.213  INFO 27024 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-23 21:24:21.230  INFO 27024 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 8.161 seconds (JVM running for 9.683)
+2023-05-23 21:24:26.763  INFO 27024 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-23 21:24:26.763  INFO 27024 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-05-23 21:24:26.766  INFO 27024 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 2 ms
+2023-05-23 21:24:48.067  INFO 27024 --- [http-nio-8080-exec-6] c.i.e.c.AuthController                   : Ulogovan korisnik: admin
+2023-05-23 21:24:48.219  WARN 27024 --- [http-nio-8080-exec-6] o.a.c.u.SessionIdGeneratorBase           : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [134] milliseconds.
+2023-05-23 21:33:02.115  INFO 27024 --- [RMI TCP Connection(13)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-23 21:33:02.140  INFO 27024 --- [RMI TCP Connection(13)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-05-23 21:33:02.143  INFO 27024 --- [RMI TCP Connection(13)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-05-23 21:33:02.163  INFO 27024 --- [RMI TCP Connection(13)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-23 21:33:02.165  INFO 27024 --- [RMI TCP Connection(13)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-05-23 21:33:02.182  INFO 27024 --- [RMI TCP Connection(13)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-05-25 09:50:10.652  INFO 8996 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 8996 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-05-25 09:50:10.673  INFO 8996 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-05-25 09:50:11.763  INFO 8996 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-25 09:50:11.910  INFO 8996 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 130 ms. Found 12 JPA repository interfaces.
+2023-05-25 09:50:12.783  INFO 8996 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-05-25 09:50:12.812  INFO 8996 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-05-25 09:50:12.812  INFO 8996 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-25 09:50:13.010  INFO 8996 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-05-25 09:50:13.010  INFO 8996 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2244 ms
+2023-05-25 09:50:13.674  INFO 8996 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-05-25 09:50:14.141  INFO 8996 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-05-25 09:50:15.884  INFO 8996 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-25 09:50:15.961  WARN 8996 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-25 09:50:17.259  INFO 8996 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@648c80cb, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4a9d6eb9, org.springframework.security.web.context.SecurityContextPersistenceFilter@65528bcf, org.springframework.security.web.header.HeaderWriterFilter@5edce7da, org.springframework.web.filter.CorsFilter@157a2c86, org.springframework.security.web.authentication.logout.LogoutFilter@1737834, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@ee7a538, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3c83e9ca, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5b9c74a, org.springframework.security.web.session.SessionManagementFilter@3c3a767, org.springframework.security.web.access.ExceptionTranslationFilter@329a27ae, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@128ebca1]
+2023-05-25 09:50:17.506  WARN 8996 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-05-25 09:50:17.721  INFO 8996 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-25 09:50:17.736  INFO 8996 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 7.751 seconds (JVM running for 9.269)
+2023-05-25 09:50:51.721  INFO 8996 --- [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-25 09:50:51.722  INFO 8996 --- [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-05-25 09:50:51.725  INFO 8996 --- [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet                : Completed initialization in 3 ms
+2023-05-25 09:55:57.335  INFO 8996 --- [http-nio-8080-exec-6] c.i.e.c.AuthController                   : Ulogovan korisnik: milica123
+2023-05-25 09:55:57.475  WARN 8996 --- [http-nio-8080-exec-6] o.a.c.u.SessionIdGeneratorBase           : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [127] milliseconds.
+2023-05-25 10:00:35.593  INFO 8996 --- [http-nio-8080-exec-10] c.i.e.c.TeacherEntitiyController         : This are all subjects for teacher: milica123
+2023-05-25 10:06:47.112  INFO 8996 --- [RMI TCP Connection(20)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-25 10:06:47.140  INFO 8996 --- [RMI TCP Connection(20)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-05-25 10:06:47.142  INFO 8996 --- [RMI TCP Connection(20)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-05-25 10:06:47.159  INFO 8996 --- [RMI TCP Connection(20)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-25 10:06:47.161  INFO 8996 --- [RMI TCP Connection(20)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-05-25 10:06:47.179  INFO 8996 --- [RMI TCP Connection(20)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-05-25 10:06:51.850  INFO 7916 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 7916 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-05-25 10:06:51.869  INFO 7916 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-05-25 10:06:53.038  INFO 7916 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-25 10:06:53.186  INFO 7916 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 134 ms. Found 12 JPA repository interfaces.
+2023-05-25 10:06:54.024  INFO 7916 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-05-25 10:06:54.051  INFO 7916 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-05-25 10:06:54.052  INFO 7916 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-25 10:06:54.257  INFO 7916 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-05-25 10:06:54.258  INFO 7916 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2281 ms
+2023-05-25 10:06:55.196  INFO 7916 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-05-25 10:06:55.662  INFO 7916 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-05-25 10:06:57.309  INFO 7916 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-25 10:06:57.387  WARN 7916 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-25 10:06:58.428  INFO 7916 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@66ab3716, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@103a1ad3, org.springframework.security.web.context.SecurityContextPersistenceFilter@31b6eec8, org.springframework.security.web.header.HeaderWriterFilter@79e33802, org.springframework.security.web.authentication.logout.LogoutFilter@578ac0be, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@329a27ae, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@602e7a9e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1d6ed085, org.springframework.security.web.session.SessionManagementFilter@5cdafb4d, org.springframework.security.web.access.ExceptionTranslationFilter@a1c4f69, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@473c491]
+2023-05-25 10:06:58.874  WARN 7916 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-05-25 10:06:59.088  INFO 7916 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-25 10:06:59.104  INFO 7916 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 7.94 seconds (JVM running for 9.468)
+2023-05-25 10:07:07.004  INFO 7916 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-25 10:07:07.005  INFO 7916 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-05-25 10:07:07.007  INFO 7916 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 2 ms
+2023-05-25 10:07:08.752  INFO 7916 --- [http-nio-8080-exec-1] c.i.e.c.AuthController                   : Ulogovan korisnik: milica123
+2023-05-25 10:07:08.952  WARN 7916 --- [http-nio-8080-exec-1] o.a.c.u.SessionIdGeneratorBase           : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [155] milliseconds.
+2023-05-25 10:20:12.448  INFO 7916 --- [RMI TCP Connection(18)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-25 10:20:12.487  INFO 7916 --- [RMI TCP Connection(18)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-05-25 10:20:12.489  INFO 7916 --- [RMI TCP Connection(18)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-05-25 10:20:12.514  INFO 7916 --- [RMI TCP Connection(18)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-25 10:20:12.516  INFO 7916 --- [RMI TCP Connection(18)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-05-25 10:20:12.537  INFO 7916 --- [RMI TCP Connection(18)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-05-25 10:20:16.763  INFO 13324 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 13324 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-05-25 10:20:16.786  INFO 13324 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-05-25 10:20:18.124  INFO 13324 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-25 10:20:18.282  INFO 13324 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 138 ms. Found 12 JPA repository interfaces.
+2023-05-25 10:20:19.105  INFO 13324 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-05-25 10:20:19.138  INFO 13324 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-05-25 10:20:19.139  INFO 13324 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-25 10:20:19.335  INFO 13324 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-05-25 10:20:19.336  INFO 13324 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2425 ms
+2023-05-25 10:20:20.007  INFO 13324 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-05-25 10:20:20.462  INFO 13324 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-05-25 10:20:22.000  INFO 13324 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-25 10:20:22.072  WARN 13324 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-25 10:20:23.145  INFO 13324 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1ee5792a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@37f60cd4, org.springframework.security.web.context.SecurityContextPersistenceFilter@16ca4532, org.springframework.security.web.header.HeaderWriterFilter@40477d52, org.springframework.security.web.authentication.logout.LogoutFilter@70a8654, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@75a5a912, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2fda92e0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4cf46574, org.springframework.security.web.session.SessionManagementFilter@36618b3b, org.springframework.security.web.access.ExceptionTranslationFilter@37289e90, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@294c36b9]
+2023-05-25 10:20:23.575  WARN 13324 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-05-25 10:20:23.806  INFO 13324 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-25 10:20:23.822  INFO 13324 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 7.769 seconds (JVM running for 9.31)
+2023-05-25 10:20:39.414  INFO 13324 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-25 10:20:39.414  INFO 13324 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-05-25 10:20:39.416  INFO 13324 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 1 ms
+2023-05-25 10:20:41.236  INFO 13324 --- [http-nio-8080-exec-1] c.i.e.c.AuthController                   : Ulogovan korisnik: milica123
+2023-05-25 10:20:41.460  WARN 13324 --- [http-nio-8080-exec-1] o.a.c.u.SessionIdGeneratorBase           : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [182] milliseconds.
+2023-05-25 16:09:12.718  WARN 13324 --- [HikariPool-1 housekeeper] c.z.h.p.HikariPool                       : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=59m17s315ms747µs400ns).
+2023-05-25 17:12:42.163  INFO 13324 --- [RMI TCP Connection(357)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-25 17:12:42.189  INFO 13324 --- [RMI TCP Connection(357)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-05-25 17:12:42.192  INFO 13324 --- [RMI TCP Connection(357)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-05-25 17:12:42.208  INFO 13324 --- [RMI TCP Connection(357)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-25 17:12:42.212  INFO 13324 --- [RMI TCP Connection(357)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-05-25 17:12:42.221  INFO 13324 --- [RMI TCP Connection(357)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2023-05-26 18:20:35.841  INFO 10760 --- [main] c.i.e.EDnevnikApplication                : Starting EDnevnikApplication using Java 17.0.6 on DESKTOP-G5LGSKP with PID 10760 (D:\Program Files\StsWorkspaceNew\eDnevnik\target\classes started by USER in D:\Program Files\StsWorkspaceNew\eDnevnik)
+2023-05-26 18:20:35.883  INFO 10760 --- [main] c.i.e.EDnevnikApplication                : No active profile set, falling back to 1 default profile: "default"
+2023-05-26 18:20:38.952  INFO 10760 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-26 18:20:39.406  INFO 10760 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 403 ms. Found 12 JPA repository interfaces.
+2023-05-26 18:20:42.643  INFO 10760 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2023-05-26 18:20:42.706  INFO 10760 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2023-05-26 18:20:42.708  INFO 10760 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-26 18:20:43.177  INFO 10760 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2023-05-26 18:20:43.179  INFO 10760 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 7169 ms
+2023-05-26 18:20:45.584  INFO 10760 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2023-05-26 18:20:46.852  INFO 10760 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2023-05-26 18:20:51.698  INFO 10760 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-26 18:20:51.855  WARN 10760 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-26 18:20:55.493  INFO 10760 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1eeb9e5c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2cca7d3c, org.springframework.security.web.context.SecurityContextPersistenceFilter@67fda9fb, org.springframework.security.web.header.HeaderWriterFilter@6418075c, org.springframework.web.filter.CorsFilter@5e1535e0, org.springframework.security.web.authentication.logout.LogoutFilter@4e6add8d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@66450129, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@445d878c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6c27be1d, org.springframework.security.web.session.SessionManagementFilter@4dfe56dc, org.springframework.security.web.access.ExceptionTranslationFilter@1b18fa79, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@726d0482]
+2023-05-26 18:20:56.062  WARN 10760 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-05-26 18:20:56.498  INFO 10760 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-26 18:20:56.546  INFO 10760 --- [main] c.i.e.EDnevnikApplication                : Started EDnevnikApplication in 22.777 seconds (JVM running for 27.783)
+2023-05-26 18:22:18.144  INFO 10760 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-26 18:22:18.145  INFO 10760 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2023-05-26 18:22:18.149  INFO 10760 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 4 ms
+2023-05-26 18:22:21.464  INFO 10760 --- [http-nio-8080-exec-1] c.i.e.c.AuthController                   : Ulogovan korisnik: milica123
+2023-05-26 18:22:21.776  WARN 10760 --- [http-nio-8080-exec-1] o.a.c.u.SessionIdGeneratorBase           : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [215] milliseconds.
+2023-05-26 18:31:34.408  INFO 10760 --- [http-nio-8080-exec-8] c.i.e.c.AuthController                   : Ulogovan korisnik: admin
+2023-05-26 18:32:31.635  INFO 10760 --- [http-nio-8080-exec-3] c.i.e.c.AuthController                   : Success loading logger.
+2023-05-26 18:42:23.425  INFO 10760 --- [RMI TCP Connection(25)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-26 18:42:23.470  INFO 10760 --- [RMI TCP Connection(25)-127.0.0.1] o.a.c.c.StandardService                  : Stopping service [Tomcat]
+2023-05-26 18:42:23.474  INFO 10760 --- [RMI TCP Connection(25)-127.0.0.1] o.a.c.c.C.[.[.[/]                        : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-05-26 18:42:23.498  INFO 10760 --- [RMI TCP Connection(25)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-26 18:42:23.500  INFO 10760 --- [RMI TCP Connection(25)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2023-05-26 18:42:23.525  INFO 10760 --- [RMI TCP Connection(25)-127.0.0.1] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.

@@ -93,49 +93,95 @@ public class AuthController {
 	
 
     
-    
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+        Optional<UserEntity> userOptional = userRepository.findByUsername(loginRequest.getUsername());
 
-//        // Provera da li postoji korisnik sa zadatim username-om
-//        if (userRepository.existsByUsername(loginRequest.getUsername())) {
-        	// Dohvatanje korisnika po username-u
-        	Optional<UserEntity> userOptional = userRepository.findByUsername(loginRequest.getUsername());
+        if (userOptional.isPresent()) {
+            UserEntity user = userOptional.get();
 
-        	if (userOptional.isPresent()) {
-        	    UserEntity user = userOptional.get();
-        	    
-        	    // Provera da li je korisnik označen kao obrisan
-        	    if (user.getDeleted()) {
-        	        return ResponseEntity
-        	                .badRequest()
-        	                .body(new ApiResponse(false, "Pristup odbijen. Vaš nalog je obrisan."));
-        	    }
-            // Provera vjerodajnica korisnika
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            loginRequest.getUsername(),
-                            loginRequest.getPassword()
-                    )
-            );
+            // Provera da li je korisnik označen kao obrisan
+            if (user.getDeleted()) {
+                return ResponseEntity
+                        .badRequest()
+                        .body(new ApiResponse(false, "Pristup odbijen. Vaš nalog je obrisan."));
+            }
 
-            // Postavljanje autentifikacije u SecurityContext
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            // Provera passworda korisnika
+            if (passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+            	
+                // Autentifikacija uspešna
+                Authentication authentication = authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(
+                                loginRequest.getUsername(),
+                                loginRequest.getPassword()
+                        )
+                );
 
-            // Generiranje JWT tokena
-            String jwt = tokenProvider.generateToken(authentication);
+                // Postavljanje autentifikacije u SecurityContext
+                SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            // Dohvat informacija o prijavljenom korisniku
-            UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
-            logger.info("Ulogovan korisnik: " + loginRequest.getUsername());
-            // Vraćanje odgovora s generisanim tokenom i informacijama o korisniku
-            return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
-        } else {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new ApiResponse(false, "Pogrešni kredencijali. Molimo pokušajte ponovo."));
+                // Generiranje JWT tokena
+                String jwt = tokenProvider.generateToken(authentication);
+
+                // Dohvat informacija o prijavljenom korisniku
+                UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
+                logger.info("Ulogovan korisnik: " + loginRequest.getUsername());
+
+                // Vraćanje odgovora s generisanim tokenom i informacijama o korisniku
+                return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+            }
         }
+
+        // Neuspešna autentifikacija
+        return ResponseEntity
+                .badRequest()
+                .body(new ApiResponse(false, "Pogrešni kredencijali. Molimo pokušajte ponovo."));
     }
+    
+    
+////    @PostMapping("/login")
+////    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+////
+//////        // Provera da li postoji korisnik sa zadatim username-om
+//////        if (userRepository.existsByUsername(loginRequest.getUsername())) {
+////        	// Dohvatanje korisnika po username-u
+////        	Optional<UserEntity> userOptional = userRepository.findByUsername(loginRequest.getUsername());
+////
+////        	if (userOptional.isPresent()) {
+////        	    UserEntity user = userOptional.get();
+////        	    
+////        	    // Provera da li je korisnik označen kao obrisan
+////        	    if (user.getDeleted()) {
+////        	        return ResponseEntity
+////        	                .badRequest()
+////        	                .body(new ApiResponse(false, "Pristup odbijen. Vaš nalog je obrisan."));
+////        	    }
+////            // Provera vjerodajnica korisnika
+////            Authentication authentication = authenticationManager.authenticate(
+////                    new UsernamePasswordAuthenticationToken(
+////                            loginRequest.getUsername(),
+////                            loginRequest.getPassword()
+////                    )
+////            );
+////
+////            // Postavljanje autentifikacije u SecurityContext
+////            SecurityContextHolder.getContext().setAuthentication(authentication);
+////
+////            // Generiranje JWT tokena
+////            String jwt = tokenProvider.generateToken(authentication);
+////
+////            // Dohvat informacija o prijavljenom korisniku
+////            UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
+////            logger.info("Ulogovan korisnik: " + loginRequest.getUsername());
+////            // Vraćanje odgovora s generisanim tokenom i informacijama o korisniku
+////            return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+//        } else {
+//            return ResponseEntity
+//                    .badRequest()
+//                    .body(new ApiResponse(false, "Pogrešni kredencijali. Molimo pokušajte ponovo."));
+//        }
+//    }
     
     
     
