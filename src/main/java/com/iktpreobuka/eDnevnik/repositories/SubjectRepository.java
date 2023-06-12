@@ -15,9 +15,17 @@ public interface SubjectRepository extends CrudRepository<SubjectEntity, Long> {
 	Object findByNameAndYearAndSemester(String name, SchoolYear schoolYear, Semester semester);
 
 	List<SubjectEntity> findByNameContainingIgnoreCase(String name); 
-		
+	List<SubjectEntity> findByDeletedFalse();
 	
-
-	
-
+	List<SubjectEntity> findByYearAndDeletedFalse(SchoolYear year);
+    List<SubjectEntity> findBySemesterAndDeletedFalse(Semester semester);
+    List<SubjectEntity> findByNameContainingIgnoreCaseAndDeletedFalse(String name);
+    List<SubjectEntity> findByYearAndSemesterAndDeletedFalse(SchoolYear year, Semester semester);
+    List<SubjectEntity> findByYearAndNameContainingIgnoreCaseAndDeletedFalse(SchoolYear year, String name);
+    List<SubjectEntity> findBySemesterAndNameContainingIgnoreCaseAndDeletedFalse(Semester semester, String name);
+    List<SubjectEntity> findByYearAndSemesterAndNameContainingIgnoreCaseAndDeletedFalse(SchoolYear year, Semester semester, String name);
 }
+
+	
+
+

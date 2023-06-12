@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,6 +33,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.iktpreobuka.eDnevnik.entities.GradeEntity;
 import com.iktpreobuka.eDnevnik.entities.StudentEntity;
 import com.iktpreobuka.eDnevnik.entities.SubjectEntity;
+import com.iktpreobuka.eDnevnik.entities.enums.SchoolYear;
+import com.iktpreobuka.eDnevnik.entities.enums.Semester;
 import com.iktpreobuka.eDnevnik.repositories.StudentRepository;
 import com.iktpreobuka.eDnevnik.repositories.SubjectRepository;
 import com.iktpreobuka.eDnevnik.service.SubjectService;
@@ -38,7 +43,7 @@ import com.iktpreobuka.eDnevnik.validation.Validation;
 
 @RestController
 @RequestMapping("/api/v1/subjects")
-@CrossOrigin(origins = "*") 
+@CrossOrigin(origins = "http://localhost:3000")
 public class SubjectEntityController {
 
 private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
@@ -55,7 +60,7 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	protected void initBinder(final WebDataBinder binder) {
 		binder.addValidators();
 	}
-	//@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@PostMapping("/add")
 	public ResponseEntity<?> addNewSubject(@Valid @RequestBody SubjectEntity newSubject, BindingResult result) {
 		if(result.hasErrors()) {
@@ -75,7 +80,7 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 		return subjectRepository.findAll();
 	}
 	
-	@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getSubjectById(@PathVariable Long id) {
 		if(subjectRepository.existsById(id)) {
@@ -84,7 +89,7 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 			return new ResponseEntity<>("The subject does not exist.", HttpStatus.NOT_FOUND);
 		}
 	}
-	@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@PutMapping("/update/{id}")
 	public ResponseEntity<?> updateSubjectById(@PathVariable Long id, @Valid @RequestBody SubjectEntity updatedSubject, BindingResult result) {
 		if(result.hasErrors()) {
@@ -104,27 +109,53 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 			return new ResponseEntity<>("The subject does not exist.", HttpStatus.NOT_FOUND);
 		}
 	}
-	@Secured("ADMIN")
+	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> deleteSubject(@PathVariable Long id) {
-		if (subjectService.isActive(id)) {
-			SubjectEntity subjectToDelete = subjectRepository.findById(id).get();
-			logger.info("Deleted subject with id:" + id);
-			subjectToDelete.setDeleted(true);
-			return new ResponseEntity<>("Deleted gsubject with id:" + id, HttpStatus.OK);
-		}
-		return new ResponseEntity<RESTError>(new RESTError(1, "Grade with id " + id + " not found"),
-				HttpStatus.NOT_FOUND);
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    logger.info("Logged in user: " + auth.getName());
+	    logger.info("Authorities: " + auth.getAuthorities());
 
+	    if (subjectService.isActive(id)) {
+	        SubjectEntity subjectToDelete = subjectRepository.findById(id).get();
+	        logger.info("Deleted subject with id:" + id);
+	        subjectToDelete.setDeleted(true);
+	        subjectRepository.save(subjectToDelete);
+	        return new ResponseEntity<>("Deleted subject with id:" + id, HttpStatus.OK);
+	    }
+	    return new ResponseEntity<RESTError>(new RESTError(1, "Grade with id " + id + " not found"),
+	            HttpStatus.NOT_FOUND);
 	}
+
 
 	@GetMapping("/search")
-	@CrossOrigin(origins = "*") 
-	public Iterable<SubjectEntity> searchSubjectByName(@RequestParam String name) {
-		
-		return subjectRepository.findByNameContainingIgnoreCase(name);
+	public ResponseEntity<?> searchSubject(
+	    @RequestParam(required = false) SchoolYear year, 
+	    @RequestParam(required = false) Semester semester, 
+	    @RequestParam(required = false) String name) {
+	    
+	    if(year != null && semester != null && name != null) {
+	        return new ResponseEntity<>(subjectRepository.findByYearAndSemesterAndNameContainingIgnoreCaseAndDeletedFalse(year, semester, name), HttpStatus.OK);
+	    } else if(year != null && semester != null) {
+	        return new ResponseEntity<>(subjectRepository.findByYearAndSemesterAndDeletedFalse(year, semester), HttpStatus.OK);
+	    } else if(year != null && name != null) {
+	        return new ResponseEntity<>(subjectRepository.findByYearAndNameContainingIgnoreCaseAndDeletedFalse(year, name), HttpStatus.OK);
+	    } else if(semester != null && name != null) {
+	        return new ResponseEntity<>(subjectRepository.findBySemesterAndNameContainingIgnoreCaseAndDeletedFalse(semester, name), HttpStatus.OK);
+	    } else if(year != null) {
+	        return new ResponseEntity<>(subjectRepository.findByYearAndDeletedFalse(year), HttpStatus.OK);
+	    } else if(semester != null) {
+	        return new ResponseEntity<>(subjectRepository.findBySemesterAndDeletedFalse(semester), HttpStatus.OK);
+	    } else if(name != null) {
+	        return new ResponseEntity<>(subjectRepository.findByNameContainingIgnoreCaseAndDeletedFalse(name), HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>(subjectRepository.findByDeletedFalse(), HttpStatus.OK);
+	    }
 	}
+	
 }
+
 
 
 

@@ -95,7 +95,7 @@ public class StudentEntityController {
 		binder.addValidators(studentCustomValidator);
 	}
 	// 1. add StudentEntity
-	@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@PostMapping("/add")
 	public ResponseEntity<?> addStudent(@Valid @RequestBody StudentDto newStudent, BindingResult result) {
 		if (result.hasErrors()) {
@@ -115,7 +115,7 @@ public class StudentEntityController {
 //	    return new ResponseEntity<>(studentRepository.findAll(), HttpStatus.OK);
 //	}
 	
-	@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping
 	public ResponseEntity<?> getAllStudents() {
 		List<StudentEntity> students = StreamSupport.stream(studentRepository.findAll().spliterator(), false)
@@ -126,7 +126,7 @@ public class StudentEntityController {
 	//all Parents children
 	
 	@CrossOrigin
-	@Secured("PARENT")
+	@PreAuthorize("hasAuthority('PARENT')")
 	@GetMapping("/children")
 	public ResponseEntity<?> getMyStudents(Principal principal) {
 	    ParentEntity parent = parentRepository.findByUsername(principal.getName());
@@ -141,7 +141,7 @@ public class StudentEntityController {
 	
 	
 	// 3. change StudentEntity
-	@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@PutMapping("/update/{id}")
 	public ResponseEntity<?> updateStudent(@PathVariable Long id, @Valid @RequestBody StudentDto dto,
 	        BindingResult result) {
@@ -160,7 +160,7 @@ public class StudentEntityController {
 	}
 
 	// 4. find by id
-	@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("/find/{id}")
 	public ResponseEntity<?> getStudentById(@PathVariable Long id) {
 
@@ -171,21 +171,19 @@ public class StudentEntityController {
 	    return new ResponseEntity<RESTError>(new RESTError(4 , "Student does not exist!"), HttpStatus.NOT_FOUND);
 	}
     // 5. delete StudentEntity (only set StudentEntity.deleted on true)
-	@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteStudent(@PathVariable Long id) {
         
         if (studentService.isActive(id)) {
-        	StudentEntity existingStudent = studentRepository.findById(id).get();
-        	existingStudent.setDeleted(true);
-        	studentRepository.save(existingStudent);
+        	studentService.deleteStudent(id);
             return new ResponseEntity<>("Student deleted successfully", HttpStatus.OK);
         }
         return new ResponseEntity<RESTError>(new RESTError(4,"Student does not exist!"), HttpStatus.NOT_FOUND);
     }
     
     // 6. add parent to student
-	@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/addParent/{studentId}/parent/{parentId}")
     public ResponseEntity<?> addParentToStudent(@PathVariable Long studentId, @PathVariable Long parentId) {
     	 if (!studentService.isActive(studentId)) {
@@ -202,7 +200,7 @@ public class StudentEntityController {
     }
     
     // 7. add student to grade
-	@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/addGrade/{studentId}/grade/{gradeId}")
     public ResponseEntity<?> addStudentToGrade(@PathVariable Long studentId, @PathVariable Long gradeId){
     	if (!studentService.isActive(studentId)) {
@@ -228,7 +226,7 @@ public class StudentEntityController {
 	
 	// 8. get all students marks
 	
-	@Secured("STUDENT")
+	@PreAuthorize("hasAuthority('STUDENT')")
 	@GetMapping("/mySubjectsWithMarks")
 	public ResponseEntity<?> mySubjectsWithMarks(Principal principal) {
 	    // pronalazenje studenta koji ima pristup 
@@ -256,7 +254,7 @@ public class StudentEntityController {
 	    return new ResponseEntity<>(subjectsWithMarkslist, HttpStatus.OK);
 	}
 	
-	@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("/allmMarksForStudentByAdmin")
 	public ResponseEntity<?> allmMarksForStudentByAdmin(@RequestParam Long studentId) {
 	    // pronalazenje studenta da li aktivan

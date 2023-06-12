@@ -2,6 +2,7 @@ package com.iktpreobuka.eDnevnik.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -136,36 +137,12 @@ public class SubjectEntity {
 	public Boolean getDeleted() {
 		return deleted;
 	}
-	@JsonIgnore
-	@Transient
-	@Autowired
-	private TeacherSubjectRepository teacherSubjectRepository;
-	@JsonIgnore
-	@Transient
-	@Autowired
-	private TeacherSubjectGradeRepository teacherSubjectGradeRepository;
-	@JsonIgnore
-	@Transient
-	@Autowired
-	private TeacherSubjectStudentRepository teacherSubjectStudentRepository;
+	
 
 	
 	public void setDeleted(Boolean deleted) {
 	    this.deleted = deleted;
 
-	    if (deleted) {
-	        List<TeacherSubjectEntity> teacherSubjects = teacherSubjectRepository.findBySubject(this);
-	        teacherSubjects.forEach(ts -> ts.setDeleted(true));
-	        teacherSubjectRepository.saveAll(teacherSubjects);
-
-	        List<TeacherSubjectStudentEntity> teacherSubjectStudents = teacherSubjectStudentRepository.findByTeacherSubjectSubject(this);
-	        teacherSubjectStudents.forEach(tss -> tss.setDeleted(true));
-	        teacherSubjectStudentRepository.saveAll(teacherSubjectStudents);
-
-	        List<TeacherSubjectGradeEntity> teacherSubjectGrades = teacherSubjectGradeRepository.findByTeacherSubjectSubject(this);
-	        teacherSubjectGrades.forEach(tsg -> tsg.setDeleted(true));
-	        teacherSubjectGradeRepository.saveAll(teacherSubjectGrades);
-	    }
 	}
 
 	

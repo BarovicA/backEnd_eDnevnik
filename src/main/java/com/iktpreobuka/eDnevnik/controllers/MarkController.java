@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -79,7 +80,7 @@ public class MarkController {
 	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
 	// nastavnik dodaje ocenu
-	@Secured("TEACHER")
+	@PreAuthorize("hasAuthority('TEACHER')")
 	@PostMapping("/createMarkByTeacher")
 	public ResponseEntity<?> createGradeByTeacher(@RequestParam Long studentId, @RequestParam Long subjectId,
 			@Valid @RequestBody MarkDto newMark, BindingResult result, Principal principal) {
@@ -118,7 +119,7 @@ public class MarkController {
 		return new ResponseEntity<>(mark, HttpStatus.OK);
 	}
 
-	@Secured("TEACHER")
+	@PreAuthorize("hasAuthority('TEACHER')")
 	@GetMapping("/getAllMyMarksByTeacher")
 	public ResponseEntity<?> getAllMyMarksByTeacher(Principal principal){
 	TeacherEntity teacher = teacherRepository.findByUsername(principal.getName());
@@ -161,7 +162,7 @@ public class MarkController {
 	
 	
 	
-	@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@PostMapping("/createMarkByAdmin")
 	public ResponseEntity<?> createGradeByAdmin(@RequestParam Long studentId, @RequestParam Long subjectId,
 			@RequestParam Long teacherId, @Valid @RequestBody MarkDto newMark, BindingResult result) {
@@ -206,7 +207,7 @@ public class MarkController {
 		return new ResponseEntity<>(mark, HttpStatus.OK);
 	}
 	
-	@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('TEACHER')")
 	@PutMapping("/updateMarkByAdmin")
 	public ResponseEntity<?> updateGradeByAdmin(@RequestParam Long markId,
 	        @Valid @RequestBody MarkDto updatedMark, BindingResult result) {
@@ -232,7 +233,7 @@ public class MarkController {
 	}
 	
 	
-	@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('TEACHER')")
 	@GetMapping("/getAllMarksByAdmin")
 	public ResponseEntity<?> getAllMarksByAdmin() {
 		List<MarkEntity>  all = markRepository.findByDeletedFalse();

@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -16,6 +17,7 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;
@@ -23,6 +25,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -95,13 +98,23 @@ public class AuthController {
     
     
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult result) {
 
 //        // Provera da li postoji korisnik sa zadatim username-om
-//        if (userRepository.existsByUsername(loginRequest.getUsername())) {
+//       if (userRepository.existsByUsername(loginRequest.getUsername())) {
         	// Dohvatanje korisnika po username-u
+    	
+    	if (result.hasErrors()) {
+            // Obrada grešaka validacije
+            String errorMessage = result.getFieldErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.joining(", "));
+            return ResponseEntity
+                    .badRequest()
+                    .body(new ApiResponse(false, errorMessage));
+        }
         	Optional<UserEntity> userOptional = userRepository.findByUsername(loginRequest.getUsername());
-
+        
         	if (userOptional.isPresent()) {
         	    UserEntity user = userOptional.get();
         	    
@@ -130,6 +143,7 @@ public class AuthController {
             logger.info("Ulogovan korisnik: " + loginRequest.getUsername());
             // Vraćanje odgovora s generisanim tokenom i informacijama o korisniku
             return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+        	
         } else {
             return ResponseEntity
                     .badRequest()
@@ -153,7 +167,7 @@ public class AuthController {
     
     //sredjen download sa try-with-resources blokom
     
-    @Secured("ADMIN")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/logs/download")
     public void downloadLogs(HttpServletResponse response) {
         try (InputStream inputStream = new FileInputStream("logs/spring-boot-logging.log")) {

@@ -28,6 +28,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
@@ -84,6 +87,7 @@ public class TeacherEntitiyController {
     // 1. add TeacherEntity
     @Secured("ADMIN")
     @PostMapping("/add")
+    
     public ResponseEntity<?> addTeacher(@Valid @RequestBody TeacherEntityDTO newTeacher, BindingResult result) {
     	if (result.hasErrors()) {
 			return new ResponseEntity<>(Validation.createErrorMessage(result), HttpStatus.BAD_REQUEST);
@@ -96,15 +100,41 @@ public class TeacherEntitiyController {
     }
 
     // 2. get all TeacherEntity
-    @Secured("ADMIN")
+//    @Secured("ADMIN")
+//    @GetMapping
+//    public ResponseEntity<?> getAllTeachers() {
+//        return new ResponseEntity<>(teacherRepository.findAll(), HttpStatus.OK);
+//        
+//    }
+    
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public ResponseEntity<?> getAllTeachers() {
-        return new ResponseEntity<>(teacherRepository.findAll(), HttpStatus.OK);
-        
+        // Dohvati trenutni objekt autentikacije
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        // Provjeri je li korisnik autenticiran
+        if (authentication.isAuthenticated()) {
+            // Provjeri uloge korisnika
+            boolean isAdmin = authentication.getAuthorities().stream()
+                    .anyMatch(authority -> authority.getAuthority().equals("ADMIN"));
+
+            if (isAdmin) {
+                // Korisnik je autenticiran i ima ulogu "ADMIN"
+                // Izvrši željene radnje
+                return new ResponseEntity<>(teacherRepository.findAll(), HttpStatus.OK);
+            } else {
+                // Korisnik nema ulogu "ADMIN"
+                return new ResponseEntity<>("Nemate dozvolu za pristup ovoj putanji", HttpStatus.FORBIDDEN);
+            }
+        } else {
+            // Korisnik nije autenticiran
+            return new ResponseEntity<>("Morate biti autenticirani za pristup ovoj putanji", HttpStatus.UNAUTHORIZED);
+        }
     }
 
     // 3. change TeacherEntity
-    @Secured("ADMIN")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateTeacher(@PathVariable Long id,@Valid  @RequestBody TeacherEntityDTO dto,
     		BindingResult result) {
@@ -123,7 +153,7 @@ public class TeacherEntitiyController {
     }
 //
 //    // 4. find by id
-    @Secured("ADMIN")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/find/{id}")
     public ResponseEntity<?> getTeacherById(@PathVariable Long id) {
         TeacherEntity teacherEntity = teacherRepository.findById(id).orElse(null);
@@ -134,7 +164,7 @@ public class TeacherEntitiyController {
     }
 
     // 5. delete TeacherEntity (only set TeacherEntity.deleted on true)
-    @Secured("ADMIN")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteTeacher(@PathVariable Long id) {
         TeacherEntity existingTeacher = teacherRepository.findById(id).orElse(null);
@@ -148,7 +178,7 @@ public class TeacherEntitiyController {
     }
     
     // add subject for teacher
-    @Secured("ADMIN")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/{teacherId}/subject/{subjectId}")
     public ResponseEntity<?> addSubjectForTeacher(@PathVariable Long teacherId, @PathVariable Long subjectId) {
     	
@@ -183,7 +213,7 @@ public class TeacherEntitiyController {
     }
     
     //delete subject for teacher
-    @Secured("ADMIN")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/delete/teacherSubject{id}")
     public ResponseEntity<?> deleteSubjectTeacher(@PathVariable Long id) {
     	TeacherSubjectEntity ts = teacherSubjectRepository.findById(id).orElse(null);
@@ -203,7 +233,7 @@ public class TeacherEntitiyController {
     
 
     //prikazi sve predmete koje Naastavnik koji je ulogovan predaje.
-    @Secured("TEACHER")
+    @PreAuthorize("hasAuthority('TEACHER')")
     @GetMapping("/mySubjects")
     public ResponseEntity<?> getMySubjects(Principal principal){
     	TeacherEntity teacher = teacherRepository.findByUsername(principal.getName());
@@ -220,7 +250,7 @@ public class TeacherEntitiyController {
     }
     
   //prikazi sve Razrede gde Naastavnik koji je ulogovan predaje
-	@Secured("TEACHER")
+    @PreAuthorize("hasAuthority('TEACHER')")
 	@GetMapping("/myGrades")
 	public ResponseEntity<?> getMyGrades(Principal principal) {
 		TeacherEntity teacher = teacherRepository.findByUsername(principal.getName());
@@ -242,7 +272,7 @@ public class TeacherEntitiyController {
 	}
     
     //prikazi sve ucenike u razredu 
-	@Secured("TEACHER")
+    @PreAuthorize("hasAuthority('TEACHER')")
 	@GetMapping("/studentsInMyGrade/{gradeid}")
 	public ResponseEntity<?> getStudentsInGrade(@PathVariable Long gradeid,Principal principal){
 		if (gradeService.isActive(gradeid)) {

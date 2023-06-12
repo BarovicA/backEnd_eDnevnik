@@ -3,6 +3,7 @@ package com.iktpreobuka.eDnevnik.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,7 +86,7 @@ public class StudentServiceIpml implements StudentService {
 
 	@Override
 	public StudentEntity addStudentToGrade(Long studentId, Long gradeId) {
-		StudentEntity studentEntity = studentRepository.findById(studentId).get();
+		StudentEntity studentEntity = studentRepository.findById(studentId).orElse(null);
 		GradeEntity grade = gradeRepository.findById(gradeId).get();
 		studentEntity.setGrade(grade);
 
@@ -126,6 +127,21 @@ public class StudentServiceIpml implements StudentService {
 		dto.setSubjectMarkDto(list);
 		return dto;
 	}
+	@Override
+	public void deleteStudent(Long studentId) {
+        Optional<StudentEntity> studentOptional = studentRepository.findById(studentId);
+
+            StudentEntity student = studentOptional.get();
+            student.setDeleted(true);
+            List<TeacherSubjectStudentEntity> teacherSubjectStudents = teacherSubjectStudentRepository.findByStudent(student);
+                if (teacherSubjectStudents != null) {
+                	for (TeacherSubjectStudentEntity tss : teacherSubjectStudents) {
+                        tss.setDeleted(true);
+                        teacherSubjectStudentRepository.save(tss);			
+                    }
+                }
+            studentRepository.save(student);   
+        }
 	
 	
 	

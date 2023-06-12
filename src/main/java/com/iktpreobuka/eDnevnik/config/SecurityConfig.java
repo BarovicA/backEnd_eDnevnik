@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
 @EnableWebSecurity
@@ -22,6 +23,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
+	
+	    @Autowired
+	    private JwtTokenProvider tokenProvider;
 
 	    @Autowired
 	    private UserDetailsService userDetailsService;
@@ -39,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 	        http
+	            .addFilter(new JwtAuthenticationFilter(tokenProvider, userDetailsService))
 	            .authorizeRequests()
 	                .antMatchers("/api/v1/auth/login").permitAll()
 	                .antMatchers("/api/v1/subjects").permitAll()
@@ -47,11 +52,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	                .antMatchers("/api/v1/subjects/search/**").permitAll()
 	                .anyRequest().authenticated()
 	                .and()
-	            .cors() // Dodajte ovu liniju da omogućite CORS za sve endpointove
+	            .cors() 
 	            .and()
 	            .csrf().disable();
 	    }
-	    
+	   
+
 	    @Override
 	    @Bean
 	    public AuthenticationManager authenticationManagerBean() throws Exception {

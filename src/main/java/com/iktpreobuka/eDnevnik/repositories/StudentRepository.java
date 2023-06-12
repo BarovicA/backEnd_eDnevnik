@@ -18,7 +18,8 @@ public interface StudentRepository extends CrudRepository<StudentEntity, Long> {
 	StudentEntity findByUsername(String name);
 
 	List<StudentEntity> findByParent(ParentEntity parent);
-
+	
+	
 	
 
 }

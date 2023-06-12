@@ -32,22 +32,18 @@ public class StudentEntity extends UserEntity {
 	
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(name = "grade")
+	@JsonIgnore
 	private GradeEntity grade;
 
 	@OneToMany(mappedBy = "student", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<TeacherSubjectStudentEntity> teacherSubjectStudent;
 	
-	
-	
-	
 //	@OneToMany(mappedBy = "student", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 //	@JsonBackReference
 //	private List<MarkEntity> marks;
 //	
 
-	
-	
 	public StudentEntity() {
 		super();
 		this.deleted = false;
@@ -62,21 +58,6 @@ public class StudentEntity extends UserEntity {
 		this.teacherSubjectStudent = teacherSubjectStudent;
 	}
 
-	public TeacherSubjectStudentRepository getTeacherSubjectStudentRepository() {
-		return teacherSubjectStudentRepository;
-	}
-
-	public void setTeacherSubjectStudentRepository(TeacherSubjectStudentRepository teacherSubjectStudentRepository) {
-		this.teacherSubjectStudentRepository = teacherSubjectStudentRepository;
-	}
-
-	public TeacherSubjectGradeRepository getTeacherSubjectGradeRepository() {
-		return teacherSubjectGradeRepository;
-	}
-
-	public void setTeacherSubjectGradeRepository(TeacherSubjectGradeRepository teacherSubjectGradeRepository) {
-		this.teacherSubjectGradeRepository = teacherSubjectGradeRepository;
-	}
 
 	public ParentEntity getParent() {
 		return parent;
@@ -93,32 +74,10 @@ public class StudentEntity extends UserEntity {
 	public void setGrade(GradeEntity grade) {
 		this.grade = grade;
 	}
-
-//	public List<MarkEntity> getMarks() {
-//		return marks;
-//	}
-//
-//	public void setMarks(List<MarkEntity> marks) {
-//		this.marks = marks;
-//	}
-//	
-	
-	@JsonIgnore
-	@Transient
-	@Autowired
-	private TeacherSubjectStudentRepository teacherSubjectStudentRepository;
-	@JsonIgnore
-	@Transient
-	@Autowired
-	private TeacherSubjectGradeRepository teacherSubjectGradeRepository;
-	
 	
 	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
-		if (deleted) {
-		    List<TeacherSubjectStudentEntity> teacherSubjectStudents = teacherSubjectStudentRepository.findByStudent(this);
-		    teacherSubjectStudents.forEach(tss -> tss.setDeleted(true));
-		    teacherSubjectStudentRepository.saveAll(teacherSubjectStudents);
+		
 	}
-	}
+	
 }

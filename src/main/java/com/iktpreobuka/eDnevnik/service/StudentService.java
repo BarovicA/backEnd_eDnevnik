@@ -21,4 +21,6 @@ public interface StudentService {
 
 	ReportStudentDto makeReportDto(StudentEntity student);
 
+	void deleteStudent(Long studentId);
+
 }

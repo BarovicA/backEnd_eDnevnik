@@ -1,5 +1,9 @@
 package com.iktpreobuka.eDnevnik.controllers;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -8,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -36,6 +42,7 @@ import com.iktpreobuka.eDnevnik.validation.Validation;
 
 @RestController
 @RequestMapping("/api/v1/grades")
+@CrossOrigin(origins = "http://localhost:3000")
 public class GradeEntityController {
 
 	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
@@ -58,7 +65,7 @@ public class GradeEntityController {
 	@Autowired
 	GradeRepository gradeRepository;
 	
-	@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@PostMapping("/add")
 	public ResponseEntity<?> addNewGrade(@RequestBody GradeEntity newGrade, BindingResult result) {
 		if(result.hasErrors()) {
@@ -73,7 +80,7 @@ public class GradeEntityController {
 	}
 	
 	
-	@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@PutMapping("/upadte/{id}")
 	public ResponseEntity<?> updateGrade(@PathVariable Long id, @Valid @RequestBody GradeEntity upadetedGrade, BindingResult result) {
 		if(result.hasErrors()) {
@@ -87,12 +94,17 @@ public class GradeEntityController {
         logger.info("Changed grade with id:" + id);
 		return new ResponseEntity<>(gradeRepository.save(existingGrade), HttpStatus.OK);
 	}
-	@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("/all")
-	public ResponseEntity<?> getAll(){
-		return new ResponseEntity<>(gradeRepository.findAll(), HttpStatus.OK);
+	public ResponseEntity<?> getAll() {
+		List<GradeEntity> activeGrades = ((Collection<GradeEntity>) gradeRepository.findAll()).stream()
+				.filter(grade -> !grade.getDeleted())
+				.collect(Collectors.toList());
+		return new ResponseEntity<>(activeGrades, HttpStatus.OK);
 	}
-	@Secured("ADMIN")
+	
+	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@DeleteMapping(path = "/delete/{Id}")
 	public ResponseEntity<?> deleteGrade(@PathVariable Long Id){
 		if(gradeService.isActive(Id)) {
@@ -107,7 +119,7 @@ public class GradeEntityController {
 	}
 	
 	// add TecherSubjectCombination to Grade
-	@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@PostMapping("/addSubjecttoGrade/{teacherSubjectId}/grade/{gadeId}")
 	public ResponseEntity<?> addSubjecttoGrade(@PathVariable Long teacherSubjectId, @PathVariable Long gadeId){
 		
@@ -159,7 +171,7 @@ public class GradeEntityController {
 	
 	
 	// svi ucenici u razredu
-	@Secured("ADMIN")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("/studentsInGrade/{gadeId}")
 	public ResponseEntity<?> allStudentsInGrade(@PathVariable Long gadeId){
 		if (!gradeService.isActive(gadeId)) {

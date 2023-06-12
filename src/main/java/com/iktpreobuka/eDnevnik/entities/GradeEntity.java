@@ -64,7 +64,7 @@ public class GradeEntity {
 	private List<TeacherSubjectGradeEntity> teacherSubjectGrade = new ArrayList<>();
 	
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(mappedBy = "grade", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	private List<StudentEntity> student = new ArrayList<>();
 	
