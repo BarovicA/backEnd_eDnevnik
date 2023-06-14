@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
@@ -28,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    private JwtTokenProvider tokenProvider;
 
 	    @Autowired
-	    private UserDetailsService userDetailsService;
+	    private UserDetailsServiceImpl userDetailsService;
 
 	    @Bean
 	    public PasswordEncoder passwordEncoder() {
@@ -42,8 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
+	        JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(tokenProvider, userDetailsService);
 	        http
-	            .addFilter(new JwtAuthenticationFilter(tokenProvider, userDetailsService))
+	            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 	            .authorizeRequests()
 	                .antMatchers("/api/v1/auth/login").permitAll()
 	                .antMatchers("/api/v1/subjects").permitAll()

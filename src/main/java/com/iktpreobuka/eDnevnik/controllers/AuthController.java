@@ -102,8 +102,7 @@ public class AuthController {
 
 //        // Provera da li postoji korisnik sa zadatim username-om
 //       if (userRepository.existsByUsername(loginRequest.getUsername())) {
-        	// Dohvatanje korisnika po username-u
-    	
+        	// Dohvatanje korisnika po username-u  	
     	if (result.hasErrors()) {
             // Obrada grešaka validacije
             String errorMessage = result.getFieldErrors().stream()
@@ -113,11 +112,9 @@ public class AuthController {
                     .badRequest()
                     .body(new ApiResponse(false, errorMessage));
         }
-        	Optional<UserEntity> userOptional = userRepository.findByUsername(loginRequest.getUsername());
-        
+        	Optional<UserEntity> userOptional = userRepository.findByUsername(loginRequest.getUsername());     
         	if (userOptional.isPresent()) {
-        	    UserEntity user = userOptional.get();
-        	    
+        	    UserEntity user = userOptional.get(); 
         	    // Provera da li je korisnik označen kao obrisan
         	    if (user.getDeleted()) {
         	        return ResponseEntity
@@ -131,19 +128,15 @@ public class AuthController {
                             loginRequest.getPassword()
                     )
             );
-
             // Postavljanje autentifikacije u SecurityContext
             SecurityContextHolder.getContext().setAuthentication(authentication);
-
             // Generiranje JWT tokena
             String jwt = tokenProvider.generateToken(authentication);
-
             // Dohvat informacija o prijavljenom korisniku
             UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
             logger.info("Ulogovan korisnik: " + loginRequest.getUsername());
             // Vraćanje odgovora s generisanim tokenom i informacijama o korisniku
             return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
-        	
         } else {
             return ResponseEntity
                     .badRequest()

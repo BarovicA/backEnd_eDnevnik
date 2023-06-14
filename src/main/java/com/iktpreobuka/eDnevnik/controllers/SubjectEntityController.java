@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.iktpreobuka.eDnevnik.entities.GradeEntity;
 import com.iktpreobuka.eDnevnik.entities.StudentEntity;
 import com.iktpreobuka.eDnevnik.entities.SubjectEntity;
+import com.iktpreobuka.eDnevnik.entities.dto.SubjectDTO;
 import com.iktpreobuka.eDnevnik.entities.enums.SchoolYear;
 import com.iktpreobuka.eDnevnik.entities.enums.Semester;
 import com.iktpreobuka.eDnevnik.repositories.StudentRepository;
@@ -84,7 +85,9 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getSubjectById(@PathVariable Long id) {
 		if(subjectRepository.existsById(id)) {
-			return new ResponseEntity<>(subjectRepository.findById(id), HttpStatus.OK);
+			SubjectEntity subject = subjectRepository.findById(id).get();
+			SubjectDTO subDTO = subjectService.mappSubjectForDto(subject); 		
+			return new ResponseEntity<>(subDTO, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>("The subject does not exist.", HttpStatus.NOT_FOUND);
 		}
@@ -101,7 +104,6 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 			subject.setWeeklyHours(updatedSubject.getWeeklyHours());
 			subject.setYear(updatedSubject.getYear());
 			subject.setSemester(updatedSubject.getSemester());
-			subject.setName(updatedSubject.getName());
 			subjectRepository.save(subject);
 			logger.info("Updated subject with id: " + id);
 			return new ResponseEntity<>("The subject is updated.", HttpStatus.OK);
@@ -152,22 +154,8 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	    } else {
 	        return new ResponseEntity<>(subjectRepository.findByDeletedFalse(), HttpStatus.OK);
 	    }
-	}
-	
+	}	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

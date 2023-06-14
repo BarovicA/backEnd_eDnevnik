@@ -12,15 +12,21 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class UserPrincipal implements UserDetails{
-
-	private Long id;
+public class UserPrincipal implements UserDetails {
+    private Long id;
     private String username;
-
-    @JsonIgnore
     private String password;
-
     private Collection<? extends GrantedAuthority> authorities;
+
+    public static UserPrincipal create(UserEntity user) {
+        List<GrantedAuthority> authorities = user.getAuthorities();
+        return new UserPrincipal(
+                user.getId(),
+                user.getUsername(),
+                user.getPassword(),
+                authorities
+        );
+    }
 
     public UserPrincipal(Long id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
@@ -29,17 +35,19 @@ public class UserPrincipal implements UserDetails{
         this.authorities = authorities;
     }
 
-    public static UserPrincipal create(UserEntity user) {
-    	List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRole().getName().name()));
-
-        return new UserPrincipal(
-                user.getId(),
-                user.getUsername(),
-                user.getPassword(),
-                authorities
-        );
-    }
+//    public static UserPrincipal create(UserEntity user) {
+//    	List<GrantedAuthority> authorities = new ArrayList<>();
+//        authorities.add(new SimpleGrantedAuthority(user.getRole().getName().name()));
+//
+//        return new UserPrincipal(
+//                user.getId(),
+//                user.getUsername(),
+//                user.getPassword(),
+//                authorities
+//        );
+//   }
+    
+   
 
     public Long getId() {
         return id;
