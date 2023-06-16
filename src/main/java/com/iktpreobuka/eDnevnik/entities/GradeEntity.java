@@ -30,6 +30,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.iktpreobuka.eDnevnik.entities.enums.SchoolYear;
 import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectGradeRepository;
@@ -65,8 +66,9 @@ public class GradeEntity {
 	
 	
 //	@JsonIgnore
+	
 	@OneToMany(mappedBy = "grade", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-	private List<StudentEntity> student = new ArrayList<>();
+	private List<StudentEntity> students = new ArrayList<>();
 	
 	@JsonIgnore
 	private Boolean deleted = Boolean.FALSE;
@@ -84,11 +86,11 @@ public class GradeEntity {
 	}
 
 	public List<StudentEntity> getStudent() {
-		return student;
+		return students;
 	}
 
-	public void setStudent(List<StudentEntity> student) {
-		this.student = student;
+	public void setStudent(List<StudentEntity> students) {
+		this.students = students;
 	}
 
 	public void setId(Long id) {
@@ -145,16 +147,7 @@ public class GradeEntity {
 	
 	public void setDeleted(Boolean deleted) {
 	    this.deleted = deleted;
-	    
-	    if (deleted) {
-	       
-	    
-	        List<TeacherSubjectGradeEntity> teacherSubjectGrades = teacherSubjectGradeRepository.findByGrade(this);
-	        teacherSubjectGrades.forEach(tss -> tss.setDeleted(true));
-	        teacherSubjectGradeRepository.saveAll(teacherSubjectGrades);
-	        
-	        
-	    }
+	   
 	}
 
 }

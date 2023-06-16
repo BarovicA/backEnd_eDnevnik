@@ -29,6 +29,10 @@ public interface TeacherSubjectGradeRepository extends CrudRepository<TeacherSub
 
 	
 
+	List<TeacherSubjectGradeEntity> findByGradeIdAndTeacherSubject(Long id, TeacherSubjectEntity teacherSubject);
+
+	
+
 	
 
 

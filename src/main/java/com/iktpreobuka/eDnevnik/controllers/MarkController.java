@@ -233,7 +233,7 @@ public class MarkController {
 	}
 	
 	
-	@PreAuthorize("hasAuthority('TEACHER')")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("/getAllMarksByAdmin")
 	public ResponseEntity<?> getAllMarksByAdmin() {
 		List<MarkEntity>  all = markRepository.findByDeletedFalse();

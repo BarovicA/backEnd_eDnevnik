@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -32,6 +33,7 @@ import com.iktpreobuka.eDnevnik.entities.ParentEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherSubjectEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherSubjectGradeEntity;
 import com.iktpreobuka.eDnevnik.entities.dto.StudentDto;
+import com.iktpreobuka.eDnevnik.entities.enums.SchoolYear;
 import com.iktpreobuka.eDnevnik.repositories.GradeRepository;
 import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectGradeRepository;
 import com.iktpreobuka.eDnevnik.repositories.TeacherSubjectRepository;
@@ -79,7 +81,19 @@ public class GradeEntityController {
 	    }
 	}
 	
-	
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@GetMapping("/{id}")
+	public ResponseEntity<?> getGradeById(@PathVariable Long id) {
+	    GradeEntity grade = gradeRepository.findById(id).orElse(null);
+	    if (grade == null) {
+	        return new ResponseEntity<RESTError>(new RESTError(2, "Grade with id: " + id + " does not exist."), HttpStatus.NOT_FOUND);
+	    } else if (grade.getDeleted()) {
+	        return new ResponseEntity<RESTError>(new RESTError(2, "Grade with id: " + id + " is deleted."), HttpStatus.NOT_FOUND);
+	    }
+	    return new ResponseEntity<>(grade, HttpStatus.OK);
+	}
+
+
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@PutMapping("/upadte/{id}")
 	public ResponseEntity<?> updateGrade(@PathVariable Long id, @Valid @RequestBody GradeEntity upadetedGrade, BindingResult result) {
@@ -94,13 +108,25 @@ public class GradeEntityController {
         logger.info("Changed grade with id:" + id);
 		return new ResponseEntity<>(gradeRepository.save(existingGrade), HttpStatus.OK);
 	}
+	
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("/all")
-	public ResponseEntity<?> getAll() {
-		List<GradeEntity> activeGrades = ((Collection<GradeEntity>) gradeRepository.findAll()).stream()
-				.filter(grade -> !grade.getDeleted())
-				.collect(Collectors.toList());
-		return new ResponseEntity<>(activeGrades, HttpStatus.OK);
+	public ResponseEntity<?> getAll(
+	    @RequestParam(required = false) SchoolYear schoolYear,
+	    @RequestParam(required = false) Integer unit) {
+	    
+	    if(schoolYear != null && unit != null) {
+	        return new ResponseEntity<>(gradeRepository.findBySchoolYearAndUnitAndDeletedFalse(schoolYear, unit), HttpStatus.OK);
+	    } else if(schoolYear != null) {
+	        return new ResponseEntity<>(gradeRepository.findBySchoolYearAndDeletedFalse(schoolYear), HttpStatus.OK);
+	    } else if(unit != null) {
+	        return new ResponseEntity<>(gradeRepository.findByUnitAndDeletedFalse(unit), HttpStatus.OK);
+	    } else {
+	        List<GradeEntity> activeGrades = ((Collection<GradeEntity>) gradeRepository.findAll()).stream()
+	                .filter(grade -> !grade.getDeleted())
+	                .collect(Collectors.toList());
+	        return new ResponseEntity<>(activeGrades, HttpStatus.OK);
+	    }
 	}
 	
 	
@@ -111,12 +137,26 @@ public class GradeEntityController {
 			GradeEntity grade = gradeRepository.findById(Id).get();
 			grade.setDeleted(true);
 			gradeRepository.save(grade);
+			
+			List<TeacherSubjectGradeEntity> teacherSubjectGrades = teacherSubjectGradeRepository.findByGrade(grade);
+			if (teacherSubjectGrades  != null) {
+				
+	        teacherSubjectGrades.forEach(tss -> tss.setDeleted(true));
+	        teacherSubjectGradeRepository.saveAll(teacherSubjectGrades);
+			}
 			logger.info("Deleted grade: " + grade.getSchoolYear().toString() + grade.getUnit());
 			return new ResponseEntity<>("Grade successfully deleted", HttpStatus.OK);
 			
 		}
 		return new ResponseEntity<>(new RESTError(1, "Grade with id: " + Id + " doesn't exist."), HttpStatus.NOT_FOUND);
 	}
+	
+//	if (deleted) {
+//        List<TeacherSubjectGradeEntity> teacherSubjectGrades = teacherSubjectGradeRepository.findByGrade(this);
+//        teacherSubjectGrades.forEach(tss -> tss.setDeleted(true));
+//        teacherSubjectGradeRepository.saveAll(teacherSubjectGrades);
+//        
+        
 	
 	// add TecherSubjectCombination to Grade
 	@PreAuthorize("hasAuthority('ADMIN')")

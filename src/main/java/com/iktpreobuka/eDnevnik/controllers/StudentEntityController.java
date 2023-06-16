@@ -245,6 +245,8 @@ public class StudentEntityController {
 	    	
 	    	SubjectMarksDto dto = new SubjectMarksDto();
 	    	dto.setName(teacherSubjectStudentEntity.getTeacherSubject().getSubject().getName());
+	    	dto.setYear(teacherSubjectStudentEntity.getTeacherSubject().getSubject().getYear());
+	    	dto.setSemester(teacherSubjectStudentEntity.getTeacherSubject().getSubject().getSemester());
 	    	List <MarkEntity> marks = markRepository.findByTeacherSubjectStudent(teacherSubjectStudentEntity);
 	    	dto.setMarks(marks);
 	    	subjectsWithMarkslist.add(dto);

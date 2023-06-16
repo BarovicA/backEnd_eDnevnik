@@ -47,7 +47,7 @@ public class MarkEntity {
 //	@JoinColumn(name = "subject")
 //	private SubjectEntity subject;
 
-	
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(name = "teacherSubjectStudent")
 	private TeacherSubjectStudentEntity teacherSubjectStudent;

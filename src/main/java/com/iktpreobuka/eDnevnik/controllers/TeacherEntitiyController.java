@@ -7,6 +7,7 @@ import com.iktpreobuka.eDnevnik.entities.SubjectEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherSubjectEntity;
 import com.iktpreobuka.eDnevnik.entities.TeacherSubjectGradeEntity;
+import com.iktpreobuka.eDnevnik.entities.dto.SubjectDTO;
 import com.iktpreobuka.eDnevnik.entities.dto.TeacherEntityDTO;
 import com.iktpreobuka.eDnevnik.repositories.GradeRepository;
 import com.iktpreobuka.eDnevnik.repositories.SubjectRepository;
@@ -226,12 +227,7 @@ public class TeacherEntitiyController {
         return new ResponseEntity<>("TeacherSubject deleted successfully", HttpStatus.OK);
     }
     
-    
-    
-    
-    
-    
-
+///api/v1/teachers/mySubjects
     //prikazi sve predmete koje Naastavnik koji je ulogovan predaje.
     @PreAuthorize("hasAuthority('TEACHER')")
     @GetMapping("/mySubjects")
@@ -247,6 +243,21 @@ public class TeacherEntitiyController {
     	logger.info("This are all subjects for teacher: " + teacher.getUsername() );
     	return new ResponseEntity<List<SubjectEntity>>(subjects, HttpStatus.OK);
   
+    }
+    //my subject by id
+    @PreAuthorize("hasAuthority('TEACHER')")
+    @GetMapping("/mySubjects/{id}")
+    public ResponseEntity<?> getMySubjectById(@PathVariable Long id, Principal principal) {
+        TeacherEntity teacher = teacherRepository.findByUsername(principal.getName());
+
+        if (teacherSubjectRepository.existsBySubjectIdAndTeacher(id, teacher)) {
+            TeacherSubjectEntity teacherSubject = teacherSubjectRepository.findBySubjectIdAndTeacher(id, teacher).get();
+            SubjectEntity subject = teacherSubject.getSubject();
+            SubjectDTO subDTO = subjectService.mappSubjectForDto(subject);
+            return new ResponseEntity<>(subDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("The subject does not exist or is not linked to this teacher.", HttpStatus.NOT_FOUND);
+        }
     }
     
   //prikazi sve Razrede gde Naastavnik koji je ulogovan predaje
@@ -271,6 +282,30 @@ public class TeacherEntitiyController {
 		return new ResponseEntity<List<GradeEntity>>(grades, HttpStatus.OK);
 	}
     
+    @PreAuthorize("hasAuthority('TEACHER')")
+    @GetMapping("/myGrades/{id}")
+    public ResponseEntity<?> getMyGradeById(@PathVariable Long id, Principal principal) {
+        TeacherEntity teacher = teacherRepository.findByUsername(principal.getName());
+        GradeEntity grade;
+        List<TeacherSubjectEntity> teacherSubjects = teacherSubjectRepository.findByTeacher(teacher);
+        for (TeacherSubjectEntity teacherSubject : teacherSubjects) {
+            if (!teacherSubject.getDeleted()) {
+                List<TeacherSubjectGradeEntity> teacherSubjectGrades = teacherSubjectGradeRepository.findByGradeIdAndTeacherSubject(id, teacherSubject);
+                for (TeacherSubjectGradeEntity teacherSubjectGrade : teacherSubjectGrades) {
+                    if (!teacherSubjectGrade.getDeleted()) {
+                        grade = teacherSubjectGrade.getGrade();
+                        logger.info("Returned grade with id " + id + " where " + teacher.getUsername()+ " teaches." );
+                        return new ResponseEntity<GradeEntity>(grade, HttpStatus.OK);
+                    }
+                }
+            }
+        }
+        logger.error("Teacher " + teacher.getUsername() + " does not teach in grade with id " + id);
+        return new ResponseEntity<String>("Grade not found or teacher does not teach in this grade.", HttpStatus.NOT_FOUND);
+    }
+
+
+    
     //prikazi sve ucenike u razredu 
     @PreAuthorize("hasAuthority('TEACHER')")
 	@GetMapping("/studentsInMyGrade/{gradeid}")
@@ -289,15 +324,7 @@ public class TeacherEntitiyController {
 		
 	return new ResponseEntity<RESTError>(new RESTError(2, "Grade is not active."), HttpStatus.NOT_FOUND);
 	}
-    
-    
-    
-    
-    
-    
-    
-    
-    
+ 
     //"Subjects where you teach:"
     
 //    Map<String, Object> response = new HashMap<>();
@@ -305,13 +332,7 @@ public class TeacherEntitiyController {
 //    response.put("subjects", subjects);
 //
 //    return ResponseEntity.ok(response);
-    
-    
-    
-    
-    
-    
-    
+
 }
 
 

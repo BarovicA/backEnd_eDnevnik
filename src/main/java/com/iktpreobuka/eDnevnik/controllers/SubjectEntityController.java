@@ -130,7 +130,7 @@ private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	            HttpStatus.NOT_FOUND);
 	}
 
-
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("/search")
 	public ResponseEntity<?> searchSubject(
 	    @RequestParam(required = false) SchoolYear year, 
