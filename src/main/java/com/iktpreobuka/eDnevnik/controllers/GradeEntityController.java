@@ -70,12 +70,20 @@ public class GradeEntityController {
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@PostMapping("/add")
 	public ResponseEntity<?> addNewGrade(@RequestBody GradeEntity newGrade, BindingResult result) {
-		if(result.hasErrors()) {
-			return new ResponseEntity<>(Validation.createErrorMessage(result), HttpStatus.BAD_REQUEST);
-		}
-		if (gradeService.isGradeUnique(newGrade.getSchoolYear(), newGrade.getUnit())) {
-	        logger.info("Created grade:" + newGrade.getSchoolYear().toString() + newGrade.getUnit() );
+	    if(result.hasErrors()) {
+	        return new ResponseEntity<>(Validation.createErrorMessage(result), HttpStatus.BAD_REQUEST);
+	    }
+	    
+	    GradeEntity existingGrade = gradeService.findBySchoolYearAndUnit(newGrade.getSchoolYear(), newGrade.getUnit());
+
+	    if(existingGrade == null) {
+	        logger.info("Created grade:" + newGrade.getSchoolYear().toString() + newGrade.getUnit());
 	        return new ResponseEntity<>(gradeService.create(newGrade), HttpStatus.OK);
+	    } else if (existingGrade.getDeleted()) {
+	        existingGrade.setDeleted(false);
+	        gradeRepository.save(existingGrade);
+	        logger.info("Reactivated grade:" + existingGrade.getSchoolYear().toString() + existingGrade.getUnit());
+	        return new ResponseEntity<>(existingGrade, HttpStatus.OK);
 	    } else {
 	        return new ResponseEntity<>("The combination of school year and unit already exists.", HttpStatus.CONFLICT);
 	    }
@@ -94,19 +102,52 @@ public class GradeEntityController {
 	}
 
 
+//	@PreAuthorize("hasAuthority('ADMIN')")
+//	@PutMapping("/upadte/{id}")
+//	public ResponseEntity<?> updateGrade(@PathVariable Long id, @Valid @RequestBody GradeEntity upadetedGrade, BindingResult result) {
+//		if(result.hasErrors()) {
+//			return new ResponseEntity<>(Validation.createErrorMessage(result), HttpStatus.BAD_REQUEST);
+//		}
+//		GradeEntity existingGrade = gradeRepository.findById(id).orElse(null);
+//        if (existingGrade == null) {
+//            return new ResponseEntity<RESTError>(new RESTError(2, "Grade does not exist!"), HttpStatus.NOT_FOUND);
+//        }
+//        existingGrade = gradeService.mappGradeEntity(existingGrade, upadetedGrade);
+//        logger.info("Changed grade with id:" + id);
+//		return new ResponseEntity<>(gradeRepository.save(existingGrade), HttpStatus.OK);
+//	}
+	
+	
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@PutMapping("/upadte/{id}")
-	public ResponseEntity<?> updateGrade(@PathVariable Long id, @Valid @RequestBody GradeEntity upadetedGrade, BindingResult result) {
-		if(result.hasErrors()) {
-			return new ResponseEntity<>(Validation.createErrorMessage(result), HttpStatus.BAD_REQUEST);
-		}
-		GradeEntity existingGrade = gradeRepository.findById(id).orElse(null);
-        if (existingGrade == null) {
-            return new ResponseEntity<RESTError>(new RESTError(2, "Grade does not exist!"), HttpStatus.NOT_FOUND);
-        }
-        existingGrade = gradeService.mappGradeEntity(existingGrade, upadetedGrade);
-        logger.info("Changed grade with id:" + id);
-		return new ResponseEntity<>(gradeRepository.save(existingGrade), HttpStatus.OK);
+	public ResponseEntity<?> updateGrade(@PathVariable Long id, @Valid @RequestBody GradeEntity updatedGrade, BindingResult result) {
+	    if(result.hasErrors()) {
+	        return new ResponseEntity<>(Validation.createErrorMessage(result), HttpStatus.BAD_REQUEST);
+	    }
+	    GradeEntity existingGrade = gradeRepository.findById(id).orElse(null);
+	    if (existingGrade == null) {
+	        return new ResponseEntity<RESTError>(new RESTError(2, "Grade does not exist!"), HttpStatus.NOT_FOUND);
+	    }
+	    
+	    // Check if there's another grade with the same schoolYear and unit
+	    GradeEntity sameSchoolYearAndUnitGrade = gradeService.findBySchoolYearAndUnit(updatedGrade.getSchoolYear(), updatedGrade.getUnit());
+	    
+	    if (sameSchoolYearAndUnitGrade != null && !sameSchoolYearAndUnitGrade.getId().equals(id)) {
+	        // If there is and it's deleted, reactivate it
+	        if(sameSchoolYearAndUnitGrade.getDeleted()) {
+	            //sameSchoolYearAndUnitGrade.setDeleted(false);
+	            //return new ResponseEntity<>(gradeRepository.save(sameSchoolYearAndUnitGrade), HttpStatus.OK);
+	            return new ResponseEntity<RESTError>(new RESTError(4, "A deleted grade with the same school year and unit already exists! Please reactivate it instead."), HttpStatus.CONFLICT);
+	        }
+	        // If it's not deleted, return an error message
+	        else {
+	            return new ResponseEntity<RESTError>(new RESTError(3, "Grade with the same school year and unit already exists!"), HttpStatus.CONFLICT);
+	        }
+	    }
+	    
+	    // Otherwise, proceed to update the existing grade
+	    logger.info("Changed grade with id:" + id);
+	    return new ResponseEntity<>(gradeRepository.save(existingGrade), HttpStatus.OK);
 	}
 	
 	@PreAuthorize("hasAuthority('ADMIN')")

@@ -23,4 +23,8 @@ public interface GradeService {
 
 	void addTeacherSubjectForAllStudentsInGrade(Long gradeId);
 
+	GradeEntity findDeletedGrade(SchoolYear schoolYear, Integer unit);
+
+	GradeEntity findBySchoolYearAndUnit(SchoolYear schoolYear, Integer unit);
+
 }

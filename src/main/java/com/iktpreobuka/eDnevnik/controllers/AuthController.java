@@ -104,7 +104,7 @@ public class AuthController {
 //       if (userRepository.existsByUsername(loginRequest.getUsername())) {
         	// Dohvatanje korisnika po username-u  	
     	if (result.hasErrors()) {
-            // Obrada grešaka validacije
+            // Obrada gresaka 
             String errorMessage = result.getFieldErrors().stream()
                     .map(DefaultMessageSourceResolvable::getDefaultMessage)
                     .collect(Collectors.joining(", "));
@@ -115,13 +115,13 @@ public class AuthController {
         	Optional<UserEntity> userOptional = userRepository.findByUsername(loginRequest.getUsername());     
         	if (userOptional.isPresent()) {
         	    UserEntity user = userOptional.get(); 
-        	    // Provera da li je korisnik označen kao obrisan
+        	    // Provera da li je korisnik oznacen kao obrisan
         	    if (user.getDeleted()) {
         	        return ResponseEntity
         	                .badRequest()
         	                .body(new ApiResponse(false, "Pristup odbijen. Vaš nalog je obrisan."));
         	    }
-            // Provera vjerodajnica korisnika
+            // Provera korisnika
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             loginRequest.getUsername(),
@@ -135,7 +135,7 @@ public class AuthController {
             // Dohvat informacija o prijavljenom korisniku
             UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
             logger.info("Ulogovan korisnik: " + loginRequest.getUsername());
-            // Vraćanje odgovora s generisanim tokenom i informacijama o korisniku
+            // Vracanje odgovora s generisanim tokenom i informacijama o korisniku
             return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
         } else {
             return ResponseEntity

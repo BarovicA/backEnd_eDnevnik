@@ -41,6 +41,12 @@ public class GradeServiceImpl implements GradeService {
 		return gradeRepository.save(grade);
 	}
 	@Override
+	public GradeEntity findDeletedGrade(SchoolYear schoolYear, Integer unit) {
+	    return gradeRepository.findBySchoolYearAndUnitAndDeletedIsTrue(schoolYear, unit).orElse(null);
+	}
+	
+	
+	@Override
 	public Boolean isActive(Long id) {
 		if(gradeRepository.existsById(id)) {
 			GradeEntity grade = gradeRepository.findById(id).get();
@@ -66,6 +72,12 @@ public class GradeServiceImpl implements GradeService {
 	public boolean isGradeUnique(SchoolYear schoolYear, Integer unit) {
 	    return gradeRepository.findBySchoolYearAndUnit(schoolYear, unit) == null;
 	}
+	
+	@Override
+	public GradeEntity findBySchoolYearAndUnit(SchoolYear schoolYear, Integer unit) {
+	    return gradeRepository.findBySchoolYearAndUnit(schoolYear, unit);
+	}
+	
 	@Override
 	public List<StudentEntity> listAllStudentsInGrade(Long gradeId){
 		GradeEntity grade = gradeRepository.findById(gradeId).get();
